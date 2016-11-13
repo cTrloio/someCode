@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        p{
+            float: left;
+        }
+        a{
+            text-decoration: none;
+            font-size: 50px;;
+        }
+        div{
+            /*190 181*/
+            width: 760px;
+            height: 181px;
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        div ul{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        div ul li {
+            list-style: none;
+            width: 190px;
+            height: 181px;
+            float: left;
+        }
+    </style>
+    <script>
+        window.onload= function () {
+            function wfgd(arr,speed){
+                var oDiv=document.getElementById('div1');
+                var oUl=oDiv.getElementsByTagName('ul')[0];
+                var aLi=oDiv.getElementsByTagName('li');
+                var oA1=document.getElementById('a1');
+                var oA2=document.getElementById('a2');
+                for( n in aLi){
+                    aLi[n].innerHTML = '<img src='+ arr[n] +'>';
+                }
+                oUl.innerHTML+=oUl.innerHTML;
+                oUl.style.width = aLi[0].offsetWidth * aLi.length +'px';
+                var timer=null;
+                function move() {
+                    if(oUl.offsetLeft<-oUl.offsetWidth/2){
+                        oUl.style.left='0';
+                    }
+                    if(oUl.offsetLeft>0){
+                        oUl.style.left= -oUl.offsetWidth/2 +'px';
+                    }
+                    oUl.style.left = oUl.offsetLeft+ speed + 'px';
+                }
+                timer=setInterval(move,30);
+                oA1.onmousemove= function () {
+                    speed=Math.abs(speed);
+                }
+                oA2.onmousemove= function () {
+                    speed=-Math.abs(speed);
+                }
+                oDiv.onmouseover = function () {
+                    clearInterval(timer);
+                }
+                oDiv.onmouseout= function () {
+                    timer=setInterval(move,30);
+                }
+            }
+            var arr=['../image/timer/5.jpg','../image/timer/7.jpg','../image/timer/9.jpg','../image/timer/1.jpg']
+            wfgd(arr,5);
+        }
+    </script>
+</head>
+<body>
+<p>
+    <a id="a2" href="#"><</a>
+    <div id="div1">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <a id="a1" href="#">></a>
+</p>
+
+</body>
+</html>

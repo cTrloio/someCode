@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>背景和边框相关样式-新增的背景属性</title>
+    <style>
+        div#d1{
+            background-color: #000;
+            width: 300px;
+            height: 150px;
+            border: dashed 30px green;  /*虚线*/
+            padding: 30px;
+            background-clip: content-box;            /*w3c ie9 firefox4.0+标准*/
+            -moz-background-clip: border;            /*firefox3.6-兼容写法*/
+            -webkit-background-clip: padding-box;   /*google兼容写法*/
+        }
+        div.d2{
+            width:600px;
+            height: 300px;
+            background-image: url("../image/asd.jpg");
+            background-repeat: no-repeat;
+            border: dashed 30px green;
+            padding: 30px;
+            background-origin: border-box;            /*w3c ie9 firefox4.0+标准*/
+            -moz-background-origin: border;            /*firefox3.6-老版兼容写法 border/box 新版写法*/
+            -webkit-background-origin: content-box;   /*google兼容写法*/
+        }
+        div#d3{
+            width: 600px;
+            height: 300px;
+            background-image: url("../image/asd.jpg");
+            background-repeat: no-repeat;
+            border: dashed 30px #13ff13;
+            padding: 30px;
+            background-origin: content-box;
+            background-size: 600px 300px;
+            -moz-background-size:cover;
+            -webkit-background-size: 600px 300px;
+            -o-background-size: 100%;
+        }
+        div.d4{
+            width: 400px;
+            height: 200px;
+            background-image: url("../image/asd.jpg");
+            background-repeat: no-repeat;
+            border: dashed 30px #126fb0;
+            padding: 30px;
+            background-origin: content-box;
+            background-break: bounding-box;/*待定不太会*/
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>背景和边框相关样式-新增的背景属性</h1>
+    <h2>background-clip:用来控制我们的背景显示区域</h2>
+    <p> border-box  默认背景从border区域向外裁剪，也就是超出部分将被裁减掉<br>
+        padding-box 背景从oadding区域向外裁剪，超过padding区域的背景将被裁剪掉<br>
+        content-box 背景从content区域向外裁剪，超过content区域的背景将被裁减掉<br>
+    </p>
+    <div id="d1"></div>
+
+    <h2>background-origin:指定绘制背景图像的绘制起点，左上角开始</h2>
+    <p>
+        border-box  决定background-position起始位置从border的外边缘开始显示背景图片<br>
+        padding-box 默认 决定background-position起始位置从padding的外边缘(border内边缘)开始显示背景图片<br>
+        content-box 决定background-position起始位置从content的外边缘(border和padding的内边缘)开始显示背景图片<br>
+    </p>
+    <div class="d2"></div>
+
+    <h2>background-size:指定背景图像的尺寸</h2>
+    <p>
+        auto:默认值，保持背景图片原始高宽<br>
+        length，length:指定高宽，如果只指定一个，另一个为auto<br>
+        percentage:以父元素的百分比来设置背景图像的宽高，第一个设置宽，第二个高，如果只设置一个，另一个auto<br>
+        cover:将图片放大，铺满整个容器。会失真<br>
+        contain:缩小图片，以适合容器，会失真
+    </p>
+    <div id="d3"></div>
+
+    <h2>background-break:指定背景图像的尺寸</h2>
+    <p>
+        continuous:默认，忽视区域之间的间隔空隙（给他们应用图片就好像把他们看成一个区域一样）<br>
+        bounding-box:重新考虑区域之间的间隔<br>
+        each-box:对每一个独立的标签区域进行背景的重新划分
+    </p>
+    <div class="d4"></div>
+</body>
+</html>

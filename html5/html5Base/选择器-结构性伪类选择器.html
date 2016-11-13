@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>结构性伪类选择器</title>
+    <style>
+        body{
+            background: #ffffff;
+        }
+        td{
+            width: 50px;
+            height: 30px;
+            border: 2px solid #ff2415;
+        }
+        :root{
+            background: #126fb0;
+        }
+        h1:not(p){
+            color: #ff002e;
+        }
+        :empty{
+            background: #35ff09;
+        }
+        :target{
+            background: #000000;
+        }
+    </style>
+</head>
+<body>
+    <h2>结构性伪类选择器</h2>
+    <h1>结构性伪类选择器1</h1>
+    <p>
+        root结构性伪类选择器 将样式绑定到页面的根元素中
+    </p>
+    <h1>结构性伪类选择器2</h1>
+    <p>
+        not结构性伪类选择器 想对某个元素使用样式，但是要排除它下面的子结构元素
+    </p>
+    <h1>结构性伪类选择器3</h1>
+    <p>
+        empty结构性伪类选择器 指定当元素中内容为空白时使用的样式
+    <table>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>1-1</td>
+            <td></td>
+            <td>3-3</td>
+        </tr>
+    </table>
+    </p>
+
+    <h1>结构性伪类选择器4</h1>
+    <p>
+        target结构性伪类选择器 对某个target元素使用样式，只有在用户点击了页面后才产生效果
+    </p>
+    <a href="#A">A</a>
+    <a href="#B">B</a>
+    <a href="#C">C</a>
+    <div id="A">
+        <h3>AAAAAAAA</h3>
+    </div>
+    <div id="B">
+        <h3>AAAAAAAA</h3>
+    </div>
+    <div id="C">
+        <h3>CCCCCCCC</h3>
+    </div>
+</body>
+</html>

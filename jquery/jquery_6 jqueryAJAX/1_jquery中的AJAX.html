@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            width: 500px;
+            height: 300px;
+            border: 1px solid #abcdef;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    jquery(Dom).load()</br>
+    $.get()</br>
+    $.post()</br>
+    $.ajax()</br>
+    <!--需要在服务器环境下学习-->
+    <input type="text" name="username" id="username">
+    <input type="button" value="加载">    </br>
+    <div class="load"></div>
+    <script>
+//        $("input[type=button]").click(function(){
+//            // 向服务器发送地址  (发送数据 回调函数)
+////            $(".load").load(url,data,callback);
+//            //请求地址
+//            //后面加个参数" ?date="+Math.random() " 就可以在IE下缓存
+//            $(".load").load("test.txt");
+////            $(".load").load("test.html?date="+Math.random());
+////            $(".load").load("test.html?date="+Math.random()+"#test2");
+//        });
+
+//get函数
+//        $("input[type=button]").click(function () {
+////            发送地址 （发送数据 回调函数 返回数据类型）
+////            $.get(url,sendData,callback,dataType);
+//            $.get('test.txt?data='+Math.random(), function (data) {
+//                $(".load").html(data);
+//            });
+//        });
+
+//get验证
+//        $("input[type=button]").click(function () {
+//
+//            var url = "test.php";
+//            var sendData = {'username':$("#username").val()};
+//
+//            $.get(url,sendData,function(data,XMLHttpRequest){
+//                if( data == 'true'){
+//                    $("div").html('可以注册la');
+//                }else{
+//                    $("div").html("不能注册a");
+//                }
+//            });
+//        });
+
+//post函数 同get 方法
+
+//$.ajax(url)  用的最多
+//        $("input[type=button]").click(function () {
+//            var url = "test.php";
+//            var sendData = {'username':$("#username").val()};
+//            $.ajax({
+//                url:url,
+//                type:'post', //'get'
+//                data:sendData,
+//                success: function (data) {
+////                    if(data == "true"){
+////                        $(".load").html("可以注册");
+//                        $(".load").html(data);
+////                    }else{
+////                        $('.load').html('不能注册为admin');
+////                    }
+//                }
+//            })
+//        });
+
+//        在服务器端的test.php文件如下:
+//        <?php
+//        header('Content-type:text/html;charset=utf-8');
+//        $username = $_POST['username'];
+//        $username = $_GET['username'];
+//        if($username == 'admin'){
+//            echo '用户名不能是admin';  //
+//            echo 'false';
+//        }else{
+//            echo '用户名可以注册';     //
+//            echo 'true';
+//        }
+//        />
+    </script>
+</body>
+</html>

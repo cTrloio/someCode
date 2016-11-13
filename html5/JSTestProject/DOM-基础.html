@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h2>什么是DOM</h2>
+    在js中就是document
+    浏览器支持
+    IE678  10% 9 10%++
+    Chrome 60%
+    FF     99%
+    <h2>DOM节点</h2>
+    <h3>childNodes  nodeType</h3>
+    childNodes获取子节点
+    childNodes.length ie67没问题 其他会把空文本节点也算进去
+    for(var i =0;i<oUl.childNodes.length;i++){
+        if(oUl.childNodes[i].nodeType==1){
+            oUl.childNodes[i].style.background='red';
+        }
+    }
+    nodeType 返回节点类型
+    元素节点 返回1
+    文本节点 返回3
+    oUl.children获取子节点 只包括元素节点 不包括文本节点！
+
+    <h3>parentNode</h3>
+    返回父节点                详见隐藏例子
+    <h3>offsetParent</h3>
+    返回有定位的父节点
+
+    <h3>首尾子节点</h3>
+    兼容性问题 高版本浏览器也会把文本节点算作第一个节点！！！！！
+    firstChild、firstElementChild(高版本浏览器用第二个)
+    lastChild、lastElementSibling(高版本浏览器用第二个)
+
+    <h3>兄弟节点</h3>
+    有兼容性问题 同上
+    nextSibling、nextElementSibling
+    previousSibling、previousElementSibling
+
+    兼容写法：
+    if(元素.firstElementChild){
+        元素.firstElementChild.style.background='red'
+    }else{
+        元素.firstChild.style.background='red'
+    }
+
+    <h2>元素属性操作</h2>
+    oDiv.style.display = 'block';
+    oDiv.style["display"] = 'block';
+    Dom方式
+
+    <h2>DOM方式操作元素属性</h2>
+    获取getAttribute(名称)
+    设置setAttribute(名称，值)
+    删除removeAttribute(名称)
+
+    <h2>用className选择元素</h2>
+    <h3>如何用className选择元素</h3>
+    选出所有元素
+    通过className条件筛选
+                            详见封装函数 getByClass
+    <h3>封装成函数</h3>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>文字搬运工</title>
+    <style>
+        @-webkit-keyframes BtnAnm {
+            0%{
+                background-color: #fff906;
+            }
+            20%{
+                background-color: #ff0c15;
+            }
+            40%{
+                background-color: #ff9604;
+            }
+            60%{
+                background-color: #26ff10;
+            }
+            80%{
+                background-color: #0bebff;
+            }
+            100%{
+                background-color: #ae21ff;
+            }
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div#container{
+            margin: 0 auto;
+            padding: 20px;
+            border: solid 10px #6c6c6c;
+            width: 800px;
+            height: 400px;
+        }
+        div#left{
+            float: left;
+            width: 250px;
+            height: 370px;
+            padding: 10px;
+            border: solid 5px #6c6c6c;
+        }
+        div#left textarea{
+            width: 245px;
+            height: 370px;
+        }
+        div#center{
+            float: left;
+            margin-left: 10px;
+            width: 190px;
+            height: 370px;
+            padding: 10px;
+            border: solid 5px #6c6c6c;
+        }
+        div#center input{
+            width: 190px;
+            height: 45px;
+            background: rgb(226, 255, 87);
+            border: solid 5px #ffbd66;
+        }
+        div#center input:hover{
+            -webkit-animation-name: BtnAnm;
+            -webkit-animation-duration: 3s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+        }
+        div#center span{
+            margin-left: 70px;
+            font-size: 30px;
+            line-height: 50px;
+            width: 100px;
+            height: 30px;
+            text-align: center;
+        }
+        div#center div#logo progress{
+            width: 164px;
+            padding: 0;
+            margin: 14px;
+            height: 28px;
+            border: solid 5px #31331f;
+        }
+        div#right{
+            float: right;
+            width: 250px;
+            height: 370px;
+            padding: 10px;
+            border: solid 5px #6c6c6c;
+        }
+        div#right p{
+            width: 245px;
+            height: 370px;
+            border: solid 1px #c1c1c1;
+        }
+
+    </style>
+    <script>
+        window.onload = function(){
+            var oTextArea = document.getElementsByTagName('textarea')[0];
+            var oInput = document.getElementsByTagName('input')[0];
+            var oSpan = document.getElementsByTagName('span')[0];
+            var oProgress = document.getElementsByTagName('progress')[0];
+            var oP = document.getElementsByTagName('p')[0];
+
+            var num=0;
+            var timer=null;
+            var canClick=true;
+            oInput.onclick = function(){                        //点击移动文字
+                var areaStr = oTextArea.value;                      //得到文本框的内容
+                if(canClick){
+                    var textArr = areaStr.split('');                //每个字放到数组里
+                    clearInterval(timer);
+                    timer = setInterval(function () {
+                        oP.innerHTML += textArr[num];               //文字右移
+                        oTextArea.innerHTML = areaStr.substring(num+1,areaStr.length);  //文字减少
+                        num++;
+
+                        oSpan.innerHTML = num +'/'+ areaStr.length; //显示文字
+                        oProgress.value = num;                      //显示进度
+                        oProgress.max = areaStr.length;
+
+                        if(num+1>areaStr.length){                   //移动结束
+                            clearInterval(timer);
+                            canClick = false;
+                        }
+                    },50);
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <div id="left">
+            <textarea>这里是需要搬运的内容，这些内容将会一个字一个字搬运到右边的DIV里，在中央的按钮被点击的时候同时显示进度，这里用HTML5新元素PROGRESS来显示进度这里是需要搬运的内容，这些内容将会一个字一个字搬运到右边的DIV里，在中央的按钮被点击的时候同时显示进度，这里用HTML5新元素PROGRESS来显示进度这里是需要搬运的内容，这些内容将会一个字一个字搬运到右边的DIV里，在中央的按钮被点击的时候同时显示进度，这里用HTML5新元素PROGRESS来显示进度</textarea>
+        </div>
+        <div id="center">
+            <input type="button" value="文字右移>>">
+            <span> 0/0 </span>
+            <div id="logo">
+                <progress value="0" max="0"></progress>
+            </div>
+        </div>
+        <div id="right">
+            <p></p>
+        </div>
+    </div>
+</body>
+</html>

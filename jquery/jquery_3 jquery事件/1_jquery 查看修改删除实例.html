@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+    <style>
+        #table{
+            border: 1px solid #abcdef;
+            border-collapse: collapse;   /*移除表格之间的间隙*/
+            width: 600px;
+        }
+        th{
+            border: 1px solid #abcdef;
+        }
+        tr{
+            height: 30px;
+        }
+        td{
+            border: 1px solid #abcdef;
+            text-align: center;
+        }
+        td a{
+            margin-right: 5px;
+            color: #ff0000;
+        }
+        .popDiv{
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ff0000;
+            position: absolute;
+            left: 50%;
+            margin-left: -250px;
+            background: #fff;
+            top: 150px;
+            display: none;
+            z-index: 4;
+        }
+        .popDiv p {
+            border-bottom: 1px solid red;
+        }
+
+
+    </style>
+</head>
+<body>
+    <table id="table">
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>职位</th>
+            <th>工资</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td>猴子</td>
+            <td>22</td>
+            <td>程序</td>
+            <td>10000</td>
+            <td><a href="#" class="view">查看</a><a href="#" class="del">删除</a><a href="#">修改</a></td>
+        </tr>
+        <tr>
+            <td>狗龙</td>
+            <td>21</td>
+            <td>美术</td>
+            <td>12000</td>
+            <td><a href="#" class="view">查看</a><a href="#" class="del">删除</a><a href="#">修改</a></td>
+        </tr>
+        <tr>
+            <td>谭儿</td>
+            <td>25</td>
+            <td>经理</td>
+            <td>25000</td>
+            <td><a href="#" class="view">查看</a><a href="#" class="del">删除</a><a href="#">修改</a></td>
+        </tr>
+    </table>
+    <div class="popDiv">
+        <p><strong>姓名</strong><span></span></p>
+        <p><strong>年龄</strong><span></span></p>
+        <p><strong>职位</strong><span></span></p>
+        <p><strong>工资</strong><span></span></p>
+        <a href="#" class="close">close</a>
+    </div>
+<script>
+    //查看功能
+    $(".view").click(function () {
+        var maskHeight = $(document).height();
+        var maskWidth = $(document).width();
+        //添加遮罩层
+        $('<div class="mask"></div>').appendTo($("body"));
+        $('.mask').css({
+            "opacity":0.4,
+            "background":"#000",
+            "position":"absolute",
+            "left":0,
+            "top":0,
+            "width":maskWidth,
+            "height":maskHeight,
+            "z-index":2
+        });
+
+        var arr = [];
+        $(this).parent().siblings().each(function () {
+            arr.push($(this).text());
+        });
+//        each默认参数是循环次数
+        $(".popDiv").show().children().each(function (i) {
+            $(this).children("span").text(arr[i]);
+        });
+
+        $(".close").click(function () {
+            $(this).parent().hide();
+            $('.mask').remove();
+        });
+    });
+
+    //删除功能
+    $('.del').click(function () {
+        $(this).parents("tr").remove();
+    });
+
+    //修改
+
+</script>
+</body>
+</html>

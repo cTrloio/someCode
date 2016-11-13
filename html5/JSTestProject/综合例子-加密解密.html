@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #TextArea{
+            width: 331px;
+            height: 221px;
+        }
+        #button1{
+            width: 57px;
+        }
+        #button2{
+            width: 55px;
+        }
+    </style>
+</head>
+<body>
+    <script language="JavaScript">
+        var jiamiStr;
+        var jiemiStr;
+        function jiamijiemi(passKey,date){
+            var codeStr="";
+            for(var i =0;i<date.length;i++){
+                var dateCode;
+                for(var j=0;j<passKey.length;j++){
+                    var keyCode=passKey.charCodeAt(j);
+                     dateCode=date.charCodeAt(i)^keyCode;
+                }
+                codeStr += String.fromCharCode(dateCode);
+            }
+            return codeStr;
+        }
+        function jiami(){
+            var date=TextArea.value;
+            var key=Password1.value;
+            jiamiStr=jiamijiemi(key,date);
+            TextArea.value=jiamiStr;
+        }
+        function jiemi(){
+            var date=TextArea.value;
+            var key=Password1.value;
+            jiemiStr=jiamijiemi(key,date);
+            TextArea.value=jiemiStr;
+        }
+    </script>
+
+    <textarea id="TextArea"></textarea><br>
+    <input type="password" id="Password1">
+    <input type="button" id="button1" value="加密" onclick="return jiami()">
+    <input type="button" id="button2" value="解密" onclick="return jiemi()">
+</body>
+</html>

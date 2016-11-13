@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload= function () {
+            var oBtn=document.getElementById('btn1')
+            var oTxt=document.getElementById('txt1')
+            var oNewWindow=null;
+            oBtn.onclick= function () {
+                oNewWindow=window.open('about:blank','_blank')
+                oNewWindow.document.write(oTxt.value);
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="运行" id="btn1">
+    <input type="button" value="脚本打开窗口" id="btn2" onclick="window.open('BOM-基础-运行代码.html')">
+    <input type="button" value="关闭" id="btn3" onclick="window.close()">
+    <textarea id="txt1" rows="10" cols="40"></textarea>
+</body>
+</html>

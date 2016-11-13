@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        table{
+            width: 100%;
+            border: 1px solid #abcdef;
+            border-collapse: collapse;
+        }
+        th,td{
+            height: 28px;
+            border: 1px solid #abcdef;
+            text-align: center;
+        }
+        .evenRow1{
+            background-color: #38a38a;
+        }
+        .oddRow1{
+            background: #0099ff;
+        }
+        .curRow1{
+            background: yellow;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+    <script src="../jquery_7%20jquery插件编写/jquery-table-1.0.js"></script>
+    <script>
+        $(function () {
+            $("#table1").table({
+                evenRowClass:"evenRow1",
+                oddRowClass:"oddRow1",
+                curRowClass:"curRow1",
+                eventType1:"click"
+            });
+        });
+    </script>
+</head>
+<body>
+<!-- 需求 ： 开发一个插件
+奇数行颜色为#38a38a
+偶数行颜色#0099ff
+鼠标悬浮当前行颜色为yellow 离开时颜色还原-->
+    <table id="table1">
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>身高</th>
+            <th>体重</th>
+        </tr>
+        <tr>
+            <td>张三</td>
+            <td>23</td>
+            <td>170</td>
+            <td>55</td>
+        </tr>
+        <tr>
+            <td>李四</td>
+            <td>20</td>
+            <td>180</td>
+            <td>75</td>
+        </tr>
+        <tr>
+            <td>王五</td>
+            <td>21</td>
+            <td>165</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>赵六</td>
+            <td>30</td>
+            <td>175</td>
+            <td>60</td>
+        </tr>
+    </table>
+</body>
+</html>

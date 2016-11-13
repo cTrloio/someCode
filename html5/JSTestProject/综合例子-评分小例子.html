@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload  = function () {
+            var oDiv=document.getElementById('d1');
+            function getRating(rating){
+                if(rating>5 || rating < 0)
+                    throw new Error('数字不再范围内');
+                //方法用于提取字符串中介于两个指定下标之间的字符。
+                return '★★★★★☆☆☆☆☆'.substring(5-rating,10-rating);
+            }
+                oDiv.innerHTML=getRating(4);
+        };
+
+    </script>
+</head>
+<body>
+    <div id="d1"></div>
+</body>
+</html>

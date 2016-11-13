@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>死亡倒计时案例</title>
+    <script src="../javaScriptsCodeComplete/changeOpacity.js"></script>
+    <script src="../javaScriptsCodeComplete/changeObject.js"></script>
+    <script src="../javaScriptsCodeComplete/getStyleHd.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div#container{
+            width: 455px;
+            height: 100%;
+            border: solid 1px #c1c1c1;
+            margin: 0 auto;
+            position: relative;
+        }
+        h1{
+            width: 450px;
+            position: absolute;
+            text-align: center;
+        }
+        h1#title{
+            top: 5px;
+            border-bottom: solid 2px #000000;
+        }
+        h1#title2{
+            top: 300px;
+            border-top: solid 2px #000000;
+        }
+        div#row span{
+            width: 148px;
+            height: auto;
+            border: solid 1px #000000;
+            text-align: center;
+            display: inline-block;
+        }
+        div#row{
+            position: absolute;
+            top: 50px;
+            width: 450px;
+        }
+        div#img{
+            position: absolute;
+            top: 40px;
+        }
+        div#img #img1{
+            position: absolute;
+            top: 2px;
+            left: 0;
+        }
+        div#img #img2{
+            position: absolute;
+            top: 2px;
+            left: 150px;
+        }
+        div#img #img3{
+            position: absolute;
+            top: 2px;
+            left: 300px;
+        }
+        div#list{
+            position: absolute;
+            top: 350px;
+            width: 450px;
+            height: auto;
+            background: #6c6c6c;
+        }
+        div#list div{
+            width: 450px;
+            height: 100px;
+            background: #7c7c7c;
+        }
+        .text{
+            width: 106px;
+            height: auto;
+        }
+        .btn{
+            width: 40px;
+            height: auto;
+            vertical-align: bottom;
+            background: #c1c1c1;
+        }
+        .listImg{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+        }
+        .listP{
+            display: inline-block;
+            text-align: center;
+            font-size: 35px;
+            width: 345px;
+            height: 100px;
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oRowDiv=document.getElementById('row');
+            var aInput=document.getElementsByTagName('input');
+            var aImg=oRowDiv.getElementsByTagName('img');
+            var aSpan=document.getElementsByTagName('span');
+            var listImg=document.getElementsByClassName('listImg');
+            var listP=document.getElementsByClassName('listP');
+            var textArr=[aInput[0],aInput[2],aInput[4]];
+            var btnArr=[aInput[1],aInput[3],aInput[5]];
+            var nameArr=['火女','冰女','风女','浪','贱','贪'];
+            var timer=null;
+            var cur=null;
+            for(var i=0; i<3; i++){
+                btnArr[i].index = i;
+                btnArr[i].onclick = function () {
+                    var str=textArr[this.index].value;  //获取到达时间
+                    var iNew=new Date(str);
+                    cur = this;         //注意这里   在setInterval里的this就不是btnArr里的this了
+                    clearInterval(timer);
+                    timer=setInterval(function () {
+                        var iNow=new Date();
+                        var t = Math.floor((iNew - iNow)/1000);
+                        if(t>0){
+                            var day = Math.floor(t/86400);          //根据未来时间和现在时间差 得到相差的天数
+                            var hour= Math.floor(t%86400/3600);     //+小时 这样算并非合计多少分钟
+                            var min = Math.floor(t%86400%3600/60);  //+分钟
+                            var sec = Math.floor(t%60);             //+秒
+                            var str = day+ '日'+ hour+ '时'+ min + '分'+ sec+ '秒';
+                            aSpan[cur.index].innerHTML = str;
+                        }
+                        else{
+                            aSpan[cur.index].innerHTML = 'hero dead';
+                            doMove(aImg[cur.index],'top',2,200);
+                            opacityHd(aImg[cur.index],-0.1,endHd);
+                            clearInterval(timer);
+                        }
+                    },1000);
+                    function endHd(){
+                        listImg[cur.index].src = aImg[cur.index].src;
+                        listP[cur.index].innerHTML =  nameArr[cur.index] +'：死于'+ nameArr[cur.index+3];
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h1 id="title">select</h1>
+        <div id="row">
+            <input type="text" class="text" value="December 20,2015 15:55:12"><input type="button" class="btn" value="计时"><input type="text" class="text" value="December 20,2015 15:45:12"><input type="button" class="btn" value="计时"><input type="text" class="text" value="December 20,2015 15:43:00"><input type="button" class="btn" value="计时">
+            <div>
+                <span>10时10分10秒</span><span>20时01分03秒</span><span>05时03分04秒</span>
+            </div>
+            <div id="img">
+                <img src="../image/lina.png" id="img1"><img src="../image/lisa.png" id="img2"><img src="../image/wr.png" id="img3">
+            </div>
+        </div>
+        <h1 id="title2">dead</h1>
+        <div id="list">
+            <div class="ip">
+                <img class="listImg" src=""><p class="listP"></p>
+            </div>
+            <div class="ip">
+                <img class="listImg" src=""><p class="listP"></p>
+            </div>
+            <div class="ip">
+                <img class="listImg" src=""><p class="listP"></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

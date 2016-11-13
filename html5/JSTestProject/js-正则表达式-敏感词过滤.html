@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload= function () {
+            var oTxt1=document.getElementById('txt1')
+            var oTxt2=document.getElementById('txt2')
+            var oBtn=document.getElementById('btn1')
+            oBtn.onclick= function () {
+                var re=/麻痹|妈|操|老子|呵呵/g;
+                oTxt2.value=oTxt1.value.replace(re,'***');
+            }
+        }
+    </script>
+</head>
+<body>
+    <textarea rows="10" cols="40" id="txt1"></textarea>
+    <input type="button" value="按钮" id="btn1">
+    <textarea rows="10" cols="40" id="txt2"></textarea>
+</body>
+</html>

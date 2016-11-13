@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>盒模型-inline-block执行分列显示</title>
+    <style>
+        div{
+            width: 400px;
+        }
+        div.d1{
+            width: 200px;
+            background-color: #13ff13;
+            display: inline-block;
+        }
+        div.d2{
+            width: 200px;
+            vertical-align:top;
+            background-color: #ff3d23;
+            display: inline-block;
+        }
+        div.d3{
+            width: 400px;
+            background-color: #212fff;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>盒模型-inline-block执行分列显示</h1>
+    <div class="d1">
+        d1在之前，如果需要在一行中并列显示多个block类型的元素，
+        需要使用float属性或position属性，但是这样会使样式复杂，
+        所以使用inline-block类型
+        在之前，如果需要在一行中并列显示多个block类型的元素，
+        需要使用float属性或position属性，但是这样会使样式复杂，
+        所以使用inline-block类型
+    </div><div class="d2">
+        d2在之前，如果需要在一行中并列显示多个block类型的元素，
+        需要使用float属性或position属性，但是这样会使样式需要使用clear.both清楚float:left浮动，
+        所以使用inline-block类型 vertical-align: top;==顶部对齐
+    </div>
+    <div class="d3">
+        d3在之前，如果需要在一行中并列显示多个block类型的元素，
+        需要使用float属性或position属性，但是这样会使样式需要使用clear.both清楚float:left浮动，
+        所以使用inline-block类型
+    </div>
+</body>
+</html>

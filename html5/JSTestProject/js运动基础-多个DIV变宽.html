@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            width: 100px;
+            height: 50px;
+            background: #13ff13;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        //多物体运动时 所有东西都不能公用   譬如淡入淡出时 alpha 不能公共变量，要给每个div都加自定义属性
+        window.onload= function () {
+            var aDiv=document.getElementsByTagName('div');
+            for(var i=0;i<aDiv.length;i++){
+                aDiv[i].timer=null;
+                aDiv[i].onmouseover= function () {
+                    startMove(this,600);
+                }
+                aDiv[i].onmouseout= function () {
+                    startMove(this,100);
+                }
+            }
+        }
+        function startMove(obj,iTarget){
+            clearInterval(obj.timer);
+            obj.timer=setInterval(function () {
+                var speed=(iTarget-obj.offsetWidth)/6;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                if(obj.offsetWidth==iTarget){
+                    clearInterval(obj.timer);
+                }else{
+                    obj.style.width = obj.offsetWidth+speed +'px';
+                }
+            },30);
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>

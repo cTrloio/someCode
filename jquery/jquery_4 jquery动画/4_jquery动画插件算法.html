@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 10px;
+            top: 40px;
+            background: #abcdef;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+    <script src="../jquery/jquery.easing.min.js"></script>
+</head>
+<body>
+    <input type="button" value="点击">
+    <div></div>
+    <script>
+        //attr delay ease completeFn   凡事可以使用ease參數的的都可以用動畫插件
+        $("input").click(function () {
+//            $("div").animate({"left":"800px"},2000,"easeOutBounce");
+//            $("div").slideDown(500,"easeOutBounce");
+            $("div").animate({"left":"+=100px"},2000,"easeOutBounce");
+        });
+    </script>
+</body>
+</html>

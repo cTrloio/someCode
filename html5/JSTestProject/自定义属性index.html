@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>自定义属性index</title>
+    <style>
+        input{
+            width: 100px;
+            height: 50px;
+            float: left;
+            border: solid 2px #ff6600;
+            margin: 0 auto;
+        }
+        div{
+            width: 200px;
+            margin: 50px;
+            height: 100px;
+            top: 20px;
+            border: solid 2px #ff6600;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+    <script>
+        window.onload= function () {
+            var aBtn=document.getElementsByTagName('input');
+            var aDiv=document.getElementsByTagName('div');
+            var arr=['女王','影魔','卡尔'];
+            for(var i=0;i<aBtn.length;i++){
+                aBtn[i].index=i; /* 自定义属性，添加索引值  建立匹配，一一对应关系*/
+                aBtn[i].onclick= function () {
+                    //尽量不要在 循环里的函数里 用 i 变量
+                    aDiv[this.index].innerHTML=arr[this.index];
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="0">
+    <input type="button" value="1">
+    <input type="button" value="2">
+    <br>
+    <div>0</div>
+    <div>1</div>
+    <div>2</div>
+</body>
+</html>

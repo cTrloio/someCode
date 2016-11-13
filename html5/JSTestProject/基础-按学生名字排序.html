@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>按学生名字排序</title>
+</head>
+<body>
+    <script language="JavaScript">
+        var arr=["Mik","Tom","Bury","Tank","Shab"];
+        document.write("排序前"+arr);
+        for(n in arr){
+            for(m in arr){
+                if(arr[n]<arr[m]){
+                    var t=arr[n];
+                    arr[n]=arr[m];
+                    arr[m]=t;
+                }
+            }
+        }
+        document.write("排序后"+arr)
+    </script>
+</body>
+</html>

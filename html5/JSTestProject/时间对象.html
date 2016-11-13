@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload = function () {
+            setInterval(function(){
+                var oBody=document.body;
+                //object对象
+                var iTimer=new Date();
+                //数值类型对象
+                var iYear=iTimer.getFullYear();
+                var iMont=iTimer.getMonth()+1;
+                var iData=iTimer.getDate();
+                var iWeek =iTimer.getDay();
+                var iHour=iTimer.getHours();
+                var iMin =iTimer.getMinutes();
+                var iSec =iTimer.getSeconds();
+                switch (iWeek){
+                    case 0:
+                        iWeek = '星期日';
+                        break;
+                    case 1:
+                        iWeek = '星期一';
+                        break;
+                    case 2:
+                        iWeek = '星期二';
+                        break;
+                    case 3:
+                        iWeek = '星期三';
+                        break;
+                    case 4:
+                        iWeek = '星期四';
+                        break;
+                    case 5:
+                        iWeek = '星期五';
+                        break;
+                    case 6:
+                        iWeek = '星期六';
+                        break;
+                }
+                var str = iYear +'年'+ iMont +'月'+ iData +'日 '+ iWeek +' '+ addNum0(iHour) +':'+ addNum0(iMin) +':'+ addNum0(iSec);
+                oBody.innerHTML = str;
+            },1000);
+        };
+        function addNum0( n ){
+            return n<10 ? '0'+n : ''+n;
+        }
+    </script>
+</head>
+<body style="font-size: 60px">
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 150px;
+            height: 120px;
+            background: #c8a910;
+        }
+    </style>
+    <script>
+        window.onscroll= function () {
+            var oDiv=document.getElementById('div1');
+            //                       获取页面top的兼容性写法
+            var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+//            oDiv.style.top=document.documentElement.clientHeight-oDiv.offsetHeight+scrollTop+'px';
+            //        页面的    页面元素          可视区域
+//            startMove(document.documentElement.clientHeight-oDiv.offsetHeight+scrollTop);
+            //        在页面中央悬浮 类似对联效果  需要取整页面top
+            startMove(parseInt((document.documentElement.clientHeight-oDiv.offsetHeight)/2+scrollTop));
+        };
+        var timer=null;
+        function startMove(iTarget){
+            var oDiv=document.getElementById('div1');
+            clearInterval(timer);
+            timer=setInterval(function () {
+                var speed=(iTarget-oDiv.offsetTop)/4;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                if(oDiv.offsetTop==iTarget){
+                    clearInterval(timer);
+                }else{
+                    oDiv.style.top=oDiv.offsetTop+speed+'px';
+                }
+            },30);
+        }
+    </script>
+</head>
+<body style="height: 2000px;">
+    <div id="div1"></div>
+</body>
+</html>

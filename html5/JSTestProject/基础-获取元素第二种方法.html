@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>获取元素第二种方法</title>
+    <script>
+        window.onload=function(){
+            var uUl=document.getElementById('list'); /* 静态的找到一个元素*/
+            var uLi=uUl.getElementsByTagName('li'); /* 动态的找到一组元素，类似数组但不是数组*/
+            var oLi=document.getElementsByTagName('li')[0];/* 也可以这样找到所有的第一个*/
+            document.body.innerHTML='abc'; /*页面唯一元素寻找方法，例如body\title就是唯一的*/
+            document.title=123;
+            alert(uLi[4].innerHTML);
+        }
+    </script>
+</head>
+<body>
+    <ul id="list">  <!--无序列表-->
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+    </ul>
+
+    <ol>            <!--有序列表-->
+        <li>X</li>
+        <li>Y</li>
+        <li>Z</li>
+    </ol>
+</body>
+</html>

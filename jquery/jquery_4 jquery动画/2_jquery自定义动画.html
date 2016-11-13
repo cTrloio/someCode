@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: #f60;
+            position: absolute;
+            left: 0;
+            top: 30px;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    <input type="button" value="click">
+    <div></div>
+    <script>
+        $("input").click(function () {
+            $("div").animate({'left':'800px','top':'200px'},3000, function () {
+                $("div").animate({'left':'0px','top':'30px'},3000);
+            });
+        });
+    </script>
+</body>
+</html>

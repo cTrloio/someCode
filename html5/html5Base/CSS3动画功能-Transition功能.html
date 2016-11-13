@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CSS3动画功能-Transition功能</title>
+    <style>
+        div{
+            width: 200px;
+            height: 150px;
+            background-color: #ffdd3f;
+            transition: background-color 2s linear 1s,width 2s linear 1s;
+            -moz-transition: all 2s linear 1s;
+            -webkit-transition: all 2s linear 1s,width 2s linear 1s;
+            -o-transition: all 2s linear 1s;
+        }
+        div:hover{
+            background-color: #126fb0;
+            width: 400px;
+            height: 500px;
+            border: solid 2px #ff002e;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS3动画功能-Transition功能</h1>
+    <p>
+        允许CSS属性值在一定时间内平滑过渡（鼠标单击，获得焦点）<mark>在对元素任何改变中触发</mark><br>
+        transition:property duration timing-function delay<br>
+        -moz-transition:property duration timing-function delay<br>
+        -webkit-transition:property duration timing-function delay<br>
+        -o-transition:property duration timing-function delay<br><br>
+
+        执行变化的属性property ：<br>
+        none没有过度效果，all所有属性都有过度效果，property CSS属性名称列表，以逗号分隔
+        <br>
+        变化延续的时间duration ：<br>
+        0默认，没有效果  时间以秒S或毫秒MS为单位
+        <br>
+        延续时间段变化速率的变化timing-function ：<br>
+        ease 逐渐变慢  linear 匀速 ease-in 加速 ease-out减速 ease-in-out加速然后减速 cubic-bezier(n,n,n,n)可以为0-1的数字，贝斯尔曲线
+        <br>
+        变化延迟时间delay ：<br>
+        数值 ，单位为s || ms
+        <br>
+    </p>
+    <div></div>
+</body>
+</html>

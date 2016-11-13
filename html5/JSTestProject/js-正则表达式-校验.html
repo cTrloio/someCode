@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload= function () {
+            var oTxt1=document.getElementById('text1')
+            var oBtn1=document.getElementById('btn1')
+            oBtn1.onclick= function () {
+                var re=/^\w+@[a-z0-9]+\.[a-z]+$]/i;
+                if(re.test(oTxt1.value))        /*检验正则是否写对了*/
+                {
+                    alert('邮箱合法')
+                }
+                else
+                {
+                    alert('写错了')
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="text1">
+    <input type="button" id="btn1">
+</body>
+</html>

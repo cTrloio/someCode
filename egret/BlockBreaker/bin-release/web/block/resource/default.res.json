@@ -1,0 +1,30 @@
+{
+	"groups": [
+		{
+			"keys": "egret_icon_png,description_json,bullJson,bullPng",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/egret_icon.png",
+			"type": "image",
+			"name": "egret_icon_png"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/bullPi.json",
+			"type": "json",
+			"name": "bullJson"
+		},
+		{
+			"url": "assets/bullPi.png",
+			"type": "image",
+			"name": "bullPng"
+		}
+	]
+}

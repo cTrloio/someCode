@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        //混合的构造函数，原型方式
+        function createPer(name,age){//工厂方式 构造方法  在构造方法里加属性
+//            var obj=new Object();
+            //当使用new 关键字时   系统会自动声明：
+            // var this=new Object();
+            this.name=name;     //使用了new关键字  这里的this指createPer的对象
+            this.age=age;
+            //系统也会自动return this
+//            return obj;
+        }
+        createPer.prototype.showName= function () {  //在原型里加方法
+            alert(this.name);
+        }
+        createPer.prototype.shouQQ= function () {
+            alert(this.age);
+        }
+
+        var obj1=new createPer('tt',12);
+        obj1.shouQQ();
+        obj1.showName();
+        var obj2=new createPer('hh',13);
+        obj2.shouQQ();
+        obj2.showName();
+
+        alert(obj1.showName==obj2.showName); //true
+    </script>
+</head>
+<body>
+类：模型
+对象：产品
+面向对象：使用对象时，只关注对象提供的功能，不关注其内部细节，如jquery
+js中的面向对象
+抽象：抓住核心问题
+封装：不考虑内部实现，只考虑功能使用
+继承：从已有对象上，继承出新的对象
+    多重继承
+    多态
+对象的组成
+    方法-----函数：过程、动态的
+    属性-----变量：状态、静态的
+</body>
+</html>

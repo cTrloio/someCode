@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../javaScriptsCodeComplete/cookie.js"></script>
+    <script>
+        window.onload= function () {
+            var oForm=document.getElementById('form1');
+            var oUser=document.getElementsByName('user')[0];
+            oForm.onsubmit= function () {
+                setCookie('user',oUser.value,14);
+            }
+            oUser.value=getCookie('user');
+        }
+    </script>
+</head>
+<body>
+    <form action="http://www.zhinengshe.com/" id="form1">
+        user:<input type="text" name="user"><br>
+        password:<input type="password" name="pass"><br>
+        <input type="submit" value="login">
+    </form>
+
+</body>
+</html>

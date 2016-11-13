@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul{
+            list-style: none;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+AJAX执行时的提示
+AJAX中的细节（编码和提交方式）
+    <input type="button" value="获取新闻列表">
+    <div id="info">
+        <img src="loading.gif.gif" alt="" id="loading" style="display: none">
+        <ul></ul>
+    </div>
+    <script>
+        $("input").click(function () {
+
+            var ul = $('#info>ul');
+            $.ajax({
+                url:'demo2.php?'+Math.random(),
+                type:"get",
+                success: function (data) {
+//                    alert(data);
+                    var res = eval(data);
+                    for(var i = 0;i<res.length;i++){
+                        ul.append('<li>'+ res[i].title +':'+ res[i].publicTime +'</li>');
+                    }
+                }
+            });
+        });
+        //开始加载    //加载完成
+        $(document).ajaxStart(function () {
+            $("#loading").show();
+        }).ajaxStop(function () {
+            $("#loading").hide();
+        });
+
+    </script>
+</body>
+</html>

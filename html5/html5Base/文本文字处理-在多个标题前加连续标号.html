@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>在多个标题前加编号</title>
+    <style>
+        h2:before{
+            content:'第' counter(btxh,upper-alpha)'讲';
+            color: red;
+            font-size: 24px;
+        }
+        h2{
+            counter-increment:btxh;
+        }
+    </style>
+</head>
+<body>
+<!--编号名，编号种类 默认数字,upper-alpha为大写字母upper-roman为罗马字母-->
+    <h1>在多个标题前加编号</h1>
+        <h2>标题</h2>
+            <p>内容</p>
+        <h2>标题</h2>
+             <p>内容</p>
+        <h2>标题</h2>
+             <p>内容</p>
+        <h2>标题</h2>
+            <p>内容</p>
+        <h2>标题</h2>
+             <p>内容</p>
+</body>
+</html>

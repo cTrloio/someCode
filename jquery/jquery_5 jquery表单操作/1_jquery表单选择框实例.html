@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    <div id="checkbox">
+        <input type="checkbox" checked="checked">吃
+        <input type="checkbox">喝
+        <input type="checkbox">玩
+        <input type="checkbox">乐
+    </div>
+    <div id="btn">
+        <input type="button" value="全选" id="chkAll">
+        <input type="button" value="全不选" id="chkNone">
+        <input type="button" value="反选" id="chkReverse">
+    </div>
+    <script>
+        var chkAll  = $("#chkAll");
+        var chkNone = $("#chkNone");
+        var chkReverse = $("#chkReverse");
+        var checkbox = $("#checkbox>:checkbox");
+        //低版本可以 高版本bug
+        chkAll.click(function () {
+//            checkbox.attr("checked","checked");
+            checkbox.attr("checked",true);
+        });
+        chkNone.click(function () {
+//            checkbox.removeAttr("checked");
+            checkbox.attr("checked",false);
+        });
+        chkReverse.click(function () {
+            checkbox.each(function () {
+                $(this).attr("checked",!$(this).attr("checked"));
+            });
+        });
+    </script>
+</body>
+</html>

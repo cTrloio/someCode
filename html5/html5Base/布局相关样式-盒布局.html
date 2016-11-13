@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>布局相关样式-盒布局</title>
+    <style>
+        div#body{
+            /*width: 1000px;
+            margin: 0 auto;*/
+            display: -webkit-box;/*整体采用盒布局*/
+            display: -moz-box;
+        }
+        div ul li{
+            list-style: none;
+        }
+        div#left{
+           /* float: left;*/
+            width: 300px;
+            padding: 10px;
+            background-color: #53ebff;
+        }
+        div#center{
+            /*float: left;*/
+            width: 350px;
+            background-color: #ffdd3f;
+        }
+        div#right{
+            /*float: right;*/
+            width: 300px;
+            padding: 10px;
+            background-color: antiquewhite;
+        }
+        div#left,div#center,div#right{
+            -webkit-box-sizing: border-box;
+            /*为元素设定的宽度和高度决定了元素的边框盒。
+              就是说，为元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制。
+              通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。*/
+        }
+    </style>
+</head>
+<body>
+    <h1>布局相关样式-盒布局</h1>
+    <div id="body">
+        <div id="left">
+            <h2>左栏目</h2>
+            <ul>
+                <li>栏目1</li>
+                <li>栏目2</li>
+                <li>栏目3</li>
+                <li>栏目4</li>
+                <li>栏目5</li>
+            </ul>
+        </div>
+        <div id="center">
+            <h2>中栏目</h2>
+            <ul>
+                <li>栏目1</li>
+                <li>栏目2</li>
+                <li>栏目3</li>
+                <li>栏目4</li>
+                <li>栏目5</li>
+            </ul>
+        </div>
+        <div id="right">
+            <h2>右栏目</h2>
+            <ul>
+                <li>栏目1</li>
+                <li>栏目2</li>
+                <li>栏目3</li>
+                <li>栏目4</li>
+                <li>栏目5</li>
+            </ul>
+        </div>
+    </div>
+<p>
+    <mark>与多栏布局的区别是：</mark><br>多栏布局的栏目宽度必须相等，<br>
+    制定栏目的宽度的时候也只能统一指定，<br>栏目的宽度不可能
+    全都一样，<br>
+    所以多栏布局比较合适在文字内容页面使用，并不适合整个网页编排时使用<br>
+</p>
+</body>
+</html>

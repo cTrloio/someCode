@@ -1,0 +1,149 @@
+{
+	"groups": [
+		{
+			"keys": "description_json,bg_png,chara_png,enemy_png,bullet_png,word_png,star1,bullet_e1,enemy3_png,star2,spac,ynsw,enemy2_png,bullet_e3,life2,life3,life1,boos3,boos2,boos1,bullet_e2,fx_png,fire_png,xz_png",
+			"name": "preload"
+		},
+		{
+			"keys": "loading_f,loading_b,loadlogo",
+			"name": "loading"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/bg.png",
+			"type": "image",
+			"name": "bg_png"
+		},
+		{
+			"url": "assets/chara.png",
+			"type": "image",
+			"name": "chara_png"
+		},
+		{
+			"url": "assets/enemy.png",
+			"type": "image",
+			"name": "enemy_png"
+		},
+		{
+			"url": "assets/bullet.png",
+			"type": "image",
+			"name": "bullet_png"
+		},
+		{
+			"url": "assets/word.png",
+			"type": "image",
+			"name": "word_png"
+		},
+		{
+			"url": "assets/loading_b.png",
+			"type": "image",
+			"name": "loading_b"
+		},
+		{
+			"url": "assets/loading_f.png",
+			"type": "image",
+			"name": "loading_f"
+		},
+		{
+			"url": "assets/loadlogo.png",
+			"type": "image",
+			"name": "loadlogo"
+		},
+		{
+			"url": "assets/star1.png",
+			"type": "image",
+			"name": "star1"
+		},
+		{
+			"url": "assets/bullet_e.png",
+			"type": "image",
+			"name": "bullet_e1"
+		},
+		{
+			"url": "assets/enemy3.png",
+			"type": "image",
+			"name": "enemy3_png"
+		},
+		{
+			"url": "assets/star2.png",
+			"type": "image",
+			"name": "star2"
+		},
+		{
+			"url": "assets/sound/spac.mp3",
+			"type": "sound",
+			"name": "spac"
+		},
+		{
+			"url": "assets/sound/ynsw.ogg",
+			"type": "sound",
+			"name": "ynsw"
+		},
+		{
+			"url": "assets/enemy2.png",
+			"type": "image",
+			"name": "enemy2_png"
+		},
+		{
+			"url": "assets/bullet_e3.png",
+			"type": "image",
+			"name": "bullet_e3"
+		},
+		{
+			"url": "assets/life2.png",
+			"type": "image",
+			"name": "life2"
+		},
+		{
+			"url": "assets/life3.png",
+			"type": "image",
+			"name": "life3"
+		},
+		{
+			"url": "assets/life1.png",
+			"type": "image",
+			"name": "life1"
+		},
+		{
+			"url": "assets/boos1.png",
+			"type": "image",
+			"name": "boos1"
+		},
+		{
+			"url": "assets/boos2.png",
+			"type": "image",
+			"name": "boos2"
+		},
+		{
+			"url": "assets/boos3.png",
+			"type": "image",
+			"name": "boos3"
+		},
+		{
+			"url": "assets/bullet_e2.png",
+			"type": "image",
+			"name": "bullet_e2"
+		},
+		{
+			"name": "fx_png",
+			"type": "image",
+			"url": "assets/fx.png"
+		},
+		{
+			"name": "fire_png",
+			"type": "image",
+			"url": "assets/fire.png"
+		},
+		{
+			"name": "xz_png",
+			"type": "image",
+			"url": "assets/xz.png"
+		}
+	]
+}

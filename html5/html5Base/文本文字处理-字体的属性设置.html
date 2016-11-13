@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>使用字体的属性设置</title>
+    <style>
+        @font-face {
+            font-family: Arial;
+            src: local('Arial');
+        }
+        p.p1{
+            font-family: Arial;
+        }
+        p.p2{
+            font-family: Arial;
+            font-style: italic;
+        }
+        p.p3{
+            font-family: Arial;
+            font-variant: small-caps;
+        }
+        p.p4{
+            font-family: Arial;
+            font-weight: 900;
+        }
+        p.p5{
+            font-family: Arial;
+            font-stretch: ultra-condensed;
+        }
+        p.p6{
+            font-family: Arial;
+        }
+        p.p7{
+            font-size: small;
+        }
+    </style>
+</head>
+<body>
+    <h1>使用字体的属性设置</h1>
+    <p class="p1">font-family设置文本字体的名称</p>
+    <p class="p2">font-style设置文本样式 取值italic斜体，oblique 倾斜体，inherit 从父元素继承样式</p>
+    <p class="p3">font-variant设置文本是否大小写 取值Normal默认，Small-caps使用小型大写字母，Inherit 从父元素继承</p>
+    <p class="p4">font-weight设置文本粗细,取值normal默认，bold粗体，bolder更粗体，ligher更细体 100-900 必须是100d的倍数 400==normal 700==bold</p>
+    <p class="p5">拉伸后：font-stretch 横向或纵向拉伸文字 取值 wider伸展++ narrower收缩--</p>
+    <p class="p6">原对比：font-stretch 横向或纵向拉伸文字 取值 wider伸展++ narrower收缩--</p>
+    <p class="p7">(也没什么区别，其实就是不支持而已)</p>
+</body>
+</html>

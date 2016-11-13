@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            color: red;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    <input type="text" name="username" id="username">
+    <input type="button" value="检验">
+    <div></div>
+    <script>
+        $("input[type=button]").click(function () {
+            //date格式必须是json格式
+            var send = {
+                'username':$('#username').val()
+            };
+            //            请求地址  发送数据   回调函数
+           $("div").load('test.php',send, function (data,textStatus,XMLHttpRequest) {
+           //date服务器返回的数据  textStatus状态码 XMLHttpRequest请求对象
+//               alert(data,textStatus,XMLHttpRequest);
+
+           });
+        });
+    </script>
+    <script>
+//        test.php文件如下:
+//        <?php
+//                header('Content-type:text/html;charset=utf-8');
+//        $username = $_POST['username'];
+//        if($username == 'admin'){
+//            echo '用户名不能是admin';
+//        }else{
+//            echo '用户名可以注册';
+//        }
+//        />
+    </script>
+
+</body>
+</html>

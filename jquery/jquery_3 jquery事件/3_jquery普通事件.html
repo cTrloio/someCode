@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    事件和事件对象
+        加载文档事件
+            ready()
+            $.holdReady(bool)   暂停或恢复ready事件//用于加载远程JS文件
+            load(),unload()     废弃（1.8以上）
+        鼠标事件
+            click()     单击左键事件
+            dblclick()  双击左键事件
+            focusin()   获得焦点事件 可作用于父级
+            focusout()  失去焦点事件 可作用于父级
+            mousedown() 鼠标按下事件
+            mouseup()   鼠标抬起事件
+            mousemove() 鼠标移动事件(多次触发)
+
+            mouseover() 鼠标移入事件（参与冒泡）
+            mouseout()  鼠标移出事件
+
+            mouseenter()鼠标进入事件（不参与冒泡）
+            mouseleave()鼠标离开事件
+            hover()     同时绑定mouseenter 和 mouseleave事件
+        键盘事件
+            keydown()   键盘按下
+            keyup()     键盘抬起
+            keypress()  类似keydown
+        表单事件
+        浏览器事件
+        事件对象
+        绑定事件的方法
+        移除事件的方法
+        事件冒泡（略）
+        事件命名空间
+        <p>P标签</p>
+        <div>
+            <input type="text" value="123456">
+            <span>未获取</span>
+        </div>
+        <script>
+            //鼠标按下并抬起
+            $("p").dblclick(function () {
+                alert($(this).text());
+            });
+            //获取焦点 (作用于父级)
+            $('div').focusin(function () {
+                $(this).children("span").text("已获取");
+            });
+            //失去焦点 (作用于父级)
+            $('div').focusout(function () {
+                $(this).children("span").text("未获取");
+            });
+
+            //键盘按下
+            $('input').keydown(function (e) {
+                if(e.keyCode == 32){
+                    alert($(this).val());
+                }
+            });
+
+        </script>
+</body>
+</html>

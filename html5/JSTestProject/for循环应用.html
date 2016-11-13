@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>for循环应用</title>
+    <style>
+        div{
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background: #ff6600;
+            font-size: 20px;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var oDiv=document.getElementsByTagName('div');
+
+            for(var i=0;i<100;i++){
+                document.body.innerHTML+='<div>'+i+'</div>';
+            }
+            for(var j=0;j<oDiv.length;j++) {
+                oDiv[j].style.left = 10 + j * 55 + 'px';
+                oDiv[j].style.top = 10 + j * 55 + 'px';
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

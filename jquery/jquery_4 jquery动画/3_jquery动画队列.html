@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        p{
+            width: 50px;
+            height: 50px;
+            background: #f60;
+            position: absolute;
+            left: 10px;
+            top: 50px;
+        }
+        div{
+            width: 840px;
+            height: 200px;
+            position: absolute;
+            left: 10px;
+            top: 65px;
+            background: #abcdef;
+        }
+        span{
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 10px;
+            top: 300px;
+            background: #ff1713;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    stop(clearQueue,gotoEnd)
+        clearQueue:如果设置成true，则清空队列。可以立即结束动画。
+        gotoEnd:让当前正在执行的动画立即完成，并且重设show和hide的原始样式，调用回调函数等。
+    dequeue(fx)
+        终止一个自定义的队列函数(移除当前执行的动画)
+    finish()
+        清除队列(移除所有的动画)
+    delay(duration，queueName)
+        duration:延时时间，单位：毫秒
+        queueName:队列名词，默认是Fx，动画队列。
+    jQuery.fx.interval()
+        设置动画的显示帧速。//运动的时间
+    <a href="#" id="run">run</a>
+    <a href="#" id="stop">stop</a>
+    <a href="#" id="dequeue">dequeue</a>
+    <a href="#" id="finish">finish</a>
+    <div></div>
+    <p></p>
+    <span>延迟 消失</span>
+    <script>
+        $("#run").click(function () {
+            $("p").animate({"top":"200px"},"slow")
+                  .animate({"left":"800px"},"slow")
+                  .animate({"top":"50px"},"slow")
+                  .animate({"left":"10px"},"slow");
+        });
+        $("#stop").click(function () {
+            $("p").stop();
+        });
+        $("#dequeue").click(function () {
+            $("p").dequeue();
+        });
+        $("#finish").click(function () {
+            $("p").finish();
+        });
+
+        //设置
+//        jQuery.fx.interval=3000;
+        //delay 延迟动画
+        $("span").click(function () {
+            $(this).delay(2000).fadeOut(500);
+        });
+
+    </script>
+</body>
+</html>

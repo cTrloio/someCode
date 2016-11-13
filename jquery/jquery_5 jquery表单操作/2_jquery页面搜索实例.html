@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        table{
+            width: 700px;
+            border: 1px solid #abcdef;
+            border-collapse: collapse;
+        }
+        tr{
+            height: 30px;
+
+        }
+        th,td{
+            border: 1px solid #000;
+            text-align: center;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    <table>
+        <tr id="theadr">
+            <th>name</th>
+            <th>sex</th>
+            <th>tel</th>
+        </tr>
+        <tr>
+            <td>tt</td>
+            <td>女</td>
+            <td>18104858623</td>
+        </tr>
+        <tr>
+            <td>hfy</td>
+            <td>男</td>
+            <td>18106257752</td>
+        </tr>
+        <tr>
+            <td>cxy</td>
+            <td>女</td>
+            <td>12580000000</td>
+        </tr>
+        <tr>
+            <td>yd</td>
+            <td>女</td>
+            <td>10086100860</td>
+        </tr>
+    </table>
+    <input type="text">
+    <input type="button" value="搜索">
+    <script>
+        $("input[type=button]").click(function () {
+            var oTxt = $("input[type=text]").val();
+            $("table tr:not('#theadr')").hide().filter(":contains('"+oTxt+"')").show();
+        });
+    </script>
+</body>
+</html>

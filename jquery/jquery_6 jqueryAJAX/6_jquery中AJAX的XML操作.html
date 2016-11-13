@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    <input type="button" value="获取">
+    <div id="info">
+        <ul></ul>
+    </div>
+    <script>
+        $('input[type=button]').click(function () {
+           var ul = $('#info>ul');
+            $.ajax({
+                url:'demo4.php?'+Math.random(),
+                type:'get',
+                //dataType 不写 默认为json xml text 等所有集合
+                dataType:'xml',
+                success: function (xml) {
+//                    alert(xml);//文档对象
+                    //转换成JQuery对象 然后使用选择器选择XML文档里的元素
+                    $(xml).find('title').each(function () {
+                        //老师说html()不可用 但我的可用
+                        ul.append('<li>'+$(this).text()+'</li>')
+                    });
+                }
+            });
+        })
+    </script>
+</body>
+</html>

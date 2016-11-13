@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <select id="select1">
+        <option value="北京">北京</option>
+        <option value="上海">上海</option>
+        <option value="长春">长春</option>
+    </select>
+    <input type="button" id="btn1">
+    <script language="JavaScript">
+        var btn = document.getElementById('btn1');
+        var sel = document.getElementById('select1');
+        window.onload=function(){
+            btn.onclick=function(){
+                alert(sel.value);
+            };
+        };
+    </script>
+</body>
+</html>

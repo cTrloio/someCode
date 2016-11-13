@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        p{
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #f60;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    基本动画
+        show()      显示
+        hide()      隐藏
+        toggle()    切换show|hide
+    <a href="#" id="a1">点击1</a>
+    <a href="#" id="a2">点击2</a>
+    <a href="#" id="a3">点击3</a>
+    <a href="#" id="a4">点击4</a>
+    <p>aslkdjalskdjaslkdjaslkdjaslkdj</p>
+    <script>
+//        $("#a1").click(function(){
+////            $("p").hide(600); //0.6秒后消失
+//            $("p").hide("fast"); //快速消失 fast slow normal
+//        });
+//        $("#a2").click(function(){
+//            $("p").show("fast"); //快速显示 fast slow normal
+//        });
+//        $("#a3").click(function(){
+//            $("p").toggle("fast"); //快速切换 fast slow normal
+//        });
+        //类似toggle
+//        $("#a3").click(function () {
+//            if($("p").is(":visible")){
+//                $("p").hide(500);
+//            }else{
+//                $("p").show(500);
+//            }
+//        });
+    </script>
+    渐变动画
+        fadeIn()    //opacity 0 - 1
+        fadeOut()   //opacity 1 - 0
+        fadeTo()    //渐变到 可回调
+        fadeToggle()    //切换渐变
+    <script>
+//        $("#a1").click(function () {
+//            //opacity 1 - 0  display block>>none(不占用空间)
+//            $("p").fadeOut(1000);
+//        });
+//        $("#a2").click(function () {
+//            //opacity 0 - 1  display none>>block(不占用空间)
+//            $("p").fadeIn(1000);
+//        });
+//        //回调
+//        $("#a3").click(function () {
+//            $("p").fadeTo("1000",".5", function () {
+//                //回调
+//            });
+//        });
+//        //切换渐变
+//        $("#a4").click(function () {
+//            $("p").fadeToggle(500);
+//        })
+    </script>
+        滑动动画
+            slideDown()
+            slideUp()
+            slideToggle()
+        <script>
+            $("#a1").click(function () {
+                $("p").slideUp(500);
+            });
+
+            $("#a2").click(function () {
+                $("p").slideDown(500);
+            });
+
+            $("#a3").click(function () {
+                $("p").slideToggle(500);
+            });
+        </script>
+</body>
+</html>

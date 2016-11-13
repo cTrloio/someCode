@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    1 ID选择器最快
+    2 在CLASS选择器前添加（P）标签
+    3 采用find(),而不实用上下文查找
+    4 强大的链式操作比缓存更快
+    5 从左至右的模型1.3+版本更新
+    <div id="b"></div>
+    <p class="aa" id="a"></p>
+    <ul>
+        <li>11</li>
+        <li>22</li>
+        <li class="li3">33
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="div">
+        <p class="p"></p>
+    </div>
+
+    <script>
+        $("$a");
+        $("p.aa");
+        $("#b");   //不要$("div#b");
+
+        $("li.li3").find("li").css("background-color","red");
+
+        //1.3- pro 更快
+        $('.div p.p');
+        //1.3+ nex 更快
+        $('div.div .p');
+    </script>
+
+</body>
+</html>

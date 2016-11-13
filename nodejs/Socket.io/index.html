@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Socket.IO</title>
+	<style type="text/css">
+		h1{
+			font-family: Arial,Helvetica,sans-serif;
+			font-weight: bold;
+			font-size: 14pt;
+			color: #006bb5;
+			background-color: #f0f0f0;
+			-moz-border-radius:5px;
+			-webkit-border-radius:5px;
+			border:1px solid #f0f0f0;
+			padding: 5px 5px 5px 5px;
+			margin: 0px 0px 18px 0px;
+		}
+		div[id^=divContainer]{
+			border: 0px;
+			margin: 10px 0px 10px 0px;
+			padding: 3px
+			background-color:#f0f0f0;
+			-moz-border-radius:5px;
+			-webkit-border-radius:5px;
+		}
+		div#divLeft{
+			width: 85%;
+			background-color: #f0f0f0;
+			float: left;
+		}
+		div#divRight{
+			width: 15%;
+			background-color: white;
+			float: right;
+			font-weight: bold;
+			font-size: 12px;
+		}
+		div#divchat{
+			border: 0px;
+			margin: 10px 0px 10px 0px;
+			padding: 3px;
+			background-color: #f0f0f0;
+			-moz-border-radius:5px;
+			-webkit-border-radius:5px;
+			position: relative;
+			height: 300px;
+			overflow: auto;
+			font-size: 12px;
+		}
+		table#tbDlg{
+			font-family: Verdana,Helvetica,sans-serif;
+			font-weight: normal;
+			font-size: 12px;
+			background-color: #f0f0f0;
+		}
+		tr#reDlg,td#tdDlg{
+			background-color: #f0f0f0;
+			font-size: 10px;
+		}
+		textarea{
+			font-family: inherit;
+			font-size: 10pt;
+			border: 1px solid #444;
+			background-color: white;
+			width: 100%;
+		}
+		input[type="button"]{
+			font-family: inherit;
+			border: 1px solid #808080;
+			-moz-border-radius:10px;
+			-webkit-border-radius:10px;
+			margin: 1px;
+			color: white;
+			background-color: #81a0b5;
+			width: 100px;
+		}
+		input[type="button"]:hover{
+			margin: 1px;
+			background-color: #006bb5;
+		}
+		input[type="button"]:active{
+			margin: 1px;
+			font-weight: bold;
+			background-color: #006bb5;
+		}
+		input[type="button"]:focus{
+			margin: 0px;
+			font-weight: bold;
+			background-color: #006bb5;
+		}
+	</style>
+</head>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+<body onload="window_onload()" onunload="window_onunload">
+
+    <table id="tbDlg" border="0" cellpadding="3" cellspacing="0" width="100%">
+	    <tr id="trDlg">
+	    	<td id="tdDlg" width="5">
+	    	用户名：&nbsp;
+	    		<input id="tbxUsername" type="text" value = "游客" size = "20">
+	    		<input id="btnLogin" type="button" value="登陆" onclick="btnLogin_onclick()">
+	    		<input id="btnLogout" type="button" value="退出" onclick="btnLogout_onclick()" disabled="disabled">
+	    	</td>
+	    </tr>
+    </table>
+	
+    <div id="divLeft">
+    	<div id="divchat"></div>
+    	<div id="divContainer3">
+    		<table id="tbDlg">
+    			<tr id="trDlg">
+    				<td id="tdDlg" valign="top" nowrap="nowrap">对话</td>
+    				<td id="tdDlg" valign="top">
+    					<textarea id="tbxMsg" cols="255" rows="5" style="width: 100%"></textarea>
+    				</td>
+    				<td id="tdDlg" valign="top">
+    					<input id="btnSend" type="button" value="发送" disabled="disabled" onclick="btnSend_onclick();">
+    				</td>
+    			</tr>
+    		</table>
+    	</div>
+    </div>
+	
+    <div id="divRight">
+    	用户列表：
+    </div>
+
+	<script type="text/javascript">
+		//登陆用户名、建立连接的socket端口对象、用户名文本框、消息显示区域、对话文本框
+		var userName, socket, tbxUserName, tbxMsg, divchat, divRight;
+		//加载时初始化
+		function window_onload() {
+			divchat = document.getElementById('divchat');
+			tbxUserName = document.getElementById('tbxUsername');
+			tbxMsg = document.getElementById('tbxMsg');
+			divRight = document.getElementById('divRight');	
+			tbxUserName.focus();
+			tbxUserName.select();
+		}
+		//添加消息到对话文本框
+		function addMsg(msg) {
+			divchat.innerHTML += msg + '</br>';
+			if (divchat.scrollHeight > divchat.clientHeight) {
+				divchat.scrollTop = divchat.scrollHeight - divchat.clientHeight;
+			}
+		}
+		//登陆按钮
+		function btnLogin_onclick() {
+			if (tbxUserName.value.trim() == '') {
+				alert("请输入用户名");
+				return;
+			}
+			userName = tbxUserName.value.trim();
+			// socket = io.connect('http://localhost:8888');
+			socket = io.connect('http://www.houfeiyang.cn/page/nodePage:82');
+			//响应连接成功
+			socket.on('connect', function() {
+				addMsg("与聊天服务器的链接已建立");
+				//响应登陆成功
+				socket.on('login', function(name) {
+					addMsg("欢迎" + name + "进入聊天室");
+				});
+				//响应更新用户列表
+				socket.on('sendClients', function(names) {
+					var str = "";
+					names.forEach(function(name) {
+						str += name + "</br>";
+					});
+					divRight.innerHTML = "用户列表</br>";
+					divRight.innerHTML += str;
+				});
+				//响应更新聊天内容
+				socket.on('chat', function(data) {
+					addMsg(data.user + "说:" + data.msg);
+				});
+				//响应链接断开
+				socket.on('disconnect', function() {
+					addMsg("与服务器链接已断开");
+					document.getElementById('btnSend').disabled = true;
+					document.getElementById('btnLogout').disabled = true;
+					document.getElementById('btnLogin').disabled = "";
+					divRight.innerHTML = "用户列表";
+				});
+				//响应登出
+				socket.on('logout', function(name) {
+					addMsg('用户' + name + "离开聊天室");
+				});
+				//响应用户名重复
+				socket.on('duplicate', function() {
+					alert("该用户名已经被使用");
+					document.getElementById('btnSend').disabled = true;
+					document.getElementById('btnLogout').disabled = true;
+					document.getElementById('btnLogin').disabled = "";
+					socket.disconnect();
+					socket.removeAllListeners('connect');
+					io.sockets = {};
+				});
+			});
+			//响应链接错误
+			socket.on('error', function(err) {
+				addMsg("与聊天服务器之间链接发生错误");
+				socket.disconnect();
+				socket.removeAllListeners('connect');
+				io.sockets = {};
+			});
+			//请求登陆
+			socket.emit('login', userName);
+			document.getElementById('btnSend').disabled = "";
+			document.getElementById('btnLogout').disabled = "";
+			document.getElementById('btnLogin').disabled = true;
+		}
+		//发送消息按钮
+		function btnSend_onclick() {
+			var msg = tbxMsg.value;
+			if (msg.length > 0) {
+				//请求发送消息
+				socket.emit('chat', {
+					user: userName,
+					msg: msg
+				});
+				tbxMsg.value = "";
+			}
+		}
+		//登出按钮
+		function btnLogout_onclick() {
+			//请求登出
+			socket.emit('logout', userName);
+			socket.disconnect();
+			socket.removeAllListeners('connect');
+			io.sockets = {};
+			
+			addMsg("用户" + userName + "退出聊天室");
+			divRight.innerHTML = "用户列表";
+			document.getElementById('btnSend').disabled = "disabled";
+			document.getElementById('btnLogout').disabled = "disabled";
+			document.getElementById('btnLogin').disabled = "";
+		}
+		//关闭窗口
+		function window_onunload() {
+			//请求登出
+			socket.emit('logout', userName);
+			socket.disconnect();
+		}
+	</script>
+</body>
+</html>

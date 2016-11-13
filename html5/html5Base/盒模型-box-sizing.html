@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>盒模型-box-sizing</title>
+    <style>
+        div{
+            width: 300px;
+            border: solid 30px #6c6c6c;
+            padding: 30px;
+            background: #126fb0;
+            margin: 20px auto;
+        }
+        div.d1{
+            box-sizing: border-box;
+        }
+        div.d2{
+            box-sizing: content-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>box-sizing</h1>
+    <div class="d1">
+        box-sizing可以指定 width:100px;height:100px; 是否包括元素内部白区域及边框高度宽度<br>
+        box-sizing:content-box表示元素宽的度与高度不包括内部白边及边框的高度宽度<br>
+        box-sizing:border-box表示元素的宽度与高度包括内部白区及边框的高度宽度<br>
+        默认是box-sizing:content-box<br>
+    </div>
+
+    <div class="d2">
+        为什么要使用box-sizing属性，<br>
+        目的是对元素的总宽度做一个控制
+    </div>
+</body>
+</html>

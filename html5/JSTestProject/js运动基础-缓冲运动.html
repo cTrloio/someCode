@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #13ff13;
+            top: 50px;
+            left: 600px;
+        }
+        #div2{
+            position: absolute;
+            width: 1px;
+            height: 200px;
+            background: #000000;
+            left: 400px;
+        }
+    </style>
+    <script>
+        window.onload= function () {
+            var oBtn=document.getElementById('btn1');
+            var oDiv=document.getElementById('div1');
+            oBtn.onclick= function () {
+                startMove();
+            }
+        }
+        var timer=null;
+        function startMove(){
+            var oDiv=document.getElementById('div1');
+            clearInterval(timer);
+            timer=setInterval(function () {
+                var speed=(400-oDiv.offsetLeft)/15;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                oDiv.style.left = oDiv.offsetLeft+ speed +'px';
+                document.title = oDiv.offsetLeft+','+ speed;
+            },30)
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="go" id="btn1">
+<div id="div1"></div>
+<div id="div2"></div>
+</body>
+</html>

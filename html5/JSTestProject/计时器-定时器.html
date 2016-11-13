@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>定时器</title>
+    <script>
+        window.onload = function () {
+            var arr=['../image/pic003.jpg','../image/pic004.jpg','../image/pic005.jpg','../image/pic006.jpg'];
+            var oBtn=document.getElementsByTagName('input');
+            var num=0;
+            var timer=null;
+            var i = 0;
+            oBtn[0].onclick= function () {
+                if(i%2==0){
+                    clearInterval(timer);
+                    timer = setInterval(function () {
+                        document.body.style.background = 'url('+ arr[num] +')';
+                        num++;
+                        num%=arr.length;
+                    },1000)
+                }
+                else{
+                    clearInterval(timer);
+                }
+                i++;
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="一键实现开关">
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>属性读写操作和innerHTML操作配合案例</title>
+    <style>
+        #div1{
+            width: 260px;
+            height: 200px;
+            border: solid 1px #d438ff;
+            background-color: #d8bcff;
+            padding: 10px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var text1 = document.getElementById('text1');
+            var div1 = document.getElementById('div1');
+            var span1 = document.getElementById('span1');
+            var img1 = document.getElementById('img1');
+            var btn1 = document.getElementById('btn1');
+            btn1.onclick=function(){
+                var num1=0;
+                if(text1.value==''){
+                    alert('内容为空');
+                }
+                else{
+                    num1++;
+                    if(num1%2==1){
+                        div1.innerHTML += span1.innerHTML+text1.value+'<br>';
+                        text1.value='';
+                    }
+                    if(num1%2==0){
+                        div1.innerHTML += text1.value+span1.innerHTML+'<br>';
+                        text1.value='';
+                    }
+                }
+            };
+            var num=1;
+            span1.onclick=function(){
+                if(num==1){
+                    img1.src='../image/tx1.jpg';
+                }
+                if(num==2){
+                    img1.src='../image/tx2.jpg';
+                }
+                if(num==3){
+                    img1.src='../image/tx3.jpg';
+                }
+                num++;
+                if(num>3){
+                    num=1;
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="div1"></div><br>
+    <span id="span1"><img src="../image/tx1.jpg" id="img1"></span>
+    <input type="text" id="text1">
+    <input type="button" value="提交" id="btn1">
+
+</body>
+</html>

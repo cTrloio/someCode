@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        img{
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            left: 200px;
+            top: 150px;
+        }
+        img#img2{
+            left: 600px;
+        }
+    </style>
+    <script src="../javaScriptsCodeComplete/getStyleHd.js"></script>
+    <script>
+        window.onload = function () {
+            var oImg=document.getElementById('img1');
+            var oImg2=document.getElementById('img2');
+            oImg.onclick =fsShake;
+            oImg2.onclick =fsShake;
+            function fsShake() {
+                var _this=this;
+                shake(_this,'left', function () {
+                    shake(_this,'top');
+                });
+            }
+            function shake(obj,attr,endHd){ // 谁抖动，抖动方向(top上下 || left左右)，回调函数
+                var num=0;
+                var arr=[];
+                var pos=parseInt(getStyle(obj,attr));//记录left\top当前值，当再次点击，当前值为当前所在抖动位置的值,就会产生偏移
+                for(var i=10;i>0;i-=2){
+                    arr.push(i,-i);
+                }
+                arr.push(0);
+                clearInterval(obj.shakeTimer);
+                obj.shakeTimer=setInterval(function () {
+                    obj.style[attr]=arr[num]+pos+'px';
+                    num++;
+                    if(num === arr.length){
+                        clearInterval(obj.shakeTimer);
+                        endHd&&endHd();
+                    }
+                },50);
+            }
+        }
+    </script>
+</head>
+<body>
+    <img src="../image/pic006.jpg" id="img1">
+    <img src="../image/pic007.jpg" id="img2">
+</body>
+</html>

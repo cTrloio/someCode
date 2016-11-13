@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>QQ列表小案例</title>
+    <style>
+        li{
+            list-style:none ;
+        }
+        #list{
+            width: 200px;
+            border: solid 2px #162318;
+            margin: 0 auto;
+            padding: 0;
+        }
+        #list h2{
+            height: 30px;
+            line-height: 30px;
+            background: #53ebff  5px center;
+            color: #000;
+            text-indent: 20px;
+            margin: 0;
+            padding: 0;
+            cursor: pointer;
+        }
+        #list ul{
+            display: none;
+            margin: 0;
+            padding: 0;
+        }
+        #list ul li{
+            border-bottom: solid 1px #000000;
+            text-indent: 24px;
+            line-height: 24px;
+        }
+        #list .active{
+            background: #edd019;
+            color: #126fb0;
+        }
+        #list ul .hover{
+            background: #50ed5c;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oUL=document.getElementById('list');
+            var aH2=oUL.getElementsByTagName('h2');
+            var aUL=oUL.getElementsByTagName('ul');
+            var aLi=null;
+            var oLiArr=[]; //存放所有 #list ul li
+            for(var i=0;i<aH2.length;i++){
+                aH2[i].index=i;
+                aH2[i].onclick = function () {
+                    if(aH2[this.index].className == ''){
+                        this.className = 'active';
+                        aUL[this.index].style.display='block';
+                    }
+                    else{
+                        this.className = '';
+                        aUL[this.index].style.display='none';
+                    }
+                    return false;
+                }
+            }
+            for(var i = 0;i<aUL.length;i++){  //寻找 #list ul li 所有的li         重要！！
+                aLi=aUL[i].getElementsByTagName('li');
+                for(var j=0;j<aLi.length;j++){ //因为有3组ul 分别是 我的好友、同学、家人 而里面的aLi要全部取出来 所以声明liArr push 所有li
+                    oLiArr.push(aLi[j]);
+                }
+            }
+            for(var i= 0; i<oLiArr.length; i++){
+                oLiArr[i].onclick = function () {
+                    for(var i = 0; i<oLiArr.length; i++){   /* 清除所有被选中的class样式 然后再点击的时候添加   或者 清空上一个 赋值下一个*/
+                        oLiArr[i].className= '';
+                    }
+                    this.className = 'hover';
+                    return false;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <ul id="list">
+        <!-- 有了class就不会选中li里面的li-->
+        <li class="lis">
+            <h2>我的好友</h2>
+            <ul>
+                <li>风行者</li>
+                <li>痛苦女王</li>
+                <li>莉娜</li>
+                <li>风暴之灵</li>
+            </ul>
+        </li>
+
+        <li class="lis">
+            <h2>我的同学</h2>
+            <ul>
+                <li>拉比克</li>
+                <li>巫医咋瓦特</li>
+                <li>暗影萨满</li>
+            </ul>
+        </li>
+
+        <li class="lis">
+            <h2>我的家人</h2>
+            <ul>
+                <li>凤凰</li>
+                <li>冥界亚龙</li>
+                <li>矮人直升机</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>

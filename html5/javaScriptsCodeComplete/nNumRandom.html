@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+/**
+* Created by Administrator on 2016/3/28.
+*/
+<title>生成N个随机数的JS代码</title>
+<SCRIPT LANGUAGE="JavaScript">
+    <!-- Begin  End -->
+    function numbers() {
+        var nummenu = document.lotto.numbercount;
+        var numbercount = nummenu.options[nummenu.selectedIndex].value*1; //随机个数3
+        var maxnumbers = document.lotto.maxnum.value*1; //范围5
+        if (numbercount > maxnumbers) {
+            alert("Be sure to select a max lottery number value!");
+        }
+        else {
+            var ok = false;
+            r = new Array (3);
+            for (var i = 1; i <= 3; i++) {
+                r[i] = Math.round(Math.random() * (5-1))+1;
+            }
+            for (var i = 3; i >= 1; i--) {
+                for (var j = 3; j >= 1; j--) {
+                    if ((i != j)  &&  (r[i] == r[j]))
+                        ok = 0;
+                }
+            }
+            if (ok) {
+                var output = "";
+                for (var k = 1; k <= 3; k++) {
+                    output += "Number " + k + " = " + r[k] + "\n";
+                }
+                document.lotto.results.value = output;
+            }
+            else numbers();
+//        }
+    }
+
+</script>
+<form name="lotto">
+    <table width=100% border=0>
+        <tr>
+            <td align=center>生成随机数的个数
+                <select name="numbercount">
+                    <option value="1">1
+                    <option value="2">2
+                    <option value="3">3
+                    <option value="4">4
+                    <option value="5">5
+                    <option value="6">6
+                    <option value="7" selected>7
+                    <option value="8">8
+                    <option value="9">9
+                    <option value="10">10
+                </select>
+                产生数字范围<input type=text name=maxnum value="50" size=2 maxlength=2>
+                <input type=button value="生成随机数" onClick="numbers()">
+<textarea name="results" rows=11 cols=15>
+</body>
+</html>

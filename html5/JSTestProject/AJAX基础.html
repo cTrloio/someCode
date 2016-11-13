@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>aaa</title>
+</head>
+<body>
+    什么是服务器
+        网页浏览过程分析
+        配置自己的服务器程序(AMP)
+    什么是AJAX
+        无刷新读取技术
+        如用户注册、在线聊天等
+            有异步同步之分
+    使用AJAX
+        基础：请求并显示静态TXT文件
+            字符集编码 （txt和html 编码必须一致，如utf-8等）
+            缓存、阻止缓存 (缓存到硬盘) ie需关闭浏览器 解决方法>>ajax（ 'aaa.txt?t='+new Date().getTime(),fnS,fnO ）变换url来阻止缓存
+        动态数据：请求JS（或json）文件
+            eval的使用：将字符串解析成js可以识别的东西(这里解析成数组)
+            DOM创建元素8
+        局部刷新：请求并显示部分网页文件
+
+    详见 js-ajax-基础
+
+    AJAX原理
+        GET----用于获取数据(如：浏览帖子)
+        POST---用于上传数据(如：用户注册)
+        GET POST区别
+            get是在url里传数据：
+                安全性差、容量小 有缓存  用于获取
+            post 不通过网址url传递
+                容量大(大约2G) 安全性好点 无缓存 用于传递
+</body>
+</html>

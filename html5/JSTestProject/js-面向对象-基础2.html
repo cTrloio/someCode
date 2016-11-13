@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload= function () {
+            var arr1=new Array(12,3,44,6,77);
+            var arr2=new Array(55,6,87,999,1);
+            Array.prototype.sum= function () {      //类似于css里的class
+            //arr1.sum= function ()                   //类似于css里的行间样式
+                var res=0;
+                for(var i=0;i<this.length;i++){
+                    res+=this[i];
+                }
+                return res;
+            }
+            alert(arr1.sum());
+            alert(arr2.sum());
+        }
+    </script>
+</head>
+<body>
+    原型 prototype ：相当于css里的class
+</body>
+</html>

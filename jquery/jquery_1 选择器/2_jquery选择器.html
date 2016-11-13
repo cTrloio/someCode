@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        /*div>a{*/
+            /*color: red;*/
+        /*}*/
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $("div > a").css("color","red");
+        })
+    </script>
+</head>
+<body>
+    <div>
+        <a href="2_jquery选择器.html">aaaaa</a>
+        <p>
+            <a href="1_jquery与dom对象.html">bbbbb</a>
+        </p>
+    </div>
+    <p>我是第一个兄弟P标签</p>
+    <span>我是一个span标签</span>
+    <p>我是第二个P标签</p>
+    <!--jquery 选择器的血法鱼css非常相近，但是作用不同 css选择器的元素只能对基本添加样式、-->
+    <!--（CSS表达式除外，项目中几本不允许有CSS表达式 而且IE8标准牧师已经取消表达式的支持）-->
+    <!--jquery选择器找到的元素可以为其添加行为-->
+
+    <!--完全支持CSS1-2的选择器 支持部分CSS3选择器-->
+    <!--完美容错 即使页面上没有该元素 jquery也不会报错-->
+    <script>
+        $("#pq").css("color","red");
+    </script>
+
+
+    <!-- 选择器种类-->
+    基本选择器
+        1 #id       选择id的元素
+        2 .class    类名选择器
+        3 element   标签选择器
+        4 *         选择所有元素
+        5 e1,e2,e3,...,en
+    <script>
+        $("p").css("color","gray");
+    </script>
+    层次选择器
+        E F   选择E元素所有的后代元素
+        E>F   选择E元素的子元素，子选择器
+        E+next     选择E元素后的紧邻的兄弟元素 等价于 .next();
+        E~siblings 选择E元素后的所有兄弟元素 等价于 .nextAll();
+    <script>
+        $("div+span").css("color","red");
+        $("div~p").css("color","green");
+    </script>
+</body>
+</html>

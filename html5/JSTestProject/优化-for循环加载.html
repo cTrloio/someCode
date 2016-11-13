@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>性能优化-for循环加载</title>
+    <script>
+        window.onload=function(){
+            var str='';
+            for(var i=0;i<2000;i++){
+                //document.body.innerHTML+='<input type="button" value="button"/>';/*大约18s*/
+                str+='<input type="button" value="button"/>';
+            }
+            document.body.innerHTML=str; /*秒出*/
+        };
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

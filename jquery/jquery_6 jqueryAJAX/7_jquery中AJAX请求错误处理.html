@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    <input type="button" value="获取数据失败处理">
+    <div id="info"></div>
+    <script>
+        $('input').click(function () {
+            $.ajax({
+                url:'demo52.php?'+Math.random(),
+//                url:'demo5.php?'+Math.random(),
+                type:'get',
+                //请求超时限制为 1s
+                timeout:1000,
+                success: function (data,textSty) {
+                    $('div').html(data);
+                }
+//                error: function (jqXHR,textStatus,errorThrown) {
+////                    alert(jqXHR); //error
+////                    alert(textStatus);
+////                    alert(errorThrown);
+//                    //404
+//                    if(errorThrown == 'Not Found'){
+//                        $('div').html('没有找到');
+//                    }
+//                    if(textStatus == 'timeout'){
+//                        $('div').html('请求超时，请刷新');
+//                    }
+//                }
+            });
+        });
+        //出错时 直接抛出错误 用的比较多 优先级比ajax里的error方法高
+        $(document).ajaxError(function () {
+            $('div').html('AJAX请求发生错误');
+        });
+    </script>
+</body>
+</html>

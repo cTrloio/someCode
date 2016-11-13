@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload= function () {
+            var oText=document.getElementById('txt1');
+            oText.onkeydown= function (ev) {
+                var oEvent=ev||event;
+                if(oEvent.keyCode!=8 && oEvent.keyCode<48 || oEvent.keyCode>57){
+                    return false; //屏蔽输入
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="txt1">
+</body>
+</html>

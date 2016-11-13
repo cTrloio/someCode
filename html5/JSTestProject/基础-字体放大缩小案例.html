@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>字体放大缩小案例</title>
+    <script>
+        window.onload=function(){
+            var btn1 = document.getElementById('btn1');
+            var btn2 = document.getElementById('btn2');
+            var btn3 = document.getElementById('btn3');
+            var btn4 = document.getElementById('btn4');
+            var p1 = document.getElementById('p1');
+            var num=15;
+            btn1.onclick=function (){
+                if(num<22){
+                    num++;
+                    p1.style.fontSize=num+'px';
+                }
+            };
+            btn2.onclick=function(){
+                if(num>12){
+                    num--;
+                    p1.style.fontSize=num+'px';
+                }
+            };
+            btn3.onclick=function(){
+                p1.className='red';
+            };
+            btn4.onclick=function(){
+                p1.className='yell';
+            };
+        }
+    </script>
+    <style>
+        .red{
+            border: solid 5px #53ebff;
+            background: #c7210c;
+            color: #edd019;
+            width: 300px;
+            padding: 20px;
+        }
+        .yell{
+            border: solid 5px #39ff1d;
+            background: #c7b50d;
+            color: #ed0003;
+            width: 500px;
+            padding: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <input type="button" id="btn1" value="+">
+    <input type="button" id="btn2" value="-">
+    <input type="button" id="btn3" value="红">
+    <input type="button" id="btn4" value="黄">
+    <p id="p1">
+        Avalanche工作室旗下经典TPS人气系列续作《正当防卫3（Just Cause 3）》
+        主角为最强的杀人武器Rico Rodriguez，他将在地中海岛国“Medici”上演英雄故事。
+        目前随着发售日的临近Steam平台上曝光了《正当防卫3》PC版配置需求，显卡起步GTX 670 (2GB)、
+        内存6GB略显苛刻，游戏将在12月1日上市，你准备好了么？
+    </p>
+</body>
+</html>

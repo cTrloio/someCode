@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <li>一张点卡4.5元，你需要</li>
+    <input type="text" id="text1" style="width:31px;height: 18px;">
+    <input type="button" id="button" value="确认支付" onclick="return submatHd()">
+    <input type="button" id="button2" value="失效按钮" >
+    <script language="JavaScript">
+        function submatHd()
+        {
+            if(text1.value<1 || isNaN(text1.value)){
+                alert("输入不合法");
+            }
+            else{
+                alert("共需要支付<font color='aqua'>"+text1.value*4.5+"元")
+            }
+            button2.disabled=true;//不可用为true
+        }
+    </script>
+</body>
+</html>

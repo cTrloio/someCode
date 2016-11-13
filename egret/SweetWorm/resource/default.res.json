@@ -1,0 +1,150 @@
+{
+	"groups": [
+		{
+			"keys": "description_json,play_png,bg_jpg,blocka_png,blockb_png,sweet1_png,sweet2_png,sweet3_png,sweet4_png,sweet5_png,sweet6_png,niao_png,niaoD_png,xj1_png,xj2_png,xj3_png,worm1_png,worm2_png,home_png,bt_png,back_png,die_png,pass_png,levely_01_png,levely_02_png,pt_png,biaot_png,gd_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/Play.png",
+			"type": "image",
+			"name": "play_png"
+		},
+		{
+			"url": "assets/bg.jpg",
+			"type": "image",
+			"name": "bg_jpg"
+		},
+		{
+			"url": "assets/bt.png",
+			"type": "image",
+			"name": "bt_png"
+		},
+		{
+			"url": "assets/blocka.png",
+			"type": "image",
+			"name": "blocka_png"
+		},
+		{
+			"url": "assets/blockb.png",
+			"type": "image",
+			"name": "blockb_png"
+		},
+		{
+			"url": "assets/sweet1.png",
+			"type": "image",
+			"name": "sweet1_png"
+		},
+		{
+			"url": "assets/sweet2.png",
+			"type": "image",
+			"name": "sweet2_png"
+		},
+		{
+			"url": "assets/sweet3.png",
+			"type": "image",
+			"name": "sweet3_png"
+		},
+		{
+			"url": "assets/sweet4.png",
+			"type": "image",
+			"name": "sweet4_png"
+		},
+		{
+			"url": "assets/sweet5.png",
+			"type": "image",
+			"name": "sweet5_png"
+		},
+		{
+			"url": "assets/sweet6.png",
+			"type": "image",
+			"name": "sweet6_png"
+		},
+		{
+			"url": "assets/niao.png",
+			"type": "image",
+			"name": "niao_png"
+		},
+		{
+			"url": "assets/niaoD.png",
+			"type": "image",
+			"name": "niaoD_png"
+		},
+		{
+			"url": "assets/xj1.png",
+			"type": "image",
+			"name": "xj1_png"
+		},
+		{
+			"url": "assets/xj2.png",
+			"type": "image",
+			"name": "xj2_png"
+		},
+		{
+			"url": "assets/xj3.png",
+			"type": "image",
+			"name": "xj3_png"
+		},
+		{
+			"url": "assets/worm1.png",
+			"type": "image",
+			"name": "worm1_png"
+		},
+		{
+			"url": "assets/worm2.png",
+			"type": "image",
+			"name": "worm2_png"
+		},
+		{
+			"name": "home_png",
+			"type": "image",
+			"url": "assets/home.png"
+		},
+		{
+			"name": "back_png",
+			"type": "image",
+			"url": "assets/back.png"
+		},
+		{
+			"name": "die_png",
+			"type": "image",
+			"url": "assets/die.png"
+		},
+		{
+			"name": "pass_png",
+			"type": "image",
+			"url": "assets/pass.png"
+		},
+		{
+			"name": "levely_01_png",
+			"type": "image",
+			"url": "assets/levely_01.png"
+		},
+		{
+			"name": "levely_02_png",
+			"type": "image",
+			"url": "assets/levely_02.png"
+		},
+		{
+			"name": "pt_png",
+			"type": "image",
+			"url": "assets/pt.png"
+		},
+		{
+			"name": "biaot_png",
+			"type": "image",
+			"url": "assets/biaot.png"
+		},
+		{
+			"name": "gd_png",
+			"type": "image",
+			"url": "assets/gd.png"
+		}
+	]
+}

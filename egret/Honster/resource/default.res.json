@@ -1,0 +1,65 @@
+{
+	"resources": [
+		{
+			"name": "bgImage",
+			"type": "image",
+			"url": "assets/bg.jpg"
+		},
+		{
+			"name": "egretIcon",
+			"type": "image",
+			"url": "assets/egret_icon.png"
+		},
+		{
+			"name": "description",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+		  "name": "character",
+		  "type": "image",
+		  "url": "assets/character.png"
+		},
+		{
+		  "name": "background",
+		  "type": "image",
+		  "url": "assets/background.png"
+		},
+		{
+		  "name": "explosion",
+		  "type": "image",
+		  "url": "assets/explosion.png"
+		},
+		{
+		  "name": "levelComplete",
+		  "type": "image",
+		  "url": "assets/levelComplete.png"
+		},
+		{
+		  "name": "monsterMouthClosed",
+		  "type": "image",
+		  "url": "assets/monsterMouthClosed.png"
+		},
+		{
+		  "name": "monsterMouthOpen",
+		  "type": "image",
+		  "url": "assets/monsterMouthOpen.png"
+		},
+		{
+		  "name": "star",
+		  "type": "image",
+		  "url": "assets/star.png"
+		},
+		{
+		  "name": "youLost",
+		  "type": "image",
+		  "url": "assets/youLost.png"
+		}
+	],
+	"groups": [
+		{
+			"name": "preload",
+			"keys": "bgImage,egretIcon,character,background,explosion,levelComplete,monsterMouthClosed,monsterMouthOpen,star,youLost"
+		}
+	]
+}

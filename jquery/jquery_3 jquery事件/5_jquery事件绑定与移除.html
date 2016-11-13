@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    bind()      绑定事件
+    unbind()    移除事件
+    on()        绑定事件 基本同上 区别在于
+    off()       移除事件
+    one()       执行一次事件，然后销毁该事件
+    delegate()  事件委托
+    undelegate()
+    <!--<p>p标签</p>-->
+    <script>
+//        $("p").click(function(){
+//            alert($(this).text());
+//        });
+        //bind绑定 参数3：false防止默认事件，阻止事件冒泡 默认true
+//        $("p").bind("click", function () {
+//            alert($(this).text());
+//        });
+//        $("p").mousemove(function () {
+//            $(this).css("background","red");
+//        });
+//        $("p").unbind("click mousemove");
+//        $('p').one('click', function () {
+//            alert($(this).text());
+//        });
+        //这种新增加P不可以响应 第二种可以
+//        $('p').on("click",function () {
+//            $("body").append("<p>新的P标签</p>")
+//        });
+//        $('body').on("click","p",function () {
+//            $("body").append("<p>新的P标签</p>")
+//        });
+
+//        $("body").delegate("p","click",function () {
+//           $(this).append("<p>新的P标签</p>")
+//        });
+    </script>
+    事件命名空间(两个以上的人一起开发时)
+
+        <p>我是P标签</p>
+
+    <script>
+        //第一个开发人员给P标签添加click事件，使他背景变红
+//        $("p").click(function () {
+//            $(this).css("background","red");
+//        });
+        //第二和开发人员给P标签添加click事件，使他文本变白
+//        $("p").click(function () {
+//           $(this).css("color","blue");
+//        });
+        //第三个开发人员不想让P标签在点击时添加红背景，只想让文本变蓝色，他用unbind方法把click移除了
+//        $("p").unbind("click");
+
+        //则应该一下 jquery事件命名空间 的写法
+        $("p").bind("click.background", function () {
+            $(this).css("background","red");
+        });
+        $("p").bind("click.color", function () {
+            $(this).css("color","blue");
+        });
+        $("p").unbind("click.background");
+        //命名空间
+        var hz = {
+            //你的代码
+        }
+    </script>
+</body>
+</html>

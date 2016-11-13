@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            width: 100px;
+            height: 120px;
+            background: #f60;
+            border: solid 2px #000;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oDiv = document.getElementById('div1');
+            var disX = 0;
+            var dixY = 0;
+            oDiv.onmousedown = function (ev) {
+                var oEvent = ev || event;
+                disX = oEvent.clientX - oDiv.offsetLeft; //计算鼠标和div相对距离
+                dixY = oEvent.clientY - oDiv.offsetTop;
+
+                document.onmousemove = function (ev) {
+                    var oEvent = ev || event;
+                    var left = oEvent.clientX - disX; //计算相对距离
+                    var top = oEvent.clientY - dixY;
+//                    if (left < 0) { //限制拖拽范围
+//                        left = 0;
+//                    } else if (left > document.documentElement.clientWidth - oDiv.offsetWidth) {
+//                        left = document.documentElement.clientWidth - oDiv.offsetWidth;
+//                    }
+//                    if (top < 0) {
+//                        top = 0;
+//                    } else if (top > document.documentElement.clientHeight - oDiv.offsetHeight) {
+//                        top = document.documentElement.clientHeight - oDiv.offsetHeight;
+//                    }
+                    oDiv.style.left = left + 'px'; //拖》动
+                    oDiv.style.top = top + 'px';
+                };
+                document.onmouseup = function () {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                };
+                return false; //阻止FF拖拽空div的bug
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>

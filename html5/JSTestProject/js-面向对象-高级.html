@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    json方式的面向对象
+        把方法包在一个json里
+        优缺点：简单、不适合多个对象(单体：整个程序只有一个对象)
+        命名空间
+        var zns={};
+        zns.com={};
+        zns.ffx={};
+        zns.xxt={};
+        zns.com.getUser=function(){}
+        zns.ffx.getUser=function(){}
+        zns.xxt.getUser=function(){}
+        把同一类方法，包在一起
+
+    继承：
+        function A(){
+            this.abc=12;
+        }
+        A.prototype.show=function(){
+            alert(this.abc);
+        }
+        //show.call(13);可以改变函数执行的this,第一个参数是this的值，其他参数依次写
+        function B(){
+            A.call(this);       //B继承A的属性
+        }
+        B.prototype=A.prototype; //B继承A的方法 ，这样会引用：实际上是把B的地址也指向了A
+
+        B.prototype.gogo=function(){    //当B添加方法时，其实A也添加了方法
+            alert('bbsb');
+        }
+        A.gogo();//bbsb   引用
+
+        for(var i in A.prototype){ //这样就可以避免引用  B继承A的方法
+            B.prototype[i]=A.prototype[i];
+        }
+        var obj=new B();
+        obj.show();
+        obj.abc;
+
+
+
+
+    系统对象：
+        本地对象(非静态对象)
+            什么是本地对象
+            常用对象
+                Object,Function,Array,String,Boolean,Number
+                Date,RegExp,Error
+        内置对象(静态对象)
+            什么是内置对象
+                Gloval,Math
+        宿主对象(由浏览器提供的对象)
+            DOM,BOM
+
+
+</body>
+</html>

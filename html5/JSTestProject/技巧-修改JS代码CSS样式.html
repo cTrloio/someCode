@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width: 100px;  height: 100px;  background: #ff6600;
+        }
+    </style>
+    <script>
+        window.onload= function () {
+            var oDiv=document.getElementById('div1');
+            var oBtn=document.getElementById('btn1');
+            oDiv.onclick= function () {
+                //oDiv.style.width='200px';
+                oDiv.style.cssText='width:200px;height:200px';
+                /*是给div元素后面加一个style='...' 不会顶替CSS，但是他比CSS优先级高，所以会有效果*/
+            };
+            oBtn.onclick= function () {
+                //oDiv.style.cssText='width:100px';
+                oDiv.style.cssText='';
+                /* 只是清空div元素后面的style，效果是会还原到CSS里的100px宽100px高 而不是把它清空样式*/
+            };
+        }
+    </script>
+</head>
+<body>
+    <div id="div1">123</div>
+    <input type="button" value="按钮" id="btn1">
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>使用选择器插入图片文件</title>
+    <style>
+        h2.hot:before{
+            content: url("../image/hot.jpg");
+        }
+        h2.new:after{
+            content: url("../image/new.jpg");
+        }
+    </style>
+</head>
+<body>
+    <h1>使用选择器插入图片文件</h1>
+    <h2 class="hot">图片文件</h2>
+    <h2>图片文件</h2>
+    <h2 class="new">图片文件</h2>
+    <h2>图片文件</h2>
+</body>
+</html>

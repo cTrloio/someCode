@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        window.onload= function () {                    //??????????????????
+            var oBtn=document.getElementById('btn1');
+
+            myAddEvent(oBtn,'click', function () {
+                alert('a');
+            });
+            myAddEvent(oBtn,'click', function () {
+                alert('b');
+            });
+
+//            if(oBtn.attachEvent){
+//                oBtn.attachEvent('onclick', function () {       //ie兼容性写法
+//                    alert('a');
+//                });
+//                oBtn.attachEvent('onclick', function () {
+//                    alert('b');
+//                });
+//            }else{
+//                oBtn.addEventListener('click', function () {    //FF chrome兼容性写法
+//                    alert('a');
+//                }, false);
+//                oBtn.addEventListener('click', function () {
+//                    alert('b');
+//                }, false);
+//            }
+            function myAddEvent(obj,ev,fn){
+                if(obj.addEventListener){
+                    obj.addEventListener(ev,fn,false);
+                }else{
+                    obj.attachEvent("on"+ev,fn);
+                }
+            }
+        };
+
+    </script>
+</head>
+<body>
+    <input id="ben1" type="button" value="butt">
+</body>
+</html>

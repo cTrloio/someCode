@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>运算符</title>
+    <style>
+        li{
+            list-style: none;
+            height: 30px;
+        }
+        /*
+            真假的问题：数据类型-数字（NaN）、布尔值、函数、对象（elem、[]、{}）、未定义
+            真：非0的数字、非空字符串、ture、函数、能找到的元素、[]、{}
+            假：0、NaN、空字符串、false、不能找到的元素、NULL、未定义
+            ==   不在乎类型的比较  ！=不等
+            ===  全等，先比类型，再比较值   ！==全不等
+        */
+    </style>
+    <script>
+        window.onload= function () {
+            var arr=['red','green','yellow','blue'];
+            var oUL=document.getElementById('oul');
+            var ali=oUL.getElementsByTagName('li');
+//            for(var i = 0; i< ali.length; i++){ // 方案1
+//                ali[i].index=i;
+//                ali[i].style.background = arr[i%arr.length];
+//                ali[i].onmouseover = function () {
+//                    this.style.background = 'gray';
+//                };
+//                ali[i].onmouseout = function () {
+//                    this.style.background = arr[this.index%arr.length];
+//                }
+//            }
+            var str='';
+            for(var i = 0; i<ali.length ; i++){
+                ali[i].index = i;
+                ali[i].style.background = arr[i%arr.length];
+                ali[i].onmouseover = function () {
+                    str=this.style.background;
+                    this.style.background = 'gray';
+                };
+                ali[i].onmouseout = function () {
+                    this.style.background =str;
+                };
+//                ali[i].onclick = function () {
+//                    this.style.background = 'black';
+//                }
+            }
+            //反选按钮
+            var obut=document.getElementById('but');
+            var oinp=document.getElementById('cb');
+            var ainp=oinp.getElementsByTagName('input');
+            obut.onclick = function () {
+                for(var j= 0;j<ainp.length;j++){
+                    ainp[j].checked = !ainp[j].checked;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <ul id="oul">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+     <input type="button" value="反选" id="but">
+    <div id="cb">
+        <input type="checkbox" checked>
+        <input type="checkbox">
+        <input type="checkbox" checked>
+        <input type="checkbox">
+        <input type="checkbox">
+    </div>
+</body>
+</html>

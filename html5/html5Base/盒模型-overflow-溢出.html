@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>盒模型-overflow-溢出</title>
+    <style>
+        div#d1{
+            width: 100px;
+            height: 30px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        div#d2{
+            width: 100px;
+            height: 100px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+        div#d3{
+            width: 150px;
+            height: 30px;
+            overflow: auto;
+        }
+        div#d4{
+            width: 100px;
+            height: 100px;
+            overflow: visible;
+        }
+    </style>
+</head>
+<body>
+    <h1>盒模型-overflow-溢出</h1>
+    <div id="d1">hidden超出容纳范围的文字被隐藏，配合text-overflow:ellipsis属性，
+        可以在末尾加一个省略号（只能在水平超出时有效），可以再配合white-space:nowrap使右边内容不换行</div>
+    <br>
+    <div id="d2">scroll出现水平与垂直滚动条显示溢出内容，overflow-x:hidden,overflow-y:scroll则为垂直</div><br>
+    <div id="d3">auto文字超出div元素容纳范围时，根据需要自动出现水平或者垂直滚动条</div><br>
+    <div id="d4">visible和不使用overflow时效果一致，按原样显示</div>
+</body>
+</html>

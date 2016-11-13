@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>选择器</title>
+    <style>
+        li:first-child{
+            border: 2px solid #ff002e;
+        }
+        li:last-child{
+            border: 2px solid #ff002e; ;
+        }
+        li:nth-child(2){
+            border: 2px solid #212fff;
+        }
+        li:nth-last-child(2){
+            border: 2px solid #212fff;
+        }
+        li:nth-child(odd){
+            background: #ffa012;
+        }
+        li:nth-child(even){
+            background: #13ff13;
+        }
+    </style>
+</head>
+<body>
+    <h1>选择器</h1>
+    <p>n是正数下来第n个元素，odd接下来奇数个，even接下来偶数个，nth-last-child也同样适用，只不过是倒数</p>
+    <ul>
+        <li>第一个项目</li>
+        <li>第二个项目</li>
+        <li>第三个项目</li>
+        <li>第四个项目</li>
+        <li>第五个项目</li>
+        <li>第六个项目</li>
+        <li>第七个项目</li>
+        <li>第八个项目</li>
+    </ul>
+</body>
+</html>

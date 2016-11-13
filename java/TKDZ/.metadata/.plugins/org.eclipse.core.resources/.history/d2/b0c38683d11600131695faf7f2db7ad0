@@ -1,0 +1,139 @@
+package T1;
+
+class Tank
+{
+	int x=0, y=0;
+	int fangxiang=0;
+	int sudu=1;
+	int color;
+	
+	public int getColor() {
+		return color;
+	}
+	public void setColor(int color) {
+		this.color = color;
+	}
+	public int getSudu() {
+		return sudu;
+	}
+	public void setSudu(int sudu) {
+		this.sudu = sudu;
+	}
+	public int getFangxiang() {
+		return fangxiang;
+	}
+	public void setFangxiang(int fangxiang) {
+		this.fangxiang = fangxiang;
+	}	
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public Tank(int x,int y)
+	{
+		this.x=x;
+		this.y=y;
+	}
+}
+class DiTank extends Tank
+{
+	public DiTank(int x, int y)
+	{
+		super(x, y);
+	}  	
+}
+class MyTank extends Tank
+{
+	Zidan zd=null;
+	
+	public MyTank(int x,int y)
+	{
+		super(x,y);		
+	}
+	
+	public void fszd()
+	{
+		switch(this.fangxiang)
+		{
+		case 0:
+			zd=new Zidan(x+10,y,0);
+			break;
+		case 1:
+			zd=new Zidan(x,y+10,1);
+			break;
+		case 2:
+			zd=new Zidan(x+10,y+30,2);
+			break;
+		case 3:			
+			zd=new Zidan(x+30,y+10,3);
+			break;			
+		}
+		Thread t=new Thread(zd);
+		t.start();
+	}
+	public void xiangshang()
+	{
+		y-=sudu;
+	}
+	public void xiangzuo()
+	{
+		x-=sudu;
+	}
+	public void xiangxia()
+	{
+		y+=sudu;
+	}
+	public void xiangyou()
+	{
+		x+=sudu;
+	}
+}
+
+class Zidan implements Runnable 
+{
+	int x;
+	int y;
+	int fangxiang;
+	int sudu=2;
+	
+	public Zidan(int x,int y,int fangxiang)
+	{
+		this.x=x;
+		this.y=y;
+		this.fangxiang=fangxiang;
+	}
+	public void run() 
+	{	
+		while(true) // 凡是线程下面的死循环里
+		{
+			try	{
+				Thread.sleep(50);}
+			catch (Exception e) {}
+				
+			switch(fangxiang)
+			{
+			case 0:
+				y-=sudu;
+				break;
+			case 1:
+				x-=sudu;
+				break;
+			case 2:
+				y+=sudu;
+				break;
+			case 3:
+				x+=sudu;
+				break;
+			}
+		}
+	}	
+}

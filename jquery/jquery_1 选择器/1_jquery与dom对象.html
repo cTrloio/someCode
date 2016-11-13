@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/prototype.js"></script>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+<p id="p1">111111</p>
+<p id="p2">222222</p>
+<input type="text" id="pt1" VALUE="SSS">
+<script>
+    //jquery和Dom的区别
+        //用dom获取到的就是dom对象
+        //Dom对象不能使用'任何'jquery对象中的方法
+            var p=document.getElementById('p1');
+            alert(p.length);
+        //用jquery获取到的就是jquery对象
+        //在被jquery库中被改写过的dom方法，就可以使用
+        //jquery对象不能使用大部分Dom对象中的方法，只能使用少部分dom的方法
+            var p2=$('#p2');
+            alert(p2.length);
+
+
+    //jquery转换成dom对象
+        //使用索引index 或者 使用get(索引)的方法
+            var input = $('#pt1');
+            alert(input[0].value || input.get(0).value);
+    //dom对象转换成jquery对象
+        //把dom对象用$()包起来就行了
+            var input2=document.getElementById('pt1');
+            alert($(input2).val());
+
+    //jquery和其他公共库共存 如prototype库 需要pt库先引入 jq后引入 ,（次序不同也会有同样的问题）
+        //使用jQuery.noConflict()方法释放$的权，》》使用jquery库的时候不用$,用jQuery操作
+        jQuery.noConflict();
+        alert("这是prototype弹出的"+$F('pt1'));
+        alert("这是jquery弹出的"+jQuery('#pt1').val());
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            /*background: darkblue;*/
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    遍历查找
+        children()          选取子元素
+        parent()            选取父元素
+        parents()           选取祖先元素
+        parentsUntil()      遍历所有的父辈元素，直到遇到匹配的那个元素为止 +
+        offsetParent()      返回父元素中第一个position设为relative或者absolute的元素，仅对可见元素有效
+        next()              选择后面紧邻的兄弟元素
+        nextAll()           查找当前元素之后所有的同辈元素
+        nextUntil()         遍历所有的同辈元素，直到遇到匹配的那个元素位置
+        prev()              前一个兄弟元素
+        prevAll()           前面所有的兄弟元素
+        prevUntil()         遍历所有的兄弟元素，知道遇到匹配的那个元素位置
+
+        siblings()          前后所有的兄弟元素
+        m.closest()         从本元素开始 在DOM树上逐级向上级元素匹配 并反悔最先匹配到的祖先元素
+        n.contents()        元素的子元素 包括文字和注释节点
+        o.end()             终止在当前链的最新过滤操作，并返回匹配的元素的以前状态
+        q.addBack()         添加堆栈中元素集合到当前集合 一个选择性的过滤选择器
+        r.each()            遍历一个jquery对象 为每个匹配元素执行一个函数
+    <br><br><br>
+    <!--<div id="outer">-->
+        <!--outer-->
+        <!--<div id="wrap" style="position: absolute;left: 10px;top: 20px;">-->
+            <!--wrap-->
+            <!--<p id="p1">我是<span>第1个</span>P标签</p>-->
+            <!--<p id="p2">我是第2个P标签</p>-->
+            <!--<p>我是第3个P标签</p>-->
+            <!--<div>我是div标签</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<form action="">-->
+        <!--<input type="text" value="ipt1">-->
+        <!--<input type="text" value="ipt2">-->
+        <!--<input type="text" value="ipt3">-->
+        <!--<input type="text" value="ipt4">-->
+    <!--</form>-->
+    <!--XXXUntil()方法相当于prevAll方法加参数 其他也一样-->
+    <script>
+        $("#wrap").children("p").css("background","red");
+
+        $("#p1").parent().css("background","green");
+
+        $("#p1").parents("outer").css("background","green");
+
+        $("#p1").offsetParent().css("border","2px solid #f60");
+
+        $("#p1").next().css("background","yellow");
+
+        $("#p1").nextAll().not("div").css("background","gray");
+
+        $("#p2").prev().css("background","blue");
+
+        $("#p2").prevAll().css("background","yellow");
+
+        $("#p2").siblings().css("background","blue");
+//        $("#p2").siblings("div").css("background","blue");
+//      链式操作
+        $("span").parent().css("background","red").end().css("background","#abcdef");
+
+        $("#p1").nextAll().css("background","red").addBack().css("background","red");
+
+        $("input").each(function(){
+            alert($(this).val());
+        });
+    </script>
+
+    特殊字符“[]”处理
+    <form action="">
+        <input type="checkbox" value="a" name="gg[]">
+        <input type="checkbox" value="b" name="gg[]">
+        <input type="checkbox" value="c" name="gg[]">
+        <input type="checkbox" value="d" name="gg[]">
+    </form>
+    <script>
+//      加 两个转义符
+        $("input[name=gg\\[\\]]").click(function(){
+            alert($(this).val());
+        });
+//      加一个转义符
+        $("input[type=\'checkbox\']").click(function(){
+            alert($(this).val());
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{
+	"resources": [
+		{
+			"name": "bgImage",
+			"type": "image",
+			"url": "assets/bg.jpg"
+		},
+		{
+		  "name": "character",
+		  "type": "image",
+		  "url": "assets/character.png"
+		},
+		{
+		  "name": "background",
+		  "type": "image",
+		  "url": "assets/background.png"
+		},
+	  {
+		  "name": "box",
+		  "type": "image",
+		  "url": "assets/box.png"
+		},
+		{
+			"name": "bugWingsDown",
+			"type": "image",
+			"url": "assets/bugWingsDown.png"
+		},
+		{
+			"name": "bugWingsUp",
+			"type": "image",
+			"url": "assets/bugWingsUp.png"
+		},
+		{
+			"name": "grass",
+			"type": "image",
+			"url": "assets/grass.png"
+		},
+		{
+			"name": "spider",
+			"type": "image",
+			"url": "assets/spider.png"
+		},
+		{
+		  "name": "displayBackground",
+		  "type": "image",
+		  "url": "assets/displayBackground.png"
+		},
+		{
+			"name": "egretIcon",
+			"type": "image",
+			"url": "assets/egret_icon.png"
+		},
+		{
+			"name": "description",
+			"type": "json",
+			"url": "config/description.json"
+		}
+	],
+	"groups": [
+		{
+			"name": "preload",
+			"keys": "bgImage,egretIcon,character,background,box,bugWingsDown,bugWingsUp,grass,spider,displayBackground"
+		}
+	]
+}

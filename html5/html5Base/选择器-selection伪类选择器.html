@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>selection伪类选择器</title>
+    <style>
+        ::selection{
+            background: #212fff;
+            color: #ff002e;
+        }
+        input[type="text"]::selection{      /* 处于选中状态时 */
+            background: #53ebff;
+            color: #ff002e;
+        }
+    </style>
+</head>
+<body>
+    <h1>selection伪类选择器</h1>
+    <p>selection伪类选择器selection伪类选择器selection伪类选择器</p>
+    <form>
+        <input type="text" placeholder="selection伪类选择器">
+    </form>
+</body>
+</html>

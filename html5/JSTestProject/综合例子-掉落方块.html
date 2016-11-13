@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../javaScriptsCodeComplete/changeObject.js"></script>
+    <script>
+        window.onload = function () {
+            var len=20;
+            var srt='';
+            var num=0;
+            var timer;
+            for(var i =0; i<len;i++){
+                srt += '<div style="width: 30px;height: 30px;position:absolute;background: #f60;top: 30px;left: '+i*60+'px;"></div>'
+            }
+            document.body.innerHTML = srt;
+
+            var aDiv=document.getElementsByTagName('div');
+
+            document.onclick = function () {
+                moveDown();
+            };
+            function moveDown(){
+                clearInterval(timer);
+                timer=setInterval(function () {
+                    doMove(aDiv[num],'top',12,600);
+                    num++;
+                    if(num === len){
+                        clearInterval(timer);
+                    }
+                },100);
+            }
+
+        };
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload = function () {
+            setInterval(function(){
+                var aImg=document.getElementsByTagName('img');
+                var oP=document.getElementById('timer');
+                var iTimer=new Date();
+                var iHour=iTimer.getHours();
+                var iMin =iTimer.getMinutes();
+                var iSec =iTimer.getSeconds();
+                var str = addNum0(iHour)+addNum0(iMin)+addNum0(iSec);
+                oP.innerHTML = str;
+                for(var i=0;i<aImg.length;i++){
+                    aImg[i].src ='../image/timer/'+ str.charAt(i) + '.jpg';
+                }
+            },1000);
+        };
+        function addNum0( n ){
+            return n<10 ? '0'+n : ''+n;
+        }
+    </script>
+</head>
+<body>
+<p id="timer"></p>
+<img src="../image/timer/0.jpg">
+<img src="../image/timer/0.jpg">
+<span>：</span>
+<img src="../image/timer/0.jpg">
+<img src="../image/timer/0.jpg">
+<span>：</span>
+<img src="../image/timer/0.jpg">
+<img src="../image/timer/0.jpg">
+</body>
+</html>

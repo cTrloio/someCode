@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>字符串方法-给每个字追加样式</title>
+    <style>
+        div{
+            width: 300px;
+            height: 230px;
+            background: #ffeefe;
+            overflow: scroll;
+        }
+        .newSpan{
+            width: 40px;
+            height: 40px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oDiv=document.getElementsByTagName('div')[0];
+            var oText=document.getElementsByTagName('input')[0];
+            var oInput=document.getElementsByTagName('input')[1];
+            var arr =['#C6C','#F60','#F0F','#7C7','#CC9'];
+            oInput.onclick = function () {
+                var strArr = oText.value.split(''); //取出text中文字，变成数组
+                for(var i=0;i<strArr.length;i++){   //把数组中每一个加一个span
+                    strArr[i] ='<span style="font-size:40px; background: '+ arr[i%arr.length] +'">'+strArr[i]+'</span>';
+                }
+                //把一个数组变成字符串,如果strArr.join();则返回'x,y,z...';也就是包括',';
+                oDiv.innerHTML += strArr.join('');//if var str=[x,y,z] 这样就返回xyx
+
+                //综上所述就是，没有参数 就用默认的 ，来连接数组每个元素
+                //               有参数，如 '' ，就用参数来连接数组每个元素
+            }
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <input type="text" value="请输入">
+    <input type="button" value="按钮">
+</body>
+</html>

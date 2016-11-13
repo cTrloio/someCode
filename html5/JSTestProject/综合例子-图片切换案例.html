@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>综合案例-图片切换案例</title>
+    <style>
+        body{
+            background-color: #868686;
+        }
+        div{
+            position: relative;
+            width: 400px;
+            height: 500px;
+            margin: 0 auto;
+            top: 20px;
+        }
+        p,span{
+            position: absolute;
+            margin: 0;
+            width: 400px;
+            height: 30px;
+            left: 0;
+            line-height: 30px;
+            text-align: center;
+            color: #f1f1f1;
+            background: #868686;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+            opacity: 0.7;
+        }
+        p{
+            bottom: 0;
+            margin: 0;
+        }
+        span{
+            top:0;
+        }
+        li{
+            list-style: none;
+            width: 40px;
+            height: 40px;
+            background: #c1c1c1;
+            border: solid 1px #000000;
+            filter:alpha(opacity:50);
+            opacity: 0.5;
+        }
+        li:active{
+            background: #fff874;
+            -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+            opacity: 0.3;
+        }
+        ul{
+            position: absolute;
+            padding: 0;
+            margin: 3px;
+            width: 40px;
+            top: 0;
+            right: -50px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var textArr=['第一张','第二张','第三张','第四张'];
+            var aLi=document.getElementsByTagName('li');
+            var oImg=document.getElementById('img1');
+            var imgArr=['../image/pic005.jpg','../image/pic006.jpg','../image/pic007.jpg','../image/pic008.jpg'];
+            var oSpan1=document.getElementById('span1');
+            var oP1=document.getElementById('p1');
+
+                for(var i=0;i<aLi.length;i++){
+                    aLi[i].index=i;
+                    aLi[i].onclick = function () {
+                        oImg.src=imgArr[this.index];
+                        oSpan1.innerHTML = this.index + 1 + ' ' + '/'+ ' ' + imgArr.length;
+                        oP1.innerHTML = textArr[this.index];
+                    }
+                }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <img src="../image/pic005.jpg" id="img1">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <span id="span1">1 / 4</span>
+        <p id="p1">加载中。。。</p>
+    </div>
+</body>
+</html>

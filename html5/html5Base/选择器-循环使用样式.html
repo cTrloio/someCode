@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>循环使用样式</title>
+    <style>
+        li:nth-child(4n+1){
+            background: #ffa012;
+        }
+        li:nth-child(4n+2){
+            background: #13ff13;
+        }
+        li:nth-child(4n+3){
+
+        }
+        li:nth-child(4n+4){
+
+        }
+        li:only-child{
+            background: #212fff;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>循环使用样式</h1>
+    <ul>
+        <li>第一个项目</li>
+        <li>第二个项目</li>
+        <li>第三个项目</li>
+        <li>第四个项目</li>
+        <li>第五个项目</li>
+        <li>第六个项目</li>
+        <li>第七个项目</li>
+        <li>第八个项目</li>
+    </ul>
+    <h1>唯一样式</h1>
+    <ul>
+        <li>我是ul里面唯一一个list</li>
+    </ul>
+</body>
+</html>

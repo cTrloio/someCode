@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>到wamp中去运行</title>
+    <script src="ajax.js"></script>
+    <script>
+        window.onload= function () {
+            var oBtn=document.getElementById('btn1');
+            var oUl=document.getElementById('ul1');
+            oBtn.onclick= function () {
+                ajax('data.txt?t='+new Date().getTime(), function (str) {
+                    alert('成功');
+                    var arr=eval(str);
+                    for(var i=0;i<arr.length;i++){
+                        var oLi=document.createElement('li');
+                        oLi.innerHTML='用户：<strong>'+arr[i].user+'</strong>'+'密码：'+'<span>'+arr[i].paswd+'</span>';
+                        oUl.appendChild(oLi);
+                    }
+                }, function () {
+                    alert('失败');
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="read" id="btn1">
+    <ul id="ul1"></ul>
+</body>
+</html>

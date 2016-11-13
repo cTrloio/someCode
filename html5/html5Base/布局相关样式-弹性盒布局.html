@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>布局相关样式-弹性盒布局</title>
+    <style>
+        div#body{
+            display: -webkit-box;           /*整体采用盒布局*/
+            display: -moz-box;              /*整体采用盒布局*/
+
+            width: 600px;                    /*调整宽高，使中栏目弹性盒不出界*/
+            height: 600px;                   /*调整宽高，使中栏目弹性盒不出界*/
+
+            -webkit-box-orient: horizontal;   /*改变元素排列顺序，水平或垂直*/
+            -moz-box-orient: horizontal;    /*改变元素排列顺序，水平或垂直*/
+
+            border:dashed 5px #ff002e;
+        }
+        div#left{
+            /*width: 300px;*/
+            /*padding: 10px;*/
+            background-color: #53ebff;
+            -webkit-box-ordinal-group: 1;   /*改变元素显示顺序*/
+            -moz-box-ordinal-group: 1;      /*改变元素显示顺序*/
+            -webkit-box-flex: 1;        /*只给中栏目使用弹性盒布局，自适应宽高，比例为1*/
+        }
+        div#right{
+            /*width: 300px;*/
+            /*padding: 10px;*/
+            background-color: #fad1db;
+            -webkit-box-ordinal-group: 3;   /*改变元素显示顺序*/
+            -moz-box-ordinal-group: 3;      /*改变元素显示顺序*/
+            -webkit-box-flex: 1;        /*只给中栏目使用弹性盒布局，自适应宽高，比例为1*/
+        }
+        div#center{
+            /*width: 350px;*/
+            background-color: #ffdd3f;
+            -webkit-box-flex: 2;        /*只给中栏目使用弹性盒布局，自适应宽高，比例为2*/
+        }
+        div#left,div#center,div#right{
+            -webkit-box-sizing: border-box; /*整个模型包括内外边距*/
+            -moz-box-sizing: border-box;
+            /*-webkit-box-flex: 1;        /!*全部使用弹性盒布局，自适应宽高*!/*/
+            /*-moz-box-flex: 1;           /!*全部使用弹性盒布局，自适应宽高*!/*/
+        }
+        /*另附*/
+        div#al{
+            display: -webkit-box;       /*要使用盒布局，才能使用盒布局的一些属性*/
+            display: -moz-box;
+
+            -webkit-box-align: center;  /*指定元素中文字，图像，以及子元素的水平方向或垂直方向上的对齐方式*/
+            -moz-box-align: center;     /*指定元素中文字，图像，以及子元素的水平方向或垂直方向上的对齐方式*/
+
+            -webkit-box-pack: center;   /*指定元素中文字，图像，以及子元素的水平方向或垂直方向上的对齐方式*/
+            -moz-box-pack: center;      /*指定元素中文字，图像，以及子元素的水平方向或垂直方向上的对齐方式*/
+
+            width: 400px;
+            height: 320px;
+            background-color: #13ff13;
+        }
+    </style>
+</head>
+<body>
+    <h1>布局相关样式-弹性盒布局</h1>
+    <div id="body">
+        <div id="left">
+            <h2>左栏目</h2>
+            <ul>
+                <li>栏目1</li>
+                <li>栏目2</li>
+                <li>栏目3</li>
+                <li>栏目4</li>
+                <li>栏目5</li>
+            </ul>
+        </div>
+        <div id="center">
+            <h2>中栏目</h2>
+            <ul>
+                <li>栏目1</li>
+                <li>栏目2</li>
+                <li>栏目3</li>
+                <li>栏目4</li>
+                <li>栏目5</li>
+            </ul>
+        </div>
+        <div id="right">
+            <h2>右栏目</h2>
+            <ul>
+                <li>栏目1</li>
+                <li>栏目2</li>
+                <li>栏目3</li>
+                <li>栏目4</li>
+                <li>栏目5</li>
+            </ul>
+        </div>
+    </div>
+    <div id="al">我是测试文字/图像</div>
+</body>
+</html>

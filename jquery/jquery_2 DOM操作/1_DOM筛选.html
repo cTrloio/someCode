@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    DOM筛选
+        eq()            选择指定索引的元素
+        filter(表达式)  筛选指定表达式的元素
+        first()         选择第一个元素
+        last()          选择最后一个元素
+        is()            检测是否==参数元素返回布尔值
+        has()           保留包含特定后代的元素，去掉那些不含有指定后代的元素
+        not()           从匹配的元素集合中移除指定的元素
+        map()           将一组元素转换成其他多个数组
+        slice()         根据指定的下标范围，选取匹配的元素集合
+        <p id="p1">我是第1个标签</p>
+        <p class="p2">我是第2个标签</p>
+        <p>我是第3个标签</p>
+        <p class="first">我是第4个标签</p>
+        <p>我是第5个标签</p>
+
+        <form action="">
+            <input type="text" value="111">
+            <input type="text" value="222">
+            <input type="text" value="333">
+        </form>
+        <p id="p3"></p>
+        <script>
+            //            DOM方法用于链式操作
+            //            选择器用于选择DOM
+            $("p").eq("2").css("background","green");
+
+            $("p").filter(":last").css("background","red");
+            $("p").filter("#p1").css("background","yellow");
+            $("p").filter(".p2").css("background","gray");
+
+            $("p").first().css("");
+            $("p").last().css("");
+
+            $("p").click (function () {
+                if($(this).is(".first")){
+                    $(this).css("background","blue");
+                }
+            });
+
+            $("p").not(".p2").css("border","3px solid firebrick");
+
+            var arr = $("input").map(function () {
+                return $(this).val()
+            }).get().join(",");
+            $("#p3").html(arr);
+
+            $("p").slice(1,3).css("background","blue");
+        </script>
+</body>
+</html>

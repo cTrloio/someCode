@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload= function () {
+            document.onclick= function (ev) {
+                var oEvent=ev||event;
+                alert(oEvent.clientX+','+oEvent.clientY);
+            }
+        }
+    </script>
+</head>
+<body>
+event对象和事件冒泡<br>
+用来获取事件的详细信息：鼠标位置‘键盘按键<br>
+获取鼠标位置：clientX clientY(左上角0，0)<br>
+document的本质：document.childNodes[0].tagName >>!<br><br>
+
+获取event对象 兼容性写法<br>
+var oEvent=ev(参数)||event<br><br>
+
+事件流<br>
+取消冒泡：cancelBubble=true;<br>
+祥见例js事件冒泡<br>
+DOM事件流<br><br>
+
+鼠标事件<br>
+详见js事件基础 鼠标事件/跟随案例<br><br>
+
+键盘事件<br>
+获取用户按下哪个按键<br>
+oEvent.keyCode = A-Z 》 65-97<br>
+详见js事件基础-键盘事件<br><br>
+
+默认行为(事件)<br>
+浏览器自带的功能(例如右键页面)<br>
+
+阻止默认行为<br>
+普通写法：(阻止右键菜单)<br>
+document.oncontextmenu=function(){ return false; }//阻止默认右键菜单<br>
+详见js-事件中级-右键菜单<br>
+    js-事件中级-限制输入<br><br>
+
+拖拽<br>
+简易拖拽<br>
+    拖拽原理<br>
+        距离不变<br>
+        三个事件<br>
+详见js-事件中级-简易拖拽
+高级拖拽<br>
+    原有拖拽问题
+        给document加事件
+    FF下，空div拖拽问题
+        阻止默认事件
+    防止拖出页面
+        修正位置
+
+</body>
+</html>

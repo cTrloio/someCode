@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<link type="text/css" rel="stylesheet" id="l1">
+<!-- 任何标签都可以添加id  其属性也可以修改-->
+<script>
+        var l1=document.getElementById('l1');
+        function setL1(){
+            l1.href='../cssFile/cssTest皮肤1.css'
+        }
+        function setL2(){
+            l1.href='../cssFile/cssTest皮肤2.css'
+        }
+</script>
+<body>
+    <input type="button" id="b1" value="皮肤1" onclick="setL1()">
+    <input type="button" id="b2" value="皮肤2" onclick="setL2()">
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload = function () {
+            function start(){
+                var iNew=new Date(2016,1,18,19,47,0);  //定位到指定某一天2016.1.11     19:47:00
+                //var strNew=new Date('june 25,2016 12:12:12');   //字符串形式  可用于修改例子，方便
+                /* January  February  March  April  May  June  July  August  September  October  November  December*/
+                /* var dis=new Date().getTime();  返回1970.1.1到现在的时间差 单位毫秒*/
+                setInterval(function(){
+                    var iNow=new Date();                    //现在时间
+
+                    var t = Math.floor((iNew-iNow)/1000);  //得到秒 四舍五入  86400/3600/60/60 天 时 分 秒
+
+                    if(t>0){
+                        var day = Math.floor(t/86400);          //根据未来时间和现在时间差 得到相差的天数
+                        var hour= Math.floor(t%86400/3600);     //+小时 这样算并非合计多少分钟
+                        var min = Math.floor(t%86400%3600/60);  //+分钟
+                        var sec = Math.floor(t%60);             //+秒
+                        var str = day+ '日'+ hour+ '时'+ min + '分'+ sec+ '秒';
+                        document.body.innerHTML = str ;
+                    }else{
+                        document.body.innerHTML = '结束了';
+                    }
+                },1000);
+            }
+            start();
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

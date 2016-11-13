@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .tabNav{
+            list-style: none;
+        }
+        body{
+            margin: 50px;
+        }
+        .tabNav li{
+            float: left;
+            width: 150px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+            margin-right: 3px;
+            border: 1px solid #abcdef;
+            border-bottom: none;
+        }
+        .tabNav li.cur{
+            background: #abcdef;
+            color: #fff;
+            font-weight: 700;
+        }
+        .tabContent{
+            clear: both;
+        }
+        .tabContent div{
+            border: 1px solid #abcdef;
+            display: none;
+            width: 500px;
+            height: 200px;
+        }
+
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+    <script src="../jquery_7%20jquery插件编写/jquery-tab-1.0.js"></script>
+    <script>
+        $(function () {
+//            $('.tab').tab();
+            $('.tab').tab({
+                eventType:'mouseover'
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class = "tab">
+        <ul class="tabNav">
+            <li class="cur">html</li>
+            <li>css</li>
+            <li>javascript</li>
+        </ul>
+        <div class="tabContent">
+            <div style="display: block;">html</div>
+            <div>css</div>
+            <div>javascript</div>
+        </div>
+    </div>
+</body>
+</html>

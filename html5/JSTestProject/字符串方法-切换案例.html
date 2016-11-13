@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>字符串方法-切换案例</title>
+    <style>
+        p{
+            width: 200px;
+            height: auto;
+            margin: 0 auto;
+            background: #edff50;
+            border: solid 5px #53ebff;
+        }
+        a{
+            text-decoration: none;
+            border: solid 2px #000000;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oP=document.getElementsByTagName('p')[0];
+            var oSpan=oP.getElementsByTagName('span')[0];
+            var oA=oP.getElementsByTagName('a')[0];
+            var str=oSpan.innerHTML;
+            var op;
+            oA.onclick = function () {
+                if(op){
+                    oSpan.innerHTML = str.substring(0,20);
+                    oA.innerHTML = '>>展开';
+                }else{
+                    oSpan.innerHTML = str.substring(0,str.length);
+                    oA.innerHTML = '>>收缩';
+                }
+                op=!op;
+            }
+        }
+    </script>
+</head>
+<body>
+    <p><span>前卫传球请问请问请问企鹅请问请问额<br>爱可视喀交会打卡记录删掉老卡机时代卡拉金士顿
+        阿克苏较好的<br>哦哦痞子蔡新款凉鞋美联储</span><a>>>收缩</a></p>
+</body>
+</html>

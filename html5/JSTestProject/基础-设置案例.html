@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>设置案例</title>
+    <style>
+        #bigBox{
+            width: 400px;
+            height: 500px;
+            float: left;
+            border: solid 5px #ff6600;
+            background-color: #ffc318;
+            -webkit-transform: translateX(500px);
+            -moz-transform: translateX(500px);
+        }
+        #setButton{
+            width: 400px;
+            height: 100px;
+            float: left;
+        }
+        #setBox{
+            width: 100px;
+            height: 100px;
+            border: solid 5px #ff0002;
+            background: #ff6600;
+            -webkit-transform: translate(150px,150px);
+            -moz-transform: translate(150px,150px);
+        }
+        #setPlan{
+            width: 170px;
+            height: 210px;
+            border: solid 5px #63ff22;
+            float: right;
+            background: #96ff15;
+            -webkit-transform: translateX(-250px);
+            -moz-transform: translateX(-250px);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="bigBox">
+        <input id="setButton" type="button" value="点击此处设置" style="font-size: 40px" onclick="return setBut()">
+        <div id="setBox"></div>
+    </div>
+    <div id="setPlan">
+        <p>
+            设置颜色<br>
+                <button style="background: #ff002e" onclick="return setColorRed()">红色</button>
+                <button style="background: #0752ff" onclick="return setColorBlue()">蓝色</button>
+                <button style="background: #fbff22" onclick="return setColorYell()">黄色</button>
+        </p>
+        <p>
+            设置宽度<br>
+                <button onclick="return setWidth1()">100 </button>
+                <button onclick="return setWidth2()">200 </button>
+                <button onclick="return setWidth3()">300 </button>
+        </p>
+        <p>
+            设置高度<br>
+                <button onclick="return setHeight1()">100 </button>
+                <button onclick="return setHeight2()">200 </button>
+                <button onclick="return setHeight3()">300 </button>
+        </p>
+        <button onclick="return setOver()">确定</button>
+        <button onclick="return setPre()">恢复</button><br><br>
+
+    </div>
+    <script language="JavaScript">
+        function setBut(){
+            document.getElementById('setPlan').style.display='block';
+        }
+        function setOver(){
+            document.getElementById('setPlan').style.display='none';
+        }
+        function setPre(){
+            document.getElementById('setBox').style.width='100px';
+            document.getElementById('setBox').style.height='100px';
+            document.getElementById('setBox').style.background='#ff6600';
+        }
+        function setColorRed(){
+            document.getElementById('setBox').style.background='#ff002e';
+        }
+        function setColorBlue(){
+            document.getElementById('setBox').style.background='#0752ff';
+        }
+        function setColorYell(){
+            document.getElementById('setBox').style.background='#fbff22';
+        }
+        function setWidth1(){
+            document.getElementById('setBox').style.width='100px';
+        }
+        function setWidth2(){
+            document.getElementById('setBox').style.width='200px';
+        }
+        function setWidth3(){
+            document.getElementById('setBox').style.width='300px';
+        }
+        function setHeight1(){
+            document.getElementById('setBox').style.height='100px';
+        }
+        function setHeight2(){
+            document.getElementById('setBox').style.height='200px';
+        }
+        function setHeight3(){
+            document.getElementById('setBox').style.height='300px';
+        }
+    </script>
+</body>
+</html>

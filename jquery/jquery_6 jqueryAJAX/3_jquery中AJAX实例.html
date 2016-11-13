@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    前端喝程序员之间的数据约定
+    txt/xml
+    1我们只要纯文本
+    2返回标识符
+        1代表用户名已经被注册
+        2代表用户名不允许注册
+        3代表用户名可以注册
+        true/false
+    3返回一个数组与JSON结合的格式
+        EG:
+        新闻列表
+
+        新闻的标题
+        新闻的时间
+            则返回如下文件
+        国内新闻 2016-06-19
+        {
+            {
+                title:'新闻标题',
+                time:'2016-06-19'
+            }
+        }
+    处理不同种类数据的方法 (3 json和数组)
+        <input type="button" value="获取信息">
+        <div id="info"></div>
+        <script>
+            $('input').click(function () {
+                var url = 'demo1.php';
+                var href = $(this).find("a").attr('href');
+                $.ajax({
+                    url:url,
+                    type:'get',
+                    success: function (data) {
+                        var res = eval(data);
+                        $("#info").html(res[0].title);
+                        //如果返回的数据是数组 先用eval解析 再data[0]
+                        //如果返回的数据是对象 先用eval解析 再data[0].title
+                    }
+                })
+            })
+        </script>
+
+
+</body>
+</html>

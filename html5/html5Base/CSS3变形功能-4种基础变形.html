@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CSS3变形功能-4种基础变形</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+        }
+        div#d1{
+            background-color: #ffdd3f;
+            -webkit-transform: rotate(45deg);/*旋转角度，只在X轴变换，rotate(x,y)全部变化*/
+            -moz-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+        }
+        div#d2{
+            background-color: #ff002e;
+            -webkit-transform: scale(0.5);/*50%缩放，只在X轴变换，scale(x,y)全部变化*/
+            -moz-transform: scale(0.5);
+            -o-transform: scale(0.5);
+            -ms-transform: scale(0.5);
+        }
+        div#d3{
+            background-color: #126fb0;
+            -webkit-transform: skew(45deg);/*倾斜角度，只在X轴变换，skew(x,y)全部变化*/
+            -moz-transform: skew(45deg);
+            -o-transform: skew(45deg);
+            -ms-transform: skew(45deg);
+        }
+        div#d4{
+            background-color: #43ff25;
+            -webkit-transform: translateX(45px);/*移动，只在X轴变换，translate(x,y)全部变化 或者translateX/Y*/
+            -moz-transform: translate(45px);
+            -o-transform: translate(45px);
+            -ms-transform: translate(45px);
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS3变形功能-4种基础变形</h1>
+    <div id="d1"></div>
+    <div id="d2"></div>
+    <div id="d3"></div>
+    <div id="d4"></div>
+</body>
+</html>

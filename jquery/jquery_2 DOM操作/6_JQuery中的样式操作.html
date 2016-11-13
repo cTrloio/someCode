@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .bgred{
+            background: red;
+        }
+        .blue{
+            color: #abcdef;
+        }
+        div{
+            position: relative;
+            left: 20px;
+            top: 20px;
+            width: 100px;
+            height: 200px;
+            background: #f00;
+        }
+        h1{
+            position: absolute;
+            left: 30px;
+            top: 50px;
+            width: 50px;
+            height: 50px;
+            background: #0f0;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    操作样式(浏览器默认上下左右都有8像素)
+        addClass()          添加样式
+        removeClass()       移除样式
+        toggleClass()       切换样式
+        hasClass()          判断是否有样式
+        css()               设置匹配元素的CSS样式
+        height()            获取高度
+        innerHeight()       获取padding高度 不包括border
+        outerHeight(bool)   参数为true时 获取内外边距+border的高度
+        width()             获取宽度
+        innerWidth()        获取包括padding的宽度，不包括border
+        outerWidth(bool)    参数为true时 获取内外边距+border的宽度
+        offset()            获取元素的位置
+
+        m.offsetParent()    离匹配元素最近的有position属性的元素
+        n.position()        相对于offsetParent()的坐标
+        o.scrollTop()       纵向滚动条的位置
+        p.scrollLeft()      横向滚动条的位置
+        <p>我是P标签</p>
+        <div>div
+            <h1>hh</h1>
+        </div>
+        <script>
+//            添加样式
+            $('p').addClass("bgred").addClass("blue");
+            //$('p').addClass("bgred blue");
+//            移除样式
+            $("p").removeClass("blue");
+//            $("p").removeClass(" bgred blue");
+//            切换样式
+            $("p").click(function () {
+//                $(this).toggleClass("bgred");
+                $(this).toggleClass("bgred blue");
+            }) ;
+//            判断是否有样式
+            $("p").click(function(){
+                if($(this).hasClass("bgred")){
+                    $(this).removeClass("bgred");
+                }else{
+                    $(this).addClass("blue");
+                }
+            });
+//            设置匹配元素的CSS样式(建议把属性名用引号引起来)
+            $('p').css("background","green");
+//            $('p').css({"background":"red","color":"white","border":"1px solid #f60"});
+//            获取高度 不包括padding margin border
+            $("p").height();
+//            获取包括padding的高度 不包括border和margin
+            $("p").innerHeight();
+//            参数为true时 获取内外边距+border的高度（真实高度） false的话不会计算margin
+            $('p').outerHeight(true);
+//            获取宽度
+//            获取包括padding的宽度，不包括border
+//            参数为true时 获取内外边距+border的宽度
+//            类似
+//            获取元素的位置
+            var a = $("p").offset();
+            alert(a.left);//获取P元素相对于浏览器左边的位置 浏览器默认有8像素
+            alert(a.top);
+//           离匹配元素最近的有position属性的元素
+            $("p").offsetParent();
+//           相对于offsetParent()的坐标(相对于父元素的)
+            $("p").position();
+//           纵向滚动条的位置(离顶部的距离)
+            $("window").scrollTop();
+//           横向滚动条的位置(离左边的距离)
+            $("window").scrollLeft();
+        </script>
+</body>
+</html>

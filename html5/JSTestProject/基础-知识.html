@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    #div1{
+        width: 200px;
+        height: 200px;
+        border: 1px solid;
+    }
+    .cl1{
+        background: red;
+    }
+</style>
+<script>
+    window.onload = function(){
+        var inp1=document.getElementsByTagName('input')[0];
+        var div1=document.getElementById('div1');
+        inp1.onclick = function () {
+            div1.style.background = 'green';
+            div1.className = 'cl1';
+        }
+//        行间样式要比类修改优先级高！！！
+    }
+    setClass();
+</script>
+<body>
+    <input type="button" value="变化">
+<div id="div1">
+
+</div>
+</body>
+</html>

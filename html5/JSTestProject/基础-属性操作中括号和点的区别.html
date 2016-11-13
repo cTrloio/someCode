@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>属性操作中括号和点的区别</title>
+    <script>
+        window.onload=function(){
+            var text1 = document.getElementById('t1');
+            var text2 = document.getElementById('t2');
+            var btn1 = document.getElementById('btn1');
+            var div1 = document.getElementById('div1');
+            btn1.onclick=function(){
+                div1.style[text1.value]=text2.value;
+            };
+        };
+    </script>
+</head>
+<body>
+<div align="center">
+    div样式名<br>
+    <input type="text" id="t1"><br>
+    div样式值<br>
+    <input type="text" id="t2">
+    <input type="button" id="btn1"><br>
+    <div id="div1">i'm a pig</div>
+</div>
+
+</body>
+</html>

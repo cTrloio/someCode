@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script>
+    window.onload= function () {
+        var aA=document.getElementsByTagName('a');
+        for( n in aA){
+//           a的父节点是li
+            aA[n].onclick = function () {
+                this.parentNode.style.display= 'none';
+            }
+        }
+        /****************************************/
+        var oDiv2=document.getElementById('div2');
+        oDiv2.offsetParent.style.background='green';
+    }
+</script>
+<body>
+<ul>
+    <li>11<a href="javascript:">隐藏</a></li>
+    <li>22<a href="javascript:">隐藏</a></li>
+    <li>33<a href="javascript:">隐藏</a></li>
+    <li>44<a href="javascript:">隐藏</a></li>
+    <li>55<a href="javascript:">隐藏</a></li>
+</ul>
+<div id="div1" style="width: 200px; height: 200px;background: #f60;margin: 100px;position: relative">aa
+    <div id="father">
+        <div id="div2" style="width: 100px;height: 100px;background:#f02;position:absolute;">
+            ss
+        </div>
+    </div>
+</div>
+</body>
+</html>

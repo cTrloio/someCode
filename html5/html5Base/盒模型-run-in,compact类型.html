@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>盒模型-run-in,compact</title>
+    <style>
+        dl.run-in dt{
+            display: run-in;
+            border: solid 2px #ff002e;
+            background: #cccccc;
+        }
+        dl.compact dt{
+            -moz-display: compact;
+            border: solid 2px #126fb0;
+            background: #cccccc;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>盒模型-run-in,compact</h1>
+    <dl class="run-in">
+        <dt>run-in类型</dt>
+        <dd>run-in类型的元素将被包括在后面的block类型的元素的内部</dd>
+    </dl>
+    <dl class="compact">
+        <dt>compact类型</dt>
+        <dd>compact类型的元素将被放置在block类型的元素左边</dd>
+    </dl>
+</body>
+</html>

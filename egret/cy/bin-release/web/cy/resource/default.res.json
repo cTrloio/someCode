@@ -1,0 +1,94 @@
+{
+	"groups":[
+	{
+		"keys":"nextBtn,musicOn,musicOff,clickM,bgm,backBtn,StartBtn,SelectBg,StartBg,sel,selLight,bg,resPanel,promptPanel,interpret,teBox",
+		"name":"preload"
+	}],
+	"resources":[
+	  {
+		"name": "bgm",
+		"type": "sound",
+		"url": "assets/sound/Music.mp3"
+	  },
+	  {
+		"name": "clickM",
+		"type": "sound",
+		"url": "assets/sound/type_word.mp3"
+	  },
+	  {
+		"name": "nextBtn",
+		"type": "image",
+		"url": "assets/bitmap/nextBtn.png"
+	  },
+	  {
+		"name": "musicOn",
+		"type": "image",
+		"url": "assets/bitmap/musicOn.png"
+	  },
+	  {
+		"name": "musicOff",
+		"type": "image",
+		"url": "assets/bitmap/musicOff.png"
+	  },
+	  {
+		"name": "StartBg",
+		"type": "image",
+		"url": "assets/bitmap/StartBg.png"
+	  },
+	  {
+		"name": "StartBg",
+		"type": "image",
+		"url": "assets/bitmap/StartBg.png"
+	  },
+	  {
+		"name": "backBtn",
+		"type": "image",
+		"url": "assets/bitmap/BackBtn.png"
+	  },
+	  {
+		"name": "SelectBg",
+		"type": "image",
+		"url": "assets/bitmap/SelectBg.png"
+	  },
+	  {
+		"name": "sel",
+		"type": "image",
+		"url": "assets/bitmap/sel.png"
+	  },
+	  {
+		"name": "selLight",
+		"type": "image",
+		"url": "assets/bitmap/selLight.png"
+	  },
+	  {
+		"name": "StartBtn",
+		"type": "image",
+		"url": "assets/bitmap/StartBtn.png"
+	  },
+	  {
+		"name":"bg",
+		"type":"image",
+		"url":"assets/bitmap/bg.png"
+	  },
+	  {
+		"name":"teBox",
+		"type":"image",
+		"url":"assets/bitmap/teBox.png"
+	  },
+	  {
+		"name":"resPanel",
+		"type":"image",
+		"url":"assets/bitmap/resPanel.png"
+	  },
+	  {
+		"name":"promptPanel",
+		"type":"image",
+		"url":"assets/bitmap/promptPanel.png"
+	  },
+	  {
+		"name": "interpret",
+		"type": "sheet",
+		"url": "assets/interpret.json"
+	  }
+	]
+}

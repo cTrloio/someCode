@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>伪元素选择器</title>
+    <style>
+        p.p1:first-line{
+            color: #ff002e;
+        }
+        p.p2:first-letter{
+            color: #4752ff;
+        }
+        p.p3:before{
+            color: #24ff22;
+            content: "我是前缀";
+        }
+        p.p4:after{
+            color: #ffa012;
+            content: "我是后缀" ;
+        }
+    </style>
+</head>
+<body>
+    <h1>伪元素选择器</h1>
+    <p class="p1">
+        first-line用于给第一行元素使用样式</br>
+        这里是p1的第二行元素
+    </p>
+    <p class="p2">
+        First-letter用于给首字母，第一个汉字使用样式
+    </p>
+    <p class="p3">
+        before用于给一个元素前面插入元素
+    </p>
+    <P class="p4">
+        after用于给一个元素后面插入元素
+    </P>
+</body>
+</html>

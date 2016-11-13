@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CSS3动画功能-Animation功能</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: #ff0500;
+        }
+        @-moz-keyframes maKeyFrame {        /*关键帧兼容性也要改！！！*/
+            0%{
+                background-color: #ffa012;
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+            }
+            20%{
+                background-color: #fbff22;
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+            }
+            40%{
+                background-color: #35ff09;
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+            }
+            60%{
+                background-color: #befdff;
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+            }
+            80%{
+                background-color: #003fff;
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+            }
+            100%{
+                background-color: #c300ff;
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+            }
+        }
+        div:hover{
+            -webkit-animation-name: maKeyFrame;
+            -webkit-animation-duration: 5s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+
+            -moz-animation-name: maKeyFrame;
+            -moz-animation-duration: 5s;
+            -moz-animation-timing-function: linear;
+            -moz-animation-iteration-count: infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS3动画功能-Animation功能</h1>
+    <p>
+        animation通过关键帧以及每个关键帧中的属性值来实现更为复杂的动画效果<br>
+        使用方法：<br>
+        @-webkit-keyframes 关键帧合集名称{创建关键帧的代码}<br>
+        0%-100%{<br>
+            本关键帧中的样式<br>
+        }<br>
+        关键帧创建好了之后，在元素样式中使用该关键帧<br>
+        元素{<br>
+                -webkit-animation-name:关键帧合集名称<br>
+                -webkit-animation-duration:5s<br>
+                -webkit-animation-timing-function:linear<br>
+                -webkit-animation-iteration-count:infinite<br>
+        /*动画播放次数==某个整数，infinite为无限循环*/<br>
+        }
+    </p>
+    <div></div>
+</body>
+</html>

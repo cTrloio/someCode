@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    设置和获取节点内的文本节点
+        text() 获取匹配元素的文本节点
+        html() 获取匹配元素的DOM节点或文本节点
+    <p>11<strong style="background: #ff0000;">111</strong>11</p>
+    <script>
+
+        $('p').text();         //无参数会只获取文本
+        $('p').text("2222222");//加参数会只修改文本
+
+        $("p").html();  //如果匹配标签内有子元素 html才能获取到所有内容
+        $("p").html("33<span style='background: #00ff00;'>333</span>33");  //如果匹配标签内有子元素 html才能修改了所有内容
+
+    </script>
+</body>
+</html>

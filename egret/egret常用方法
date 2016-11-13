@@ -1,0 +1,571 @@
+//egret常用方法
+
+
+
+//安卓APP打包
+egret create_app 项目名 -f 游戏项目路径 -t Android Support路径
+
+
+
+
+
+//检测两个矩形的碰撞检测
+private hitTestObject(obj1:egret.DisplayObject,obj2:egret.DisplayObject){
+    var rect1:egret.Rectangle = obj1.getBounds();
+    var rect2:egret.Rectangle = obj2.getBounds();
+    rect1.x = obj1.x;
+    rect1.y = obj1.y;
+    rect2.x = obj2.x;
+    rect2.y = obj2.y;
+    return rect1.intersects(rect2);
+}
+
+
+
+//点与任意凸多边形碰撞检测模块
+module CollisionUtils {
+    //===================================================碰撞检测核心代码部分==================================================
+    //参数依次为： 碰撞点，碰撞多边形的坐标，碰撞多边形各个顶点坐标(多边形的局部坐标系内，传进来的顶点数组必须为凸多边形的顺时针序列顶点)
+    export function checkPointCollideShape(p: egret.Point, shppos: egret.Point, szpt: Array<egret.Point>): boolean {
+        var n: number = szpt.length;
+        if (n < 3) return false;
+        var i: number = 0;
+        var clonept: Array<egret.Point> = [];
+        for (i = 0; i < szpt.length; i++) {
+            var vp = new egret.Point(szpt[i].x, szpt[i].y);
+            clonept.push(vp);
+        }
+        //把图形的顶点坐标转换到所在坐标系（如果坐标系不同需另处理，这里只是简单实例）
+        for (i = 0; i < clonept.length; i++) {
+            clonept[i].x += shppos.x;
+            clonept[i].y += shppos.y;
+        }
+        //主要原理为右手法则，逆时针向量积为正，顺时针为负
+        //首先判断起点、第二点与P向量积，如果大于零，说明在外面
+        if (this.vectorCrossPoint(clonept[0], p, clonept[1]) > 0) return false;
+        //首先判断起点、倒数第二点与P向量积，如果小于零，说明在外面
+        if (this.vectorCrossPoint(clonept[0], p, clonept[n - 1]) < 0) return false;
+        //以上两个判断通过了，说明检查点在多边形起点相邻两边的开口方向
+        //从第二点和倒数第二点开始收缩
+        i = 2;
+        var j: number = n - 1;
+        var line: number = -1;
+        //这里采用二分法逐渐缩小范围来判定点的位置
+        while (i <= j) {
+            //找到当前等待队列中的点的中点
+            var mid: number = (i + j) >> 1;
+            //如果点在起点与中点之间，则把终点设为中点的前一点，否则把起点设置为中点的下一点
+            if (this.vectorCrossPoint(clonept[0], p, clonept[mid]) > 0) {
+                line = mid;
+                j = mid - 1;
+            }
+            else i = mid + 1;
+        }
+        if (line < 0) return false;
+        //找到了紧挨着点的两个夹边，此时，如果在多边形内，则与夹边的积必然小于零
+        return this.vectorCrossPoint(clonept[line - 1], p, clonept[line]) < 0;
+    }
+    export function vectorCrossPoint(p0: egret.Point, p1: egret.Point, p2: egret.Point): number {
+        return (p1.x - p0.x) * (p2.y - p0.y) - (p2.x - p0.x) * (p1.y - p0.y);
+    }
+}
+
+
+
+
+//创建位图
+static createBitmapByName(name:string):egret.Bitmap {
+    var result:egret.Bitmap = new egret.Bitmap();
+    var texture:egret.Texture = RES.getRes(name);
+    result.texture = texture;
+    return result;
+}
+
+
+
+
+//深度优先搜索 自动寻路
+class Main extends egret.DisplayObjectContainer {
+    //地图，0表示空地 1表示障碍物
+    a:Array<any>=[
+        [0,0,1,0],
+        [0,0,0,0],
+        [0,0,1,0],
+        [0,1,0,0],
+        [0,0,0,1]
+    ];
+    
+    //表示地图有 n 行  m列
+    n: number = 5;
+    m: number = 4;
+    
+    //pq表示终点坐标
+    p:number=3;
+    q:number=2;
+    
+    //标记起始点 xy
+    startX:number=0;
+    startY:number=0;
+    
+    //标记最小路程
+    min:any=99;
+    
+    //用来标记走过的路线
+    book:Array<any>=[];
+    
+    //声明一个栈 存储路线Xy  不包含起点和终点
+    queX:Array<number>=[];
+    queY:Array<number>=[];
+    top:number = 0;
+    
+    
+    public constructor() {
+        super();
+        //初始化为0表示没有走过
+        for(var i=0;i<51;i++){
+            this.book[i]=new Array();
+        }
+        for(var j=0;j<51;j++){
+            for(var k=0;k<51;k++){
+                this.book[j][k]=0;
+            }
+        }
+        //标记 起始点已经尝试过
+        this.book[this.startX][this.startY]=1;
+        //从1,1尝试开始  初始步数为0
+        this.dfs(this.startX,this.startY,0);
+        //输出步数
+        alert(this.min);
+        
+    }
+    private dfs(x:number,y:number,step:number){ //xy表示起点坐标  step标记行走步数
+        //表示行走方向 右下左上顺序
+        var next:Array<any>=[[0,1],[1,0],[0,-1],[-1,0]];
+        //表示下一个点的坐标
+        var nextX: number = 0;
+        var nextY: number = 0;
+        //判断是否到达终点
+        if(x==this.p && y==this.q){
+            if(step<this.min){
+                this.min=step;
+                
+                for(var i = 1;i < this.top;i++) {
+                    console.log(this.queX[i] + "," + this.queY[i]);
+                }
+                
+            }
+            return;
+        }
+        
+        //枚举四种走法
+        for(var l=0;l<4;l++){
+            //计算下一点坐标
+            nextX=x+next[l][0];
+            nextY=y+next[l][1];
+            //判断是否越界
+            if(nextX<0 || nextX>=this.n || nextY<0 || nextY>=this.m){
+                continue;
+            }
+            //判断是否已经到过此点 & 是此点不是障碍物
+            if(this.a[nextX][nextY]==0 && this.book[nextX][nextY]==0){
+                this.book[nextX][nextY]=1;  //标记这点已经走过了
+                
+                this.top++;
+                this.queX[this.top] = nextX;
+                this.queY[this.top] = nextY;
+                
+                this.dfs(nextX,nextY,step+1); //开始尝试下一点
+                this.book[nextX][nextY]=0;  //本次尝试结束 取消标记的这次尝试的这个点
+                this.top --;
+            }
+        }
+        return;
+    }
+    
+}
+
+
+
+
+
+//TextureMerger 导出文件使用方法
+static createBitmapByJsonName(jsonName:string,sheetName:string):egret.Bitmap {
+    var result:egret.Bitmap = new egret.Bitmap();
+    var spriteSheet:egret.SpriteSheet=RES.getRes(jsonName);
+    result.texture =spriteSheet.getTexture(sheetName);
+    return result;
+}
+
+
+
+
+
+//MovieClip使用方式
+var data = RES.getRes("startbgJson");
+var txtr = RES.getRes("startbgPic");
+var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( data, txtr );
+var mc1:egret.MovieClip = new egret.MovieClip( mcFactory.generateMovieClipData( "playjump" ) );
+this.addChild( mc1 );
+mc1.x = 130;
+mc1.y = 150;
+mc1.gotoAndPlay(1);
+
+
+
+
+
+//随机排序
+var arr3 = [1,2,3,4];
+arr3.sort(function () {
+    return Math.random() - 0.5;
+});
+
+
+//矩形与矩形的碰撞检测
+
+class Collision{
+    public static collisionSide:String=" ";
+    public static block(r1:egret.Sprite,r2:egret.Sprite)
+    {
+        var vx:number=(r1.x+r1.width/2)-(r2.x+r2.width/2);
+        var vy:number=(r1.y+r1.height/2)-(r2.y+r2.height/2);
+        if(Math.abs(vx)<(r1.width/2+r2.width/2))
+        {
+            if(Math.abs(vy)<(r1.height/2+r2.height/2))
+            {
+                var overlap_x:number=(r1.width/2+r2.width/2)-Math.abs(vx);
+                var overlap_y:number=(r1.height/2+r2.height/2)-Math.abs(vy);
+                if(overlap_x>=overlap_y)
+                {
+                    if(vy>0)
+                    {
+                        this.collisionSide="Top";
+                        r1.y+=overlap_y;
+                    }
+                    else
+                    {
+                        this.collisionSide="Bottom";
+                        r1.y-=overlap_y;
+                    }
+                }
+                else
+                {
+                    if(vx>0)
+                    {
+                        this.collisionSide="Left";
+                        r1.x+=overlap_x;
+                    }
+                    else
+                    {
+                        this.collisionSide="Right";
+                        r1.x-=overlap_x;
+                    }
+                }
+            }
+            else
+            {
+                this.collisionSide="No collision";
+            }
+        }
+        else
+        {
+            this.collisionSide="No collision";
+        }
+    }
+}
+
+
+
+
+//在 0-m 范围内随机 n 个不同的数
+class Main extends egret.DisplayObjectContainer {
+
+    public constructor() {
+        super();
+        this.createRanNum(5,10);
+    }
+
+    private createRanNum(count:number,distancd:number) {   // 随机数量   随机范围(0-?)
+        var isRanNum:Boolean = true;
+        var r:Array<number> = new Array(count);
+        if(count>distancd){
+            console.log('数量大于范围');
+        }
+        else{
+            //产生三个随机数
+            for(var i = 1;i <= count;i++) {
+                r[i] = Math.round(Math.random() * (distancd - 1)) + 1;
+            }
+            //判断随机的三个数是否重复
+            for(var i = count;i >= 1;i--) {
+                for(var j = count;j >= 1;j--) {
+                    if((i != j) && (r[i] == r[j])) { //有重复
+                        //不可以输出
+                        isRanNum = false;
+                    }
+                }
+            }
+            //没有重复>>可以输出
+            if(isRanNum) {
+                for(var k = 1;k <= count;k++) {
+                    console.log(r[k]);
+                }
+            }
+            //有重复>>递归调用自己>>再次随机三个数>>直到没有重复的
+            else {
+                this.createRanNum(count,distancd);
+            }
+        }
+        
+    }
+}
+
+
+
+//html dom操作
+var progressDiv = document.getElementById("loadingtiao");
+progressDiv.style.width = 100;
+progressDiv.innerHTML = "ff";
+
+var w = document.body.clientWidth;
+
+var mask = document.createElement("div");
+mask.id = "mask";
+mask.style.position = "absolute";
+mask.style.width = "100%";
+mask.style.height = "100%";
+mask.style.backgroundColor = "#545454";
+mask.style.zIndex = '100';
+
+mask.appendChild(progressDiv);
+document.body.appendChild(mask);
+
+
+
+
+//骨骼动画
+private createGameScene():void {
+    var dragon_json = RES.getRes('Dragon');
+    var textureData = RES.getRes("picJson");
+    var texture     = RES.getRes("pic");
+    var dragonFactor:dragonBones.EgretFactory = new dragonBones.EgretFactory();
+    dragonFactor.addDragonBonesData(dragonBones.DataParser.parseDragonBonesData(dragon_json));
+    dragonFactor.addTextureAtlas(new dragonBones.EgretTextureAtlas(texture,textureData));
+    var armature: dragonBones.Armature = dragonFactor.buildArmature("Dragon");
+    this.addChild(armature.display);
+    armature.display.x = 200;
+    armature.display.y = 200;
+    armature.display.scaleX = 0.5;
+    armature.display.scaleY = 0.5;
+    dragonBones.WorldClock.clock.add( armature );
+    armature.animation.gotoAndPlay("act");
+    egret.Ticker.getInstance().register(
+        function(frameTime:number){
+            dragonBones.WorldClock.clock.advanceTime(0.01)
+        },this);
+}
+配置文件
+{
+	"name": "dragonbones"
+}
+
+
+
+//粒子特效使用方式
+var par: particle.ParticleSystem;
+var pic = RES.getRes('bullPng');
+var txt = RES.getRes('bullJson');
+par = new particle.GravityParticleSystem(pic, txt);
+this.addChild(par);
+par.start();
+配置文件
+{
+	"name": "particle",
+	"path": "../libsrc/particle/libsrc"
+}
+
+
+
+
+
+
+
+//A*寻路算法
+//********************* AStar算法(F=G+H), G:当前点到开始点的距离,H:当前点到终点的距离 
+
+//某关地图信息 行数 列数
+    private MAP = {
+        arr: [
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0]
+        ],
+        rows: 9,
+        cols: 6
+    }
+//*****************************
+    private searchRoad(start_x, start_y, end_x, end_y, objStr: string) {
+        var openList = [],  //开启列表
+            closeList = [], //关闭列表
+            result = [],    //结果数组
+            result_index;   //结果数组在开启列表中的序号
+
+        //把当前点加入到开启列表中，并且G是0
+        openList.push({
+            x: start_x,
+            y: start_y,
+            G: 0
+        });
+        //计算当前点周围点的F
+        do {
+            var currentPoint = openList.pop();
+            closeList.push(currentPoint);
+            var surroundPoint = this.SurroundPoint(currentPoint);
+            for (var i in surroundPoint) {
+                var item = {
+                    x: 0,
+                    y: 0,
+                    F: 0,
+                    G: 0,
+                    H: 0
+                }
+                item.x = surroundPoint[i].x; //获得周围的8/4个点
+                item.y = surroundPoint[i].y; //获得周围的8/4个点
+                if (objStr == "chara") {
+                    if (
+                        item.x >= 0 && //判断是否在地图上
+                        item.y >= 0 &&
+                        item.x < this.MAP.rows &&
+                        item.y < this.MAP.cols &&
+                        this.MAP.arr[item.x][item.y] != 1 &&    //判断是否是障碍物
+                        !this.existList(item, closeList) &&     //判断是否在关闭列表中
+                        this.MAP.arr[item.x][currentPoint.y] != 1 && //判断之间是否有障碍物，如果有障碍物是过不去的
+                        this.MAP.arr[currentPoint.x][item.y] != 1) {
+                        // g为当前点到父节点的位置
+                        // 如果是上下左右位置的则g等于10(用于F值计算,多少都行)，斜对角的就是14
+                        // var g = currentPoint.G + ((currentPoint.x - item.x) * (currentPoint.y - item.y) == 0 ? 10 : 14);
+                        var g = 10; //这里只需要上下左右型
+                        if (!this.existList(item, openList)) { //如果不在开启列表中
+                            //计算H，通过水平和垂直距离进行确定
+                            item.H = Math.abs(end_x - item.x) * 10 + Math.abs(end_y - item.y) * 10;
+                            item.G = g;
+                            item.F = item.H + item.G;
+                            item['parent'] = currentPoint;
+                            openList.push(item);
+                        } else { //存在在开启列表中，比较目前的g值和之前的g的大小
+                            var index = this.existList(item, openList);
+                            //如果当前点的g更小
+                            if (g < openList[index].G) {
+                                openList[index].parent = currentPoint;
+                                openList[index].G = g;
+                                openList[index].F = g + openList[index].H;
+                            }
+                        }
+                    }
+                } else {
+                    if (
+                        item.x >= 0 && //判断是否在地图上
+                        item.y >= 0 &&
+                        item.x < this.MAP.rows &&
+                        item.y < this.MAP.cols &&
+                        this.MAP.arr[item.x][item.y] != 1 &&    //判断是否是障碍物
+                        this.MAP.arr[item.x][item.y] != 7 &&
+                        !this.existList(item, closeList) &&     //判断是否在关闭列表中
+                        this.MAP.arr[item.x][currentPoint.y] != 1 && //判断之间是否有障碍物，如果有障碍物是过不去的
+                        this.MAP.arr[item.x][currentPoint.y] != 7 &&
+                        this.MAP.arr[currentPoint.x][item.y] != 1 &&
+                        this.MAP.arr[currentPoint.x][item.y] != 7) {
+                        // g为当前点到父节点的位置
+                        // 如果是上下左右位置的则g等于10(用于F值计算,多少都行)，斜对角的就是14
+                        // var g = currentPoint.G + ((currentPoint.x - item.x) * (currentPoint.y - item.y) == 0 ? 10 : 14);
+                        var g = 10; //这里只需要上下左右型
+                        if (!this.existList(item, openList)) { //如果不在开启列表中
+                            //计算H，通过水平和垂直距离进行确定
+                            item.H = Math.abs(end_x - item.x) * 10 + Math.abs(end_y - item.y) * 10;
+                            item.G = g;
+                            item.F = item.H + item.G;
+                            item['parent'] = currentPoint;
+                            openList.push(item);
+                        } else { //存在在开启列表中，比较目前的g值和之前的g的大小
+                            var index = this.existList(item, openList);
+                            //如果当前点的g更小
+                            if (g < openList[index].G) {
+                                openList[index].parent = currentPoint;
+                                openList[index].G = g;
+                                openList[index].F = g + openList[index].H;
+                            }
+                        }
+                    }
+                }
+
+            }
+            //如果开启列表空了，则没有通路，结果为空
+            if (openList.length == 0) {
+                break;
+            }
+            openList.sort(this.sortF); //循环回去的时候，找出 F 值最小的, 将它从 "开启列表" 中移掉
+        } while (!(result_index = this.existList({ x: end_x, y: end_y }, openList)));
+
+        //判断结果列表是否为空
+        if (!result_index) {
+            result = [];
+        } else {
+            var currentObj = openList[result_index];
+            do {
+                //把路径节点添加到result当中
+                result.unshift({
+                    x: currentObj.x,
+                    y: currentObj.y
+                });
+                currentObj = currentObj.parent;
+            } while (currentObj.x != start_x || currentObj.y != start_y);
+        }
+        return result;
+    }
+    //用F值对数组排序
+    private sortF(a, b) {
+        return b.F - a.F;
+    }
+    //获取参数点周围8/4个点在二维数组中的值
+    private SurroundPoint(curPoint) {
+        var x = curPoint.x,
+            y = curPoint.y;
+        return [
+            // {x:x-1,y:y-1},   //斜对角位移量
+            {
+                x: x,
+                y: y - 1
+            },
+            // {x:x+1,y:y-1},
+            {
+                x: x + 1,
+                y: y
+            },
+            // {x:x+1,y:y+1},
+            {
+                x: x,
+                y: y + 1
+            },
+            // {x:x-1,y:y+1},
+            {
+                x: x - 1,
+                y: y
+            }
+        ]
+    }
+    //判断点是否存在在某个列表中，是的话返回的是序列号
+    private existList(point, list): any {
+        for (var i in list) {
+            if (point.x == list[i].x && point.y == list[i].y) {
+                return i;
+            }
+        }
+        return false;
+    }
+    //******************************************** AStar算法结束 *****************************************************

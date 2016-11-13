@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script>
+    window.onload= function () {
+        var oTab=document.getElementById('tab1');
+        var oBtn=document.getElementsByTagName('input')[2];
+        var oBtn2=document.getElementsByTagName('input')[3];
+        var oBtn3=document.getElementsByTagName('input')[4];
+        var oName=document.getElementById('name');
+        var oAge=document.getElementById('age');
+
+        var id=oTab.tBodies[0].rows.length+1;
+
+        oBtn.onclick= function () { //添加
+            var oTr=document.createElement('tr');
+            var oTd=document.createElement('td');
+            oTd.innerHTML = id++;
+            oTr.appendChild(oTd);
+            var oTd=document.createElement('td');
+            oTd.innerHTML = oName.value;
+            oTr.appendChild(oTd);
+            var oTd=document.createElement('td');
+            oTd.innerHTML = oAge.value;
+            oTr.appendChild(oTd);
+            var oTd=document.createElement('td');
+            oTd.innerHTML = "<a href='javascript:;'>删除</a>";
+            oTr.appendChild(oTd);
+            oTd.getElementsByTagName('a')[0].onclick = function () {
+                oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+            }
+            oTab.tBodies[0].appendChild(oTr);
+        }
+        oBtn2.onclick = function () { //搜索
+            for(var i=0;i<oTab.tBodies[0].rows.length;i++){
+                var str1=oTab.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase();
+                var str2=oName.value.toLowerCase();
+                var arr=str2.split(' ');//以空格为间隔分割字符串
+                oTab.tBodies[0].rows[i].style.display = 'none';
+                for(var j=0;j<arr.length;j++){
+                    if( str1.search(arr[j])!=-1){ //模糊查找 search() 返回参数位置，找不到为-1
+                        oTab.tBodies[0].rows[i].style.background = '#ff6600'
+                        oTab.tBodies[0].rows[i].style.display = 'block'
+                    }
+                }
+            }
+        }
+        oBtn3.onclick = function () { //排序
+            var arr=[];
+            for(var i=0;i<oTab.tBodies[0].rows.length;i++){
+                arr[i]=oTab.tBodies[0].rows[i];
+            }
+            arr.sort(function (tr1,tr2){
+                var n1=parseInt(tr1.cells[0].innerHTML);
+                var n2=parseInt(tr2.cells[0].innerHTML);
+                return n1-n2;
+            });
+            for(var i=0;i<arr.length;i++){
+                oTab.tBodies[0].appendChild(arr[i]);
+            }
+        }
+    }
+</script>
+<body>
+姓名：<input type="text" id="name">年龄：<input type="text" id="age">
+<input type="button" value="添加"><input type="button" value="搜索"><input type="button" value="排序">
+<table id="tab1" border="1px" width="500">
+    <thead>
+    <td>num</td>
+    <td>name</td>
+    <td>age</td>
+    <td>operation</td>
+    </thead>
+    <tbody>
+    <tr>
+        <td>4</td>
+        <td>Cxy</td>
+        <td>24</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>TwOi</td>
+        <td>23</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>BuRy</td>
+        <td>23</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Ly</td>
+        <td>22</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        document.onkeydown=function(ev){
+            var oTe=document.getElementById('te1');
+            var oTa=document.getElementById('ta1');
+            var oEvent=ev||event;
+            if(oEvent.keyCode==13&&oEvent.ctrlKey){
+                oTa.innerHTML+=oTe.value+'\n';
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="te1">
+    <textarea rows="10" cols="50" id="ta1"></textarea>
+</body>
+</html>

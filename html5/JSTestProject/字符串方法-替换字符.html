@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>字符串方法-查找功能s</title>
+    <style>
+        p{
+            width: 300px;
+            height: auto;
+            padding: 20px;
+            background: #c1c1c1;
+            margin: 20px;
+            border: solid 5px #000000;
+        }
+        span{
+            background: #96ff15;
+        }
+        input{
+            margin: 25px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var aInput1=document.getElementsByTagName('input')[0];
+            var aInput2=document.getElementsByTagName('input')[1];
+            var aBtn=document.getElementsByTagName('input')[2];
+            var op=document.getElementsByTagName('p')[0];
+            aBtn.onclick = function () {
+                var str1 = aInput1.value;
+                var str2= aInput2.value;
+                if(str1!==null && str2!==null){
+                    op.innerHTML = op.innerHTML.split(str1).join('<span>'+ str2 +'</span>');
+                    //要显示的字 = 要显示的字 以 输入框1的值分割成数组 再以输入框2的值变化连接成字符串
+                }else{
+                    alert('某个字符串为空');
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="text" placeholder="被替换文字">
+<input type="text" placeholder="替换成文字">
+<input type="button" value="替换">
+<p>
+    刀塔2有一只小牛女马甲卡萨诺卡就是你的，刀塔2拉链设计的<br>卢卡死机啦啦啦，刀塔2很2马克思鹿鼎记
+</p>
+</body>
+</html>

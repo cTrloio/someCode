@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>中编号嵌入大编号</title>
+    <style>
+        h1:before{
+            content: counter(bh,upper-alpha);/*大写字母*/
+            color: #212fff;
+        }
+        h1{
+            counter-increment: bh;
+            counter-reset: bh2;<!-- 重置bh2 -->
+        }
+        h2:before{
+            content: counter(bh,upper-alpha) '-'counter(bh2,upper-alpha);
+            color: #ff002e;
+        }
+        h2{
+            counter-increment: bh2;
+        }
+    </style>
+</head>
+<body>
+<h1>标题</h1>
+<h2>标题</h2>
+<h2>标题</h2>
+<h2>标题</h2>
+<h1>标题</h1>
+<h2>标题</h2>
+<h2>标题</h2>
+<h2>标题</h2>
+</body>
+</html>

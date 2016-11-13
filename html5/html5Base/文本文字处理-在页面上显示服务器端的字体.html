@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>在页面上显示服务器端的字体</title>
+    <style>
+        @font-face {
+            font-family: webfont;
+            src: url(../font/yuwei.ttf);
+        }
+        p.p1{
+            font-family: webfont;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: Arial;
+            src:local('Arial');
+        }
+        p.p2{
+            font-family: Arial;
+            font-style: oblique;
+        }
+    </style>
+</head>
+<body>
+    <h1>在页面上显示服务器端的字体</h1>
+    <p class="p1">
+        font-family中指定webfont来声明使用的是服务端字体<br>
+        src指定文件所在目录，format指定字体文件格式（可省略）
+    </p>
+    <h2>使用本地字体</h2>
+    <p class="p2">
+        font-family中指定本地字体的字体名<br>
+        src设置为local('字体名');
+    </p>
+</body>
+</html>

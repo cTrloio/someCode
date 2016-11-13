@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+return：返回值
+1) 函数名+括号：fn1()	==>  return 后面的值；d'd
+2) 所有函数默认返回值：未定义；
+3) return 后面任何代码都不执行了；
+4) return中的函数可以传参（参数也可以穿越）；
+
+回顾函数传参
+函数返回值：return
+JS的数据类型有哪些？函数可以是任何数据类型
+实例：通过ID名、配合函数传参特性获取元素
+可变参（不定参）：arguments
+参数的个数： arguments.length
+arguments 和 形参 的关系
+
+实例：求和函数
+封装getStyle函数
+获取元素样式：
+实例：通过ID名、配合函数传参特性获取元素
+obj.currentStyle[attr]
+getComputedStyle(obj,2)[attr]
+使用注意事项：
+不能有空格
+获取到的是计算后的样式
+只能获取非复合样式
+所获取的样式要设初使值
+获得的值是字符串
+定时器基础
+什么是定时器
+每隔一段时间，执行一次函数
+setInterval、clearInterval
+setTimeout、clearTimeout
+两种定时器的区别
+实例：自动播放的焦点图
+实例：查看QQ资料
+
+============================
+return返回值
+数字、字符串、布尔、函数、对象（元素、[]、{}）、未定义
+
+fn(20)(10);   //第二个参数可以传递到内部的函数
+function fn2(a){
+return function (b){
+alert(a+b);
+}
+}
+//30
+
+return：返回值
+1）函数名+括号：fn1()==> return后面的值
+2）所有函数默认返回值：未定义
+3）return后面的任何代码都不执行了
+
+当函数的参数个数无法确定的时候：用arguments
+既可以读又可以写arguments[0]...
+
+getComputedStyle(Odiv1).width    //获取浏览器计算后的样式  //ie 6 7 8 有兼容性问题
+Odiv1.currentStyle.width      //标准浏览器不兼容
+
+
+定时器    ：时间概念
+--------------------------------------------------------------
+setinterval(函数，毫秒)；  //重复执行
+函数有直接调用或者事件调用，或者setinterval调用
+
+setinterval(fn,30);
+时间定义尽量在14以上
+
+clearinterval(setinterval(fn,30););
+优雅的
+var timer=null;
+timer=setinterval(fn,30);
+clearinterval(timer);
+------------------------------------
+var timer=null;
+abtn[0].onclick=function(){
+clearinterval(timer);    //null未定义  清空定时器，不然点击一次就新开一个定时器
+timer=setinterval(fn,30);
+}
+========================
+var timer=setTimeout(函数，毫秒)；   执行一次
+clearTimeout(timer);
+</body>
+</html>

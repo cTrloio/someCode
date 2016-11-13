@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>背景和边框样式-图像边框</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            -webkit-border-image: url("../image/bg55.jpg") 50 repeat;
+            border-width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>背景和边框样式-图像边框</h1>
+    <p>
+        -webkit-border-image:url("...") 上边距 右边距 下边距 左边距/边距 repeat平铺 stretch拉伸 round 平铺，超过不显示 <br>
+        -moz-border-image:url("...") 上边距 右边距 下边距 左边距/边距 <br>
+        -o-border-image:url("...") 上边距 右边距 下边距 左边距/边距 <br>
+        border-image:url("...") 上边距 右边距 下边距 左边距/边距 <br>
+        <br>
+        九宫格四个角border-top-left-image  border-top-right-image  border-bottom-left-image border-bottom-right-image不会进行拉伸<br>
+        而border-top-image border-bottom-image border-left-image border-right-image 会作为边框拉伸或缩减使用
+    </p>
+    <div></div>
+</body>
+</html>

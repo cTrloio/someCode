@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>this关键字</title>
+    <style>
+        li{
+            width: 150px;
+            height: 200px;
+            position: relative;
+            float: left;
+            background: #f1f1f1;
+            margin: 30px;
+        }
+        div{
+            position: absolute;
+            width: 80px;
+            height: 200px;
+            background: #ff6600;
+            top: 100px;
+            left: 35px;
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload= function () {
+            var aLi = document.getElementsByTagName('li');
+            var t = null;
+            for(var i=0;i<aLi.length;i++) {
+                aLi[i].onmousemove = function () {
+                    t = this;
+                    f1();
+                    //或者
+                    //this.getElementsByTagName('div')[0].style.display='block';
+                };
+                aLi[i].onmouseout= function () {
+                    this.getElementsByTagName('div')[0].style.display='none';
+                };
+            }
+            function f1(){
+                //this,这里的this指的是window
+                //alert(this);
+                t.getElementsByTagName('div')[0].style.display='block';
+            }
+        };
+    </script>
+</head>
+<body>
+    <ul>
+        <li>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+    </ul>
+</body>
+</html>

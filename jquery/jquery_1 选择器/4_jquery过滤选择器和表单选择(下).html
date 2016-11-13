@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    属性选择器
+        [attr]选择拥有此属性的选择器
+        [attr==value]选择指定属性值的选择器
+        [attr1][attr2][attr3]符合属性选择器
+        其他:见API(较为少用)
+    <!--<p title="js" myAttr="myattr3">jsjsjsjsjsjsjsjsjsjssjas</p>-->
+    <!--<div title="language">div里的标签文字</div>-->
+    <!--<p myAttr="myattr">这是自定义的标签也可以获取到</p>-->
+    <!--<p myAttr="myattr2">这是自定义的第二个</p>-->
+    <script>
+        $("p[title=js]").css("background","red");
+        $("p[myAttr=myattr]").css("background","green");
+        $("p[myAttr]").css("background","gray");
+        $('p[myAttr][title]').css("background","yellow");
+    </script>
+
+    子元素选择器（类似CSS3中新增选择器）
+        :first-child            选择父元素第一个子元素
+        :last-child             选择父元素最后一个子元素
+        :nth-child()            (表达式)选择氟元素中第X个元素，X由表达式决定   (索引从1开始)
+        :only-child             选择元素中只包含一个子元素的元素
+
+        :first-of-type          选取所有相同元素的第一个兄弟元素
+        :last-of-type           选取所有相同元素的最后一个兄弟元素
+
+        :nth-last-child()       (表达式)选取所有他们父元素的第N个子元素，计数从最后一个元素开始到第一个
+
+        :only-of-type()
+        :nth-of-type()
+        :nth-last-of-type()
+    <!--<div id="a">-->
+        <!--<p>p1</p>-->
+        <!--<p>p2</p>-->
+        <!--<p>p3</p>-->
+        <!--<p>p4</p>-->
+        <!--<p>p5</p>-->
+    <!--</div>-->
+    <script>
+        $("div p:first-child").css("background","red");
+
+        $("div p:nth-child(2n)").css("background","green");
+//        $("div p:nth-child(odd)").css("background","green"); 0既是偶数也是奇数
+    </script>
+
+    表单元素选择器
+        :button
+        :checkbox
+        :checked
+        :disabled
+        :enabled
+        :focus
+        :file
+        :image
+        :input
+        :password
+        :radio
+        :reset
+        :selected
+        :submit
+        :text
+    <!--<form action="">-->
+        <!--<input type="hidden" value="隐藏">-->
+        <!--<input type="text" value="文本框">-->
+        <!--<input type="password" value="密码框">-->
+        <!--<input type="button" value="按钮">-->
+        <!--<input type="submit" value="提交">-->
+        <!--<input type="radio" value="单选按钮">-->
+        <!--<input type="checkbox" value="复选框">-->
+        <!--<input type="reset" value="重置">-->
+        <!--<input type="file" value="文件">-->
+        <!--<input type="image" src="">-->
+        <!--<textarea cols="30" rows="10">文本域</textarea>-->
+        <!--<select>-->
+            <!--<option value="1111">1111</option>-->
+            <!--<option value="2222">2222</option>-->
+            <!--<option value="3333">3333</option>-->
+        <!--</select>-->
+    <!--</form>-->
+    <script>
+        alert($(":input").length);
+        $(":text").css("background","red");
+        $(":password").css("background","green");
+        $(":hidden").css("display","block");
+    </script>
+    表单属性选择器(全都可以用属性选择器选择到)
+        enabled  选择所有可用元素
+        disabled 选择所有不可用元素
+        checked  选择所有选择的元素
+        selected 选择所有被选择的选项元素(指选项元素)
+        focus    选择当前获取焦点的元素
+    <input type="text" disabled="disabled" value="不能修改的文本框">
+    <input type="text" value="可以修改的文本框">
+    <input type="checkbox" value="111" checked="checked">
+    <input type="checkbox" value="222">
+    <input type="checkbox" value="333">
+    <select>
+        <option value="1">1</option>
+        <option value="2" selected="selected">2</option>
+        <option value="3">3</option>
+    </select>
+    <script>
+        $("input:disabled").css("background","red");
+        //上等同
+//        $("input[disabled]").css("background","red");
+
+        alert($("input:checked").val());
+
+        alert($(":selected").val());
+        //等同于
+        $("select option:selected").val();
+    </script>
+</body>
+</html>

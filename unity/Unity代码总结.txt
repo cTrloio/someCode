@@ -1,0 +1,1496 @@
+							Unity常用代码总结
+
+/*****************************************************************************************************************/
+
+//	部分JS代码  部分C#代码  自行区分
+//	大部分代码忽略头文件、变量声明等
+
+/*****************************************************************************************************************/
+	//变量声明
+		var speed : int =5;	
+		var newobject:Transform;
+
+	//获取水平垂直轴
+		var x:float =Input.GetAxis("Horizontal")*Time.deltaTime*speed;
+		var z:float =Input.GetAxis("Vertical")*Time.deltaTime*speed;
+
+	//移动功能
+		transform.Translate(x,0,z);
+
+	//开火功能
+		if(Input.GetButtonDown("Fire1"))
+		{
+			var n:Transform = Instantiate(newobject,transform.position,transform.rotation);
+			var fwd:Vector3 = transform.TransformDirection(Vector3.forward);
+			n.rigidbody.AddForce(fwd*3800);	
+		}
+	//旋转功能
+		if(Input.GetKey(KeyCode.Q))
+		{
+			transform.Rotate(0,-25*Time.deltaTime,0,Space.Self );
+		}
+		if(Input.GetKey(KeyCode.E))
+		{
+			transform.Rotate(0,25*Time.deltaTime,0,Space.Self );
+		}
+		if(Input.GetKey(KeyCode.Z))
+		{
+			transform.Rotate(-25*Time.deltaTime,0,0,Space.Self );
+		}
+		if(Input.GetKey(KeyCode.C))
+		{
+			transform.Rotate(25*Time.deltaTime,0,0,Space.Self );
+		}
+	
+		//键盘输入keyCode
+
+		字母a-z		··············· A、B、C、---Z
+
+		数字0-9		··············· Alpha0~Alpha9
+
+		功能F1-F12	··············· F1~F12
+
+		退格键		··············· Backspace
+
+		回车键		··············· Return
+
+		空格键		··············· Space
+
+		ESC键		··············· Esc/Escape
+
+		Tab键		··············· Tab
+
+		上下左右方向键	··············· UpArrow、DownArrow、LeftArrow、RightArrow
+
+		左右shift键	··············· LeftShift、RightShift
+
+		左右Ctrl键	··············· LeftCtrl、RightCtrl
+
+		左右Alt键	··············· LeftAlt、RightAlt
+
+	//升高降低镜头
+		if(Input.GetKey(KeyCode.H)){
+			transform.Translate(0,5*Time.deltaTime,0);
+		}
+		if(Input.GetKey(KeyCode.N)){
+			transform.Translate(0,-5*Time.deltaTime,0);
+		}
+
+
+	//使用Instantiate(要生成的物体,生成的位置,生成物体的旋转角度)生成物体。 *********************JS代码
+		var n:Transform =Instantiate(newobject,transform.position,transform.rotation);
+
+
+	//使用Instantiate							*********************C#代码
+		public GameObject a;
+		public Transrorm b;
+		public Rigidbody c;
+		Object		g1=Instantiate(a,Vector3.zero,Quaternion.identity) as Object;
+		GameObject 	g2=Instantiate(a,Vector3.zero,Quaternion.identity) as GameObject 
+		Transrorm 	g3=Instantiate(b,Vector3.zero,Quaternion.identity) as Transrorm 
+		Rigidbody 	g4=Instantiate(c,Vector3.zero,Quaternion.identity) as Rigidbody 
+
+	//实例化更多通常用于实例投射物（如子弹、榴弹、破片、飞行的铁球等），AI敌人，粒子爆炸或破坏物体的替代品。
+
+		C# JavaScript using UnityEngine;
+		using System.Collections;
+
+			public class example : MonoBehaviour {
+				public Rigidbody projectile;
+				void Update() {
+					if (Input.GetButtonDown("Fire1")) {
+						Rigidbody clone;
+						clone = Instantiate(projectile, transform.position, transform.rotation);
+						clone.velocity = transform.TransformDirection(Vector3.forward * 10);//velocity速度
+					}
+				}
+			}
+
+
+	//物体方向转变及给力：
+		var fwd:Vector3 = transform.TransformDirection(Vector3.forward);
+		n.rigidbody.AddForce(fwd*1500.0);
+
+
+	//碰撞后3秒消失
+		function OnCollisionStay(conInfo:Collision){
+			yield WaitForSeconds(3.0);
+			Destroy(gameObject);
+		}
+
+
+	//把物体赋给变量
+	//a、拖拽法
+	//b、代码法：
+		var newobject=GameObject.Find("cube1").transform;
+ 
+
+/*****************************************************************************************************************/
+
+	
+	//跟随（注视）物体：(脚本宿主物体跟随-target引用物体)
+	Follow.js
+		transform.LookAt(target);
+
+
+	//监视跳跃键（改变注视物体）：
+	Switch.js
+		var switchToTarget: Transform;
+		function Update () {
+			if (Input.GetButtonDown("Jump")){
+				GetComponent(Follow).target = switchToTarget;
+				//上文Follow.js
+			}
+		}
+	
+	//代码寻找物体赋值
+		
+		var newTarget:Transform = GameObject.FindWithTag("Cube1").transform;
+
+		var newTarget:Transform = GameObject.Find("Cube1").transform;
+	
+		
+	//另一种使物体移动的方法：
+		//aaaaa预制
+		if(Input.GetButtonDown("Fire1")){
+			var clone:Rigidbody;
+			clone=Instantiate(aaaaaa,transform.position,transform.rotation);
+			clone.velocity=transform.TransformDirection(Vector3.forward*10);
+		}
+	//Velocity代表子弹的速度，Vector3.forward是指子弹向z轴方向发射，现在是乘以10，改为乘以20，速度就会加快
+	
+
+	//另一种监视空格键方法：
+		if(Input.GetKeyDown(KeyCode.Space)){
+			var clone:Rigidbody;
+			clone=Instantiate(projectile,transform.position,transform.rotation);
+			clone.velocity=transform.TransformDirection(Vector3.forward*10);
+		}
+
+	//按下鼠标左键执行（脚本放在谁身上，点谁才管用）
+		function OnMouseDown(){...}						
+
+
+	//松开鼠标左键执行
+		function OnMouseUp(){...}			
+
+
+	//触发式碰撞检测 需要勾选IsTrigger属性 接触
+
+		function OnTriggerEnter (other : Collider) {}	
+				
+	//穿过中
+
+		function OnTriggerStay (other : Collider) {}	
+					
+	//穿过后
+
+		function OnTriggerExit (other : Collider) {}	
+
+	//other碰撞检测	
+				
+		var lastCollider: Collider;
+		
+		function OnCollisionEnter( collisionInfo: Collision ) {
+			if(collision.collider.tag/name/....)
+			lastCollider= collisionInfo.other;
+		}
+
+	//光线碰撞检测
+		
+		public Transform targetObject=null;
+		void Update()
+		{	
+			GetComponent<NavMeshAgent>().destination=targetObject.position;
+			
+			Ray ray=Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if(Physics.Raycast(ray,out hit,100))
+			{
+				print("撞到了一些东西");
+				targetObject=hit.transform;
+			}
+		}
+
+	
+/*****************************************************************************************************************/
+
+	//Random类
+
+		成员变量
+
+			seed			随机数生成器种子
+
+			value			返回一个0~1之间随机浮点数 包含0和1
+
+			insideUnitSphere	返回半径为1的球体内的一个随机点
+
+			insideUnitCircle	返回半径为1的圆形内的一个随机点
+
+			onUnitSphere		返回半径为1的球面内的一个随机点
+
+			rotation		返回一个随机旋转
+
+			rotationUnitform	返回一个均匀分布的随机旋转
+
+		成员函数
+
+			Range(min.max);		返回min和max之间的一个随机浮点数 包含两者
+
+	//Mathf类
+
+		成员变量
+
+			PI			π，3.14159265358979
+
+			Infinity		正无穷大
+
+			NegativeInfinity	负无穷大
+
+		成员函数
+
+			Sqrt			平方根
+
+			Abs			绝对值
+
+			Ceil（f）		返回大于或等于f的最小整数
+
+			Floor(f)		返回小于或等于f的最大整数
+
+			Clamp(float value,float min,float max)	限制value的值在min和max之间，小于min返回min，大于mxa返回max
+
+	//Transform类
+
+		重要函数
+
+			TransformDirection		将一个方向从局部坐标系变换到世界坐标系
+
+			InverseTransformDirection	将一个方向从世界坐标系变换到局部坐标系
+
+			TransformPoint			将一个位置从局部坐标系变换到世界坐标系
+
+			InverseTransformPoint		将一个位置从世界坐标系变换到局部坐标系
+
+			RotateAround			按给定轴和旋转角度进行旋转
+
+	//Time类
+			
+		重要函数
+
+			DateTime.Now.ToString(); // 2008-9-4 20:02:10
+
+			DateTime.Now.ToLocalTime().ToString(); // 2008-9-4 20:12:12//获取本地日期
+
+			DateTime.Now.ToLongDateString().ToString(); // 2008年9月4日
+
+			DateTime.Now.ToShortDateString().ToString(); // 2008-9-4
+
+			DateTime.Now.ToString("yyyy-MM-dd"); // 2008-09-04
+
+			DateTime.Now.Date.ToString(); // 2008-9-4 0:00:00
+
+
+/*****************************************************************************************************************/
+
+	//GUI组件
+
+		文本和图片
+			Texture2D ph;
+			GUI.Lable(new Rect(x,y,w,h),"str"/ph);
+
+		图形框
+			GUI.Box(new Rect(x,y,w,h),"str");
+
+		按钮、单机响应事件
+			Texture ph;
+			GUI.Button(new Rect(x,y,w,h),ph/"str");
+
+		处理持续按下事件按钮
+			Texture ph;
+			GUI.RepeatButton(new Rect(x,y,w,h),ph/"str");
+
+		单行文本输入框
+			String str="输入...";
+			str=GUI.TextField(new Rect(x,y,w,h),str,20);
+
+		密码输入框
+			String str="输入...";
+			str=GUI.PasswordField(new Rect(x,y,w,h),str,"*"[0],20);
+
+		多行文本输入框
+			String sre="asdasd\nasdasd";
+			str=GUI.TextArea(new Rect(x,y,w,h),str,200);
+
+		开关
+			Texture ph;
+			Boolean bool;
+			bool=GUI.Toggle(new Rect(x,y,w,h),bool,"str"/ph);
+
+		工具条
+			int toolInt=0;
+			String[] toolStr={"Toolbar1","Toolbar2","Toolbar3"};
+			toolInt=GUI.Toolbar(new Rect(x,y,w,h),toolInt,toolStr);
+
+		区域控制滑动
+			Vector2 sp=Vector.zero;//初始滚动位置
+			sp=GUI.BeginScrollView(new Rect(x,y,w,h),sp,new Rect(x,y,w,h));//前面的Rect为可视大小,后面Rect为总大小
+					...
+					...GUI.something;;
+					...
+			GUI.EndScrollView();
+
+		水平方向滑动条
+		垂直方向滑动条
+			float hsv=0.0f;
+			hsv=GUI.HorizontalSlider(new Rect(x,y,w,h),hsv,0.0,10.0);
+			float vsv=0.0f;
+			vsv=GUI.VerticalSlider(new Rect(x,y,w,h),vsv,0.0,10.0);
+
+		水平方向滚动条
+		垂直方向滚动条
+			float hsv=0.0f;
+			hsv=GUI.HorizontalSliderbar(new Rect(x,y,w,h),hsv,1.0,0.0,10.0);
+			float vsv=0.0f;
+			vsv=GUI.VerticalSliderbar(new Rect(x,y,w,h),vsv,1.0,0.0,10.0);
+
+		窗口
+			Rect windowRect=new Rect(x,y,w,h);
+			windowRect=GUI.Window(0,windowRect,windowFunction,"str");
+			
+			void windowFunction(int windowId)
+			{	
+				GUI.something;;
+				GUI.DragWindow(new Rect(0,0,w,h/10));
+			}
+
+
+
+/*****************************************************************************************************************/
+
+
+	//销毁游戏物体
+		Destroy (gameObject);
+
+	//从游戏物体删除该脚本实例
+		Destroy (this);
+
+	//从游戏物体删除刚体
+		Destroy (rigidbody);
+
+	//加载物体5秒后销毁游戏物体
+		Destroy (gameObject, 5);
+
+	//当按下Ctrl将从游戏物体删除名为FooScript的脚本
+		function Update () {
+			if (Input.GetButton ("Fire1") && GetComponent (FooScript))
+			Destroy (GetComponent (FooScript));
+		}
+	//生命周期
+		1、function Update () {} 正常更新，用于更新逻辑。此方法每帧都会由系统自动调用一次。
+		2、function LateUpdate () {} 推迟更新，此方法在Update() 方法执行完后调用，同样每一帧都调用。
+		3、function Awake () {} 脚本唤醒，此方法为系统执行的第一个方法，用于脚本的初始化，在脚本的生命周期中只执行一次。
+		4、function FixedUpdate () {} 固定更新。固定更新常用于移动模型等操作。
+		5、function Start () {} 此方法在Awake() 方法之后、Update()方法之前执行，并且只执行一次。
+		6、function OnDestroy () {} 当前脚本销毁时调用。
+		7、function OnGUI () {} 绘制界面，每一帧都调用，用来绘制界面的。
+
+/*****************************************************************************************************************/
+
+
+	//几个函数：
+		Update：
+			这个函数在渲染一帧之前被调用。这里是大部分游戏行为代码被执行的地方。
+		FixedUpdate：
+			这个函数在每个物理时间步被调用一次。FixedUpdate被调用的频率是由在菜单选项
+			Edit >Project Settings >Time中的固定时间间隔所指定的并且你也能改变它。
+
+
+	//如果想随着时间的变化增加关照的范围，可以用下面的代码实现：以2单位/秒改变半径。
+		Function Update() {
+			light.range= 2.0*Time.deltaTime;
+		}
+
+
+	//当通过力处理刚体的时候，通常不必使用Time.deltaTime，因为引擎已经为你考虑到了这一点。
+	//Time.time 游戏从开始到现在经历的时间（秒）  Time.deltaTime上一帧所耗费的时间（秒）
+
+
+	//移动所有的子物体，向上移动10个单位
+		for (varchild : Transform in transform) {
+			child.Translate(0, 1, 0);
+		}
+
+
+	// 如果另一个碰撞物体也是刚体，给其加上一个力。
+		function OnTriggerStay( other : Collider) {
+			if (other.rigidbody) {
+				other.rigidbody.AddForce(0, 2, 0);
+			}
+		}
+
+
+	//一种类型的所有脚本。
+	//使用Object.FindObjectsOfType找到所有具有相同类或脚本名称的物体，
+	//或者使用Object.FindObjectOfType找到这个类型的第一个物体。
+	// 找到场景中可以附加到任意一个游戏物体上的OtherScript
+		function Start (){
+			var other : OtherScript=FindObjectOfType(OtherScript);
+			other.DoSomething();
+		}
+
+
+	//计算两物体距离：
+		var enemy : Transform;
+		function Update() {
+			if ( Vector3.Distance( other.position, transform.position) < 10 ) {
+				print("I sense the enemy is near!");
+			}
+		}
+
+
+	//可以用static关键字创建全局变量。下面创建了一个全局变量。
+
+	//可以在脚本内部像访问普通变量一样访问它
+		static varsomeGlobal= 5；
+			print(someGlobal);
+			someGlobal= 1;
+
+	//如果是另一个脚本访问它，只需要使用这个脚本名称加上一个点和全局变量名。
+		print(TheScriptName.someGlobal);
+		TheScriptName.someGlobal= 10;
+
+/*****************************************************************************************************************/
+	
+	//设置活动性质
+		GameObject a;
+		a.SetActive(true);
+		Debug.log(a.activeSelf);//自己本身
+		Debug.log(a.activeInHierarchy);//父容器
+
+
+	//创建一个简单物体
+		GameObject g1=new GameObject();
+		g1.AddComponent<Rigidbody>();
+
+		GameObject g2=new GameObject("G2");
+		g2.AddComponent<FixedJoint>();
+
+		GameObject g3=new GameObject("G3",typeof(Rigidbody),typrof(FixedJoint),.....);
+		
+
+	//检测鼠标按键
+
+		if(Input.GetMouseButtonDown(0/1/2)){
+			//print(0是左键，1是右键，2是中建);
+			print(Input.mousePosition);
+		}
+		if(Input.GetMouseButton(0/1/2)){
+			//区别在于这个方法只要不抬起按键就会一直检测（一直print()）而down只执行一次print();
+		}
+		
+	//获取鼠标横轴 纵轴
+
+		float speed =5.0f;
+		float h=speed*Input.GetAxis("Mouse X");
+		float v=speed*Input.GetAxis("Mouse Y");
+		transform.Rotate(v,h,0);
+
+
+	//检测鼠标滚轮
+		if(Input.GetAxis("Mouse ScrollWheel"))
+		{
+			float a+=Input.GetAxis("Mouse ScrollWheel");
+			//执行功能
+		}
+
+
+	//跳转Scene
+		Applocation.LoadLevel("Scene名");//记得发布设置AddScene
+
+	
+	//场景之间信息传递
+
+		scene1中：
+			void Updata(){
+				if(Input.GetMouseDown(0))
+				{
+					PlayerPrefs.SetString("testStr","a data form scene1");
+					PlayerPrefs.SetInt("testInt",0);
+					PlayerPrefs.SetFloat("testFloat",0.0f);	
+					Applocation.LoadLevel("scene2");
+				}
+			}
+		scene2中：
+			public string testStr1;
+			public string testInt1;
+			public string testFloat1;
+			void Start()
+			{
+				testStr1=PlayerPrefs.GetString("testStr","default");
+				//*********
+				testInt1=PlayerPrefs.GetInt("testInt",1).ToString();
+				//*********
+				testFloat1=PlayerPrefs.GetFloat("testFloat",1.0f).ToString();
+			}
+		
+/*****************************************************************************************************************/
+	
+	//GUI某些组建如果需要点击后产生一次反应  是需要一个变量去控制 否则会一直执行
+
+	//GUI皮肤       GUI.skin=myGUISkin;    
+
+	//本地时间	System.DateTime.Now;
+
+	//固定时间	System.DateTime.Year/Month/Day/Hour/Minute/Second；---------年月日时分秒
+
+
+
+	//协同程序
+	//赋脚本物体经过两秒才显示
+		void Start()
+		{	
+			print("开始协同程序---------------");
+			StartCoroutine(funHd);
+			print("执行顺序2");
+		}
+		IEnumertor funHd()
+		{
+			print("执行顺序0");
+			this.gameObject.renderer.enabled=false;
+
+			print("执行顺序1");
+			yield return new WaitForSeconds(2.0f);
+
+			print("执行顺序3");
+			this.gameObject.renderer.enabled=true;
+			StartCoroutine(funHd);
+		}
+	
+	
+
+	//背景滚动*******************************************************************************水平滚动*********
+
+	using UnityEngine;
+	using System.Collections;
+
+	public class BackGroundCon : MonoBehaviour {//脚本依次挂在几张图片上面   可将摄像机和主角绑定在一起，主角有速度直行。。
+
+		//private Vector3 initial_position;	
+		
+		private GameObject	main_camera = null;
+		
+		public static float	WIDTH = 10.0f*4.0f;//背景组件宽度（一个）
+		
+		public static int	MODEL_NUM = 3;//背景图片数量
+	
+	void	Start() 
+	{
+		this.main_camera = GameObject.FindGameObjectWithTag("MainCamera");//可能需要另外的控制摄像机代码
+		//this.initial_position = this.transform.position;
+		//SceneControl.IS_DRAW_DEBUG_FLOOR_MODEL; 此值默认false 可能在我的游戏里没有意义
+		//this.GetComponent<Renderer> ().enabled = false;
+	}
+	void	Update()
+	{
+		//#if true
+		float	total_width = BackGroundCon.WIDTH*BackGroundCon.MODEL_NUM;	//所有背景图片的宽度
+		
+		Vector3	floor_position = this.transform.position;			//背景组件的位置
+		
+		Vector3	camera_position = this.main_camera.transform.position;		//摄像机的位置
+		
+		if(floor_position.x + total_width/2.0f < camera_position.x) {		//摄像机超过下一个组件中间点时往前移动
+			
+			floor_position.x += total_width;
+			
+			this.transform.position = floor_position;
+		}
+		if(camera_position.x < floor_position.x - total_width/2.0f) {
+			
+			floor_position.x -= total_width;
+			
+			this.transform.position = floor_position;
+		}
+	}
+}
+
+
+
+
+
+
+	//另一种背景滚动的改进*******************************************改良版********************************
+
+using UnityEngine;
+using System.Collections;
+
+public class FloorControl : MonoBehaviour {
+	
+	private Vector3	initial_position;
+
+	private GameObject	main_camera = null;
+	
+	public	static float	WIDTH = 10.0f*4.0f;
+	
+	public static int	MODEL_NUM = 3;
+
+	void	Start() 
+	{
+		this.main_camera = GameObject.FindGameObjectWithTag("MainCamera");
+		
+		//******解释同上*****
+		//this.initial_position = this.transform.position;				
+		//this.GetComponent<Renderer>().enabled = SceneControl.IS_DRAW_DEBUG_FLOOR_MODEL;
+	}
+	void	Update()
+	{
+
+		float		total_width = FloorControl.WIDTH*FloorControl.MODEL_NUM;
+		
+		Vector3		camera_position = this.main_camera.transform.position;
+		
+		float		dist = camera_position.x - this.initial_position.x;
+		
+		int		n = Mathf.RoundToInt(dist/total_width);	//移动距离再除以背景的整体宽度，再四舍五入
+									//等同于Mathf.FloorToInt(dist/total_width+0.5f);	
+		Vector3		position = this.initial_position;	//背景组件将在total_width的 n 倍距离位置出现
+		
+		position.x 	+= n*total_width;
+		
+		this.transform.position = position;
+	}
+}
+
+
+
+/***********************************************************************************************************************/
+
+
+	//当游戏对象跑出画面外时被调用的方法
+		
+		void OnBecameInvisible()
+		{
+			Destroy(this.gameObject);//销毁本物体
+		}
+
+	
+
+	//Inspector面板 Rigidbody组件 Constraints标签下的 
+
+		Freeze Position 锁定XYZ轴不能移动 
+		
+		Freeze Rotation 锁定XYZ轴不能旋转
+
+
+
+	//小技巧：
+	//修改刚体所受重力 修改摄像机深度  为物体添加物理材质等  DeBug.Break();暂停游戏运行 DeBug.drawLine(x,y,color)画调试线
+
+	//无关移动的游戏暂停可用Time.timeScale=0;
+
+	
+
+
+//*******************************************************读取TEXT地图信息**************详见随书实例第三章***************//
+
+using UnityEngine;
+using System.Collections;
+
+public class NewBehaviourScript : MonoBehaviour {
+	private MapData m_mapData;
+	public TextAsset m_defaultMap;		//地图文件
+	private const int MAP_ORIGIN_X = 100;
+	private const int MAP_ORIGIN_Z = 100;
+	struct MapData {
+		public int width;
+		public int length;
+		public int offset_x;    
+		public int offset_z; 
+		public char[,] data;
+		public float[,] height;
+		public int[,] gemParticleIndex;
+	};
+	void Start () {
+
+	}
+	void Update () {
+		LoadFromAsset (m_defaultMap);
+	}
+
+	private void LoadFromAsset(TextAsset asset)
+	{
+		m_mapData.offset_x = MAP_ORIGIN_X;
+		m_mapData.offset_z = MAP_ORIGIN_Z;
+		
+		if (asset != null) {
+			
+			string txtMapData = asset.text;
+
+			System.StringSplitOptions	option = System.StringSplitOptions.RemoveEmptyEntries;
+
+			string[] lines = txtMapData.Split(new char[] {'\r','\n'},option);
+
+			char[] spliter = new char[1] {','};
+
+			string[] sizewh = lines[0].Split(spliter,option);
+			m_mapData.width = int.Parse(sizewh[0]);
+			m_mapData.length = int.Parse(sizewh[1]);
+			
+			char[,] mapdata = new char[m_mapData.length,m_mapData.width];
+			
+			for (int lineCnt = 0; lineCnt < m_mapData.length; lineCnt++) {
+
+				if (lines.Length <= lineCnt+1)
+					break;
+
+				string[] data = lines[m_mapData.length-lineCnt].Split(spliter,option);
+				
+				for (int col = 0; col < m_mapData.width; col++) {
+					
+					if (data.Length <= col)
+						break;
+					
+					mapdata[lineCnt,col] = data[col][0];
+					print (mapdata[lineCnt,col]);
+				}
+			}
+			m_mapData.data = mapdata;
+		
+		} else {
+			Debug.LogWarning("Map data asset is null");
+		}
+	}
+}
+
+
+
+//************************示例地图
+
+11,12,,,,,,,,,,,,,,,
+
+*,*,*,*,*,*,*,*,*,*,*
+*,c,c,c,c,c,c,c,c,c,*
+*,c,*,*,*,*,*,*,*,c,*
+*,c,c,c,c,p,c,c,c,c,*
+*,c,*,c,*,s,*,c,*,c,*
+*,c,*,c,*,c,*,c,*,c,*
+*,c,c,c,*,c,*,c,c,c,*
+*,*,*,c,*,c,*,c,*,c,*
+*,c,c,c,*,c,*,c,c,c,*
+*,c,*,*,*,c,*,c,*,c,*
+*,c,c,c,c,c,c,c,c,1,*
+*,*,*,*,*,*,*,*,*,*,*
+
+p代表人物
+c代表空位
+s代表宝剑
+1数字1代表怪物
+*代表墙壁
+
+
+
+//*****************************************************Vector3总结*******************************************************//
+
+
+
+	（1）normalized	单位化向量
+		
+		Vectot3 v1=new Vector3(1.0f,2.0f,3.0f);					**********属性
+
+		Vector3 v2=v1.normalized;	//v2变为（0.3，0.5，0.8）
+
+		//相当于==  不改变v1值
+		
+		Vector3 v2=Vector3.Normalized(v1);
+	
+		//改变v1本身值
+		
+		v1.Normalized();	
+		
+		
+	（2）sqrMagnitude 模长平方	//Magnitude 模长（使用开方运算，较耗资源）	**********属性
+
+		Vectot3 v1=new Vector3(3.0f,4.0f,5.0f);
+
+		Vectot3 v2=new Vector3(1.0f,2.0f,8.0f);
+
+		if(v2.sqrMagnitude >v1.sqrMagnitude )	//true
+		{
+			return true;
+		}
+
+
+	（3）Scale 向量放缩								**********实例方法
+		
+		Vectot3 v1=new Vector3(3.0f,4.0f,5.0f);
+
+		Vectot3 v2=new Vector3(1.0f,2.0f,8.0f);
+		
+		//v2原来值不变
+		v1.Scale（v2）;				//Vectot3 v1=(v1.x*v2.x,	v1.y*v2.y,	v1.z*v2.z);
+		
+		//v1v2原来值都不变
+		Vectot3 v3=Vectot3 .Scale(v1,v2); 	//Vectot3 v3=(v1.x*v2.x,	v1.y*v2.y,	v1.z*v2.z);
+
+
+	（4）Angle 求两个向量夹角							**********静态方法
+
+		Vectot3.Angle(Vectot3(x,y,z),Vectot3（m,n,q）);
+		
+		//返回角度，在[0,180]范围  其中有一个角度为Vectot3.zero 返回值为90
+
+	
+	（5）ClampMagnitude 向量长度							**********静态方法
+
+		Vectot3 v1=Vectot3.ClampMagnitude (Vectot3 vec,float maxLength);
+			
+		//返回和vec相同方向的向量  长度受maxLength限制
+
+		//maxLength大于vec模长时 返回= vec 模长？
+
+		//maxLength小于vec模长时 返回= maxLength 模长？
+		
+
+	（6）Cross 向量差乘								**********静态方法
+
+		
+		Vectot3 v1=new Vector3(3.0f,4.0f,5.0f);
+
+		Vectot3 v2=new Vector3(1.0f,2.0f,8.0f);
+
+		Vectot3 v3=Vector3.Cross(v1,v2);
+
+		Debug.DrawLine(Vectot3.zero,v1,Color.Bule);
+
+		Debug.DrawLine(Vectot3.zero,v2,Color.Green);	
+
+		Debug.DrawLine(Vectot3.zero,v3,Color.Red);
+
+		//返回的线始终与v1 和 v2向量垂直
+		//v1和v2可以是任何角度， v1 v2重合 v3在0，0，0
+
+		//计算 v3=v1*v2；v1 v2夹角角度e   则满足:
+			//角度满足	v3⊥v1  v3⊥v2
+			//长度满足	模长 |v3|=|v1|*|v2|*sin(e)
+
+
+
+	（7）Dot 向量点乘 用来确定两个物体的相对位置关系				**********静态方法
+
+		Vectot3 a=new Vector3(3.0f,4.0f,5.0f);
+
+		Vectot3 b=new Vector3(1.0f,2.0f,8.0f);
+
+		float   c=Vector3.Dot(a,b);
+
+		//	c=a*b=|a|*|b|*cos(e);
+		//	返回 c>0, 0《e《90	
+		//	返回 c<0, 90《e《180
+
+		//例子：C
+		
+			public Transform A,B;
+			
+			Vector3 A_V,AB_V;
+
+			void Update()
+			{
+				A_V=A.TransformDirection(Vector3.forward);	//将A的自身坐标系的forward向量转向世界坐标系中
+
+				AB_V=B.position-A.position;			//A到B的差向量
+
+				float f=Vector3.Dot(A_V,AB_V);			//重要的是两个参数，才符合下列条件
+
+				if(f>0)
+				{	
+					B在A自身坐标的前方
+				}
+				else if(f<0)
+				{
+					B在A自身坐标的后方
+				}
+				else
+				{
+					B在A自身坐标左或右
+				}
+			}
+		
+
+
+	（8）Lerp 插值计算 可用于敌人追击主角的控制  					**********静态方法
+		
+		//Time.time为从游戏开始到现在运行时间 Time.dalteTime为上一帧到现在的时间
+		//脚本所在物体会在 s 与 e 之间循环移动
+
+		public Transform s,e;
+		Vector3 sv,ev;
+		float speed=0.2f;
+		float lasttime;
+	
+		void Start () {
+			sv = s.position;
+			ev = e.position;
+			lasttime = Time.time;
+		}
+
+		void Update () {
+
+			transform.position = Vector3.Lerp (sv,ev,(Time.time-lasttime)*speed);	//插值计算
+
+			if(transform.position==ev)//循环往复运动
+			{
+				transform.position=sv;	//对调s,e	
+				sv=ev;
+				ev=transform.position;
+
+				transform.position=sv;	//循环
+				lasttime=Time.time;
+			}
+		}
+
+
+
+	（9）MoveTowards 向量插值 	功能同上					**********静态方法
+
+		//基本语法
+
+		public static Vector3 MoveTowards(Vector3 from,Vector3 to,float maxDistanceDelta);
+
+		//例子
+
+		public Transform f,t;
+
+		Vector3 f_v,t_v;
+
+		float speed=5.0f;
+
+		Vector3 res=Vector3.zero;
+
+		void Start()
+		{
+			f_v=f.position;
+
+			t_v=t.position;
+		}
+
+		void Update()
+		{	
+			res=Vector3.MoveTowards(f_v , t_v, Time.time*speed);
+
+			//此点res从 f 到 t 缓缓移动 ，到了t停止
+			//可用调试划线在scene视图中观察
+			//从 000 点画到 res 点，颜色 红色，画线存在 100 秒
+
+			Debug.DrawLine(Vector3.zero，res，Color.Red,100.0f);
+		}
+
+
+
+	（10）OrthoNormalize 两个坐标轴的正交化 暂时没什么卵用				**********静态方法
+
+		public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent);		
+
+		//功能说明
+
+		此方法用于对向量normal进行单位化处理，并对向量tangent进行正交化处理。
+
+		//例如
+
+		Vector3.OrthoNormalize (ref v1,ref v2);
+
+		//向量v1和v2都发生了改变    **** v1执行后为v11，v2执行后为v22 ****
+		
+		//则：	v11=v1.narmalized;
+
+		//	v22 ⊥ v11，v22  模长为1
+
+		//	v1, v2, v11, v22 都在同一平面上
+
+		
+		//此方法无返回值**************************************************************************
+
+
+
+
+		
+	（11）OrthoNormalize 三个坐标轴的正交化 也暂时没什么卵用			**********静态方法
+
+		public static void OrthoNormalize(ref Vector3 normal, ref Vector3 tangent,ref Vector3 binormal);
+		
+		//功能说明
+
+		此方法用于对向量normal进行单位化处理，并对向量 tangent 和 binoemal 进行正交化处理。
+
+		//例如
+
+		Vector3.OrthoNormalize（ref v1,ref v2，ref v3）；
+
+		//则：	v1 和 v2 相应的变化同上
+		
+		//	v3垂直于v1 和 v2 组成的平面
+
+		/*	
+			向量v3变换前后的夹角小于90度，即执行了OrthoNormalize 方法之后，
+			v3的方向可能垂直于v1和v2组成平面的正平面也可能是负平面，
+			到底垂直哪个由初始v3的方向决定
+		*/
+
+
+		//此方法无返回值**************************************************************************
+
+
+
+
+
+
+//*****************************************************GUI简单例子总结*******************************************************//
+
+//							esc暂停游戏功能
+using UnityEngine;
+using System.Collections;
+
+public class testGUI : MonoBehaviour {
+
+	Rect windowRect=new Rect(Screen.width*0.3f,Screen.height*0.2f,440f,250f);
+	bool gameisStop;
+	//public GUISkin mySkin;
+	void Start () {
+		//GUI.skin = mySkin;
+	}
+	void Update () {
+		if(Input.GetKey(KeyCode.Escape))
+		{	
+			gameisStop=true;
+		}
+	}
+	void OnGUI()
+	{	
+		if (gameisStop) {
+			windowRect = GUI.Window (0, windowRect, windowFunction1, "暂停游戏");
+		}
+	}
+	void windowFunction1(int windowId)
+	{	
+		if (GUI.Button (new Rect (110f, 50f, 220f, 50f), "继续游戏")) 
+		{
+			gameisStop=false;
+		}
+		if(GUI.Button(new Rect(110f,150f,220f,50f),"退出游戏"))
+		{
+			gameisStop=false;
+		}
+		GUI.DragWindow(new Rect(0,0,440f,250/10f));
+	}
+}
+
+
+//*****************************************************精彩简单例子总结*************************************************//
+
+
+
+//-------------------------------绘制准星--------------------------------
+using UnityEngine;
+using System.Collections;
+
+public class zxGraphics : MonoBehaviour {
+	public Texture zx;
+	void Start()
+	{
+		Cursor.visible = false;//隐藏鼠标
+	}
+	void OnGUI()
+	{	      
+		Rect re = new Rect (Input.mousePosition.x-(zx.width/2),Screen.height-Input.mousePosition.y-(zx.height/2),zx.width,zx.height);
+		GUI.DrawTexture (re,zx);
+	}
+
+}
+//有时候会报错“意外的符号<内存>”这是Unity BUG, 换行重写就好了
+
+
+
+//-----------------------------关于 开关/活动性 的想法----------------------------------
+
+
+
+	var g:GameObject;
+	var i:int;
+	function OnMouseDown(){
+		i++;
+		if(i%2!=0)
+			g.active=true;
+		else
+			g.active=false;
+	}
+
+
+
+
+//---------------------------------LOGO/图标闪烁/小标题--------------------------------------
+
+
+using UnityEngine;
+using System.Collections;
+
+public class MainBoardTop : MonoBehaviour
+{
+	public Texture2D Logo;
+	public Texture2D SysInfo;
+	public Texture2D FriInfo;
+	public Texture2D IcoHelp;
+	public GUIStyle style;
+	public GUIStyle pathStyle;
+	private bool displaySysLabel = false;
+	private bool displayFriLabel = false;
+	IEnumerator Start()
+	{
+		yield return StartCoroutine(flashSysLabel());
+		yield return StartCoroutine(flashFriLabel());
+	}
+	IEnumerator flashSysLabel()
+	{
+		while(true)
+		{
+			displaySysLabel = true;
+			yield return new WaitForSeconds(0.5f);
+			displaySysLabel = false;
+			yield return new WaitForSeconds(0.5f);
+		}
+	}
+	IEnumerator flashFriLabel()
+	{
+		while(true)
+		{
+			displayFriLabel = true;
+			yield return new WaitForSeconds(0.5f);
+			displayFriLabel = false;
+			yield return new WaitForSeconds(0.5f);
+		}
+	}
+	void OnGUI()
+	{
+		GUI.BeginGroup(new Rect(0, 0, 300, 100));
+		GUI.Button(new Rect(3,5,37,37),Logo,style);
+		GUI.Button(new Rect(45,8,150,15),"test",pathStyle);
+		if(displaySysLabel == true)
+		{
+			GUI.Label(new Rect(45,25,16,16),SysInfo,style);
+		}
+		GUI.Label(new Rect(61,25,16,16),"0",style);
+		if(displayFriLabel == true)
+		{
+			GUI.Label(new Rect(77,25,16,16),FriInfo,style);
+		}
+		GUI.Label(new Rect(93,25,16,16),"0",style);
+		GUI.Label(new Rect(108,25,16,16),IcoHelp,style);
+		GUI.EndGroup();
+	}
+}
+
+
+
+
+
+//--------------------------------GameObject永远面对镜头-----------------------------------------------------
+
+
+	using UnityEngine;
+	using System.Collections;
+
+	public class CameraFacingBillboard : MonoBehaviour
+	{
+		public Camera cameraToLookAt;
+		void Start()
+		{
+			cameraToLookAt = Camera.main;
+		}
+		void Update()
+		{
+			Vector3 v = cameraToLookAt.transform.position - transform.position;
+			v.x = v.z = 0.0f;
+			transform.LookAt(cameraToLookAt.transform.position - v);
+		}
+	}
+
+
+
+
+
+//********************************************************物体朝向鼠标点击位置移动**********************************************************
+
+using UnityEngine;
+using System.Collections;
+ 
+public class testAngle: MonoBehaviour {
+
+	   Vector3 world;										//物体要移动到的位置 （世界坐标系）
+	   float moveSpeed=0;										//物体移动速度
+
+	   void Update(){
+
+		  Vector3 targetposition=Camera.main.WorldToScreenPoint(this.transform.position);	//将物体的世界坐标转换为屏幕坐标
+		  Vector3 mouseposition=Input.mousePosition;						//鼠标在屏幕上的位置坐标
+
+		          if(Input.GetMouseButton(0)){
+			            mouseposition.z=targetposition.z;
+				    //world=Camera.main.ScreenToWorldPoint(mouse position);		//这种情况下 会有穿透现象
+				    world.x=Camera.main.ScreenToWorldPoint(mouseposition).x;
+			            world.z=Camera.main.ScreenToWorldPoint(mouseposition).z;
+				    world.y=this.transform.position.y；
+				    moveSpeed=3;
+			   }
+
+		           if(this.transform.position==world){						//如果物体移动到了鼠标指定的位置 将移动速度设为0
+		                    moveSpeed=0;
+		           }
+
+                 this.transform.LookAt(world);								//物体朝向鼠标对应的位置 （此时的位置为世界坐标系）
+                 this.transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime);
+     	   }
+}    
+
+
+//********************************************************物体朝向鼠标位置**********************************************************
+
+
+using UnityEngine;
+using System.Collections;
+ 
+ public class testAngle: MonoBehaviour {
+
+	        	Vector3 world;										//物体要移动到的位置 （世界坐标系）
+	 
+	         	void Update(){
+
+		                Vector3 targetposition=Camera.main.WorldToScreenPoint(this.transform.position);//将物体的世界坐标转换为屏幕坐标
+	                 
+		                Vector3 mouseposition=Input.mousePosition;					//鼠标在屏幕上的位置坐标
+
+			        mouseposition.z=targetposition.z;
+
+				//world=Camera.main.ScreenToWorldPoint(mouseposition);				//这种情况下 会有穿透现象 或者使用下面三行代码
+
+				world.x=Camera.main.ScreenToWorldPoint(mouseposition).x;
+
+			        world.z=Camera.main.ScreenToWorldPoint(mouseposition).z;
+
+				world.y=this.transform.position.y;
+
+				this.transform.LookAt(world);						//物体朝向鼠标对应的位置 (此时的位置为世界坐标系） 
+             
+		       }
+
+}    
+
+
+
+//*****************************************************文字逐个出现于GUIText中***********************************************************
+
+//给脚本所在物体添加GUI Text组件 用来显示文字
+
+using UnityEngine;
+using System.Collections;
+
+public class PrintMessage : MonoBehaviour {
+	
+	private ArrayList messages = new ArrayList();
+	private bool isPrinting = false;
+	private GUIText subScreenGUIText;
+	const int MAX_ROW_COUNT = 6;
+	
+	private static int		ADDITION_NUM = 1;
+	private static string 	CURSOR_STR = "_";
+	
+	void Start () {
+		
+		subScreenGUIText = GameObject.FindGameObjectWithTag("SubScreenMessage").GetComponent<GUIText>();
+		
+		subScreenGUIText.text = "\n\n\n\n\n\n";
+		
+		SetMessage("STAND BY ALERT.");//这是要显示的文字
+		SetMessage("ENEMY FLEETS ARE APPROACHING.");
+		SetMessage(" ");
+		
+	}
+	void Update () {
+	
+		if ( messages.Count > 0 )
+		{
+			if ( !isPrinting )
+			{
+				isPrinting = true;
+				string tmp = messages[0] as string;
+				messages.RemoveAt(0); 
+				StartCoroutine( "PlayMessage", tmp );
+			}
+		}
+	}
+	
+	public void SetMessage( string message )
+	{
+		messages.Add( message );
+	}
+	
+	IEnumerator PlayMessage( string message )
+	{
+		char[] charactors = new char[256];
+			
+		if ( message.Length > 255 )
+		{
+			message = message.Substring(0, 254);
+		}
+		
+		charactors = message.ToCharArray();
+		
+		string subScreenText = subScreenGUIText.text;
+
+		subScreenText += "\n";
+
+		int	additionNum = ADDITION_NUM + messages.Count;
+
+		for(int i = 0;i < charactors.Length;i += additionNum)
+		{
+			if(subScreenText.EndsWith(CURSOR_STR)) {
+
+				subScreenText = subScreenText.Remove(subScreenText.Length - 1);
+			}
+
+			for(int j = 0;j < additionNum;j++) {
+
+				if(i + j >= charactors.Length) {
+
+					break;
+				}
+
+				subScreenText += charactors[i + j];
+			}
+
+			subScreenText += CURSOR_STR;
+
+			string[] lines = subScreenText.Split("\n"[0]);
+
+			if(lines.Length > MAX_ROW_COUNT) {
+
+				subScreenText = "";
+
+				for(int j = lines.Length - MAX_ROW_COUNT;j < lines.Length;j++) {
+
+					subScreenText += lines[j];
+
+					if(j < lines.Length - 1) {
+
+						subScreenText += "\n";
+					}
+				}
+			}
+
+			subScreenGUIText.text = subScreenText;
+			
+			yield return new WaitForSeconds( 0.001f );
+		}
+
+		if(subScreenText.EndsWith(CURSOR_STR)) {
+
+			subScreenText = subScreenText.Remove(subScreenText.Length - 1);
+
+			subScreenGUIText.text = subScreenText;
+		}
+
+		isPrinting = false;
+	}
+
+}
+
+
+//********************************************迭代递归方法********************************************************************
+
+递归的基本概念:程序调用自身的编程技巧称为递归,是函数自己调用自己.
+
+一个函数在其定义中直接或间接调用自身的一种方法,它通常把一个大型的复杂的问题转化为一个与原问题相似的规模较小的问题来解决,可以极大的减少代码量.递归的能力在于用有限的语句来定义对象的无限集合.
+
+使用递归要注意的有两点:
+
+1)递归就是在过程或函数里面调用自身;
+2)在使用递归时,必须有一个明确的递归结束条件,称为递归出口.
+
+递归分为两个阶段:
+
+1)递推:把复杂的问题的求解推到比原问题简单一些的问题的求解;
+2)回归:当获得最简单的情况后,逐步返回,依次得到复杂的解.
+
+利用递归可以解决很多问题:如背包问题,汉诺塔问题,...等.
+
+斐波那契数列为:0,1,1,2,3,5...
+
+int fib(int n)  
+{  
+   if(0 == n)
+       return 0;  
+   if(1 == n)  
+       return 1;  
+   if(n > 1)  
+       return fib(n-1)+fib(n-2);  
+}  
+
+上面就是一个简单的递归调用了.由于递归引起一系列的函数调用,并且有可能会有一系列的重复计算,递归算法的执行效率相对较低.
+
+
+迭代:利用变量的原值推算出变量的一个新值.如果递归是自己调用自己的话,迭代就是A不停的调用B.
+
+递归中一定有迭代,但是迭代中不一定有递归,大部分可以相互转换.能用迭代的不用递归,递归调用函数,浪费空间,并且递归太深容易造成堆栈的溢出.
+
+//这是递归   
+
+int funcA(int n)  
+{  
+    if(n > 1)  
+       return n+funcA(n-1);  
+    else   
+       return 1;  
+}  
+
+
+//这是迭代   
+int funcB(int n)  
+{  
+    int i,s=0;  
+    for(i=1;i<n;i++)  
+       s+=i;  
+    return s;  
+}  
+//****************************************************************************************************************
+
+ref和out的区别在C# 中，既可以通过值也可以通过引用传递参数。通过引用传递参数允许函数成员更改参数的值，并保持该更改。若要通过引用传递参数， 可使用ref或out关键字。ref和out这两个关键字都能够提供相似的功效，其作用也很像C中的指针变量。它们的区别是：
+
+1、使用ref型参数时，传入的参数必须先被初始化。对out而言，必须在方法中对其完成初始化。
+
+2、使用ref和out时，在方法的参数和执行方法时，都要加Ref或Out关键字。以满足匹配。
+
+3、out适合用在需要retrun多个返回值的地方，而ref则用在需要被调用的方法修改调用者的引用的时候。
+
+注：在C#中，方法的参数传递有四种类型：传值（by value），传址（by reference），输出参数（by output），数组参数（by array）。
+传值参数无需额外的修饰符，
+传址参数需要修饰符ref，
+输出参数需要修饰符out，
+数组参数需要修饰符params。
+
+传值参数在方法调用过程中如果改变了参数的值，那么传入方法的参数在方法调用完成以后并不因此而改变，而是保留原来传入时的值。
+传址参数恰恰相反，如果方法调用过程改变了参数的值，那么传入方法的参数在调用完成以后也随之改变。
+实际上从名称上我们可以清楚地看出两者的含义--传值参数传递的是调用参数的一份拷贝，而传址参数传递的是调用参数的内存地址，该参数在方法内外指向的是同一个存储位置。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

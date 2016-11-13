@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>invalid和valid</title>
+    <style>
+        input[type="email"]:invalid{    /* 输入有误*/
+            color: red;
+        }
+        input[type="email"]:valid{      /* 输入正确*/
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>invalid valid</h1>
+    <form>
+        <input type="email" placeholder="请输入邮箱">
+    </form>
+</body>
+</html>

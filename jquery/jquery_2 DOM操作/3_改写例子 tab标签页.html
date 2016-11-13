@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            margin: 50px;
+        }
+        ul{
+            list-style-type: none;
+            height: 30px;
+        }
+        #ul li{
+            height: 30px;
+            line-height: 30px;
+            padding:  0 15px;
+            border: 1px solid #abcdef;
+            margin-right: 3px;
+            float: left;
+            cursor: pointer;
+        }
+        #ul li.cur{
+            background-color: #abcdef;
+        }
+        #content div{
+            width: 300px;
+            height: 200px;
+            border: 1px solid #abcdef;
+            display: none;
+        }
+        #content div.show{
+            display: block;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+
+    <ul id="ul">
+        <li class="cur">php</li>
+        <li>js</li>
+        <li>ruby</li>
+    </ul>
+    <div id="content">
+        <div class="show">php............介绍</div>
+        <div>js.............介绍</div>
+        <div>ruby...........介绍</div>
+    </div>
+    原生JS实现
+    <!--<script>-->
+        <!--var oul=document.getElementById('ul');-->
+        <!--var ali=oul.getElementsByTagName('li');-->
+        <!--var oDiv=document.getElementById("content");-->
+        <!--var aDiv=oDiv.getElementsByTagName("div");-->
+        <!--for(var i=0;i<ali.length;i++){-->
+            <!--ali[i].index = i;-->
+            <!--ali[i].onclick = function () {-->
+                <!--for(var j=0;j<ali.length;j++){-->
+                    <!--ali[j].className = '';-->
+                    <!--aDiv[j].style.display = "none";-->
+                <!--}-->
+                <!--this.className = "cur";-->
+                <!--aDiv[this.index].style.display = "block";-->
+            <!--}-->
+        <!--}-->
+    <!--</script>-->
+
+    jQuery实现
+        <script>
+            $("#ul li").click(function () {
+                // 1点击切换样式
+                //$(this).addClass("cur").siblings().removeClass("cur");
+                // 2点击切换说明
+                //$("#content>div").eq($(this).index()).show().siblings().hide();
+
+                //写到一行里去
+$(this).addClass("cur").siblings().removeClass("cur").parent().next().children().eq($(this).index()).show().siblings().hide();
+            });
+        </script>
+</body>
+</html>

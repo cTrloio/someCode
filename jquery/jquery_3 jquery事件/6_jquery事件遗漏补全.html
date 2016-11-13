@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    hover(fn1,fn2) 是模拟鼠标进入和鼠标离开事件（mouseenter和mouseleave）
+    trigger()          模拟事件发生
+    triggerHandler()   模拟事件发生,并阻止冒泡
+
+    <p>P标签<a href="#">点击</a></p>
+
+    <script>
+        //hover
+//        $("p").hover(function () {
+//            $(this).css('color',"red");
+//        }, function () {
+//            $(this).css('color',"blue");
+//        });
+
+        //trigger
+//        $('a').click(function () {
+//            alert("我被点击了");
+//        });
+//        $("a").trigger("click");  //自动点击了
+
+        //triggerHandler
+        $('a').click(function () {
+            alert("a被点击了");
+        });
+        $('p').click(function () {
+            alert("p被点击了");
+        });
+//        $("a").trigger("click");
+        $("a").triggerHandler("click");  //自动点击了,并阻止冒泡到父级P上
+    </script>
+</body>
+</html>

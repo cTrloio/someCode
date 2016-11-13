@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>UI元素状态伪类选择器</title>
+    <style>
+        input[type="password"]:active{          /*激活时*/
+            background: #212fff;
+        }
+        input[type="text"]:hover{               /*移动到上面时*/
+            background: #ffa012;
+        }
+        input[type="text"]:focus{               /*获得焦点时*/
+            background: #ff002e;
+        }
+        input.i2[type="password"]:enabled{      /*可用*/
+            background: #53ebff;
+        }
+        input.i3[type="password"]:disabled{     /*不可用*/
+            background: #727272;
+        }
+    </style>
+</head>
+<body>
+    <h1>UI元素状态伪类选择器</h1>
+    <p>就是指定的元素只有某种状态下才起作用，比如鼠标悬浮，默认状态没有作用</p>
+    <h3>hover And hover</h3>
+    <input type="text" placeholder="请键入姓名">
+    <h3>active</h3>
+    <input type="password" placeholder="请键入密码">
+    <h3>enabled</h3>
+    <input type="password" class="i2" placeholder="可用密码框">
+    <h3>disabled</h3>
+    <input type="password" class="i3" placeholder="不可用密码框" disabled>
+
+</body>
+</html>

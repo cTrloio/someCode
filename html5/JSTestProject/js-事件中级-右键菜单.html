@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 100px;
+            height: 130px;
+            position: absolute;
+            background: #cccccc;
+            display:none;
+            border: solid 1px #000000;
+        }
+        li{
+            list-style: none;
+        }
+    </style>
+    <script>
+        document.oncontextmenu= function (ev) {
+            var oEvent=ev||event;
+            var oDiv=document.getElementById('div1');
+            oDiv.style.display='block';
+            oDiv.style.left=oEvent.clientX+'px';
+            oDiv.style.top=oEvent.clientY+'px';
+            return false;
+        }
+        document.onclick= function () {
+            var oDiv=document.getElementById('div1');
+            oDiv.style.display='none';
+        }
+    </script>
+</head>
+<body>
+    <div id="div1">
+        <ul>
+            <li>aaa</li>
+            <li>bbb</li>
+            <li>ccc</li>
+            <li>ddd</li>
+            <li>eee</li>
+        </ul>
+    </div>
+</body>
+</html>

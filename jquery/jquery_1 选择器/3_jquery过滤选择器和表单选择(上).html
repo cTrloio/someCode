@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<style>
+    #go{
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        background: #000;
+        left: 300px;
+        top: 300px;
+    }
+</style>
+<body>
+    基本过滤选择器
+        first：       选取第一个元素
+        last：        选取最后一个元素
+        not()：       选择除指定外的元素
+        even：        偶数选择器
+        odd：         奇数选择器
+        eq()：        选取指定索引的元素
+
+        gt()：        选取大于指定索引的元素
+        it()：        选取小于指定索引的元素
+        header：      选取h1h2h3h4h5h6标签
+        animated：    选取正在执行动画的元素
+        lang()：      语言代码选择器(暂时没什么用 1.9版本新增)
+        root：        根元素选择器(暂时没什么用 1.9版本新增)
+        target：      选择器由文档URL格式化识别码表示的目标元素(暂时没什么用 1.9版本新增)
+
+    <!--<h1>我是H1标签</h1>-->
+        <!--<p><span>我是</span>第<em>000</em>个标签</p>-->
+        <!--<p>我是第111个标签</p>-->
+    <!--<h2>我是h2标签</h2>-->
+        <!--<p class="a">我是第222个标签</p>-->
+        <!--<p>我是第333个标签</p>-->
+        <!--<p>我是第444个标签</p>-->
+        <!--<p>我是第555个标签</p>-->
+    <!--<div id="go"></div>-->
+        <script>
+            $("p:first").css("color","red");
+            $("p :first").css("color","green");
+            $("p:not('.a')").css("color","red");
+            $("p:even").css("background","#f60");
+            $("p:odd").css("background","#5a6");
+            $("p:eq(3)").css("background","gray");
+            $("p:lt(3)").css("background","yellow");
+            $(":header").css("background","yellow");
+
+            $("#go").animate({"left":"600"},1000);
+            $(":animated").css("width","200px");
+        </script>
+
+        内容过滤选择器
+            contains()  选取含有文本内容的元素
+            has()       选取指定元素的元素
+            empty       选择不包含子元素的 或者 空的文本元素
+            parent      选取含有子元素或者文本的元素
+        <!--<p>选取含有文本内容ss的元素</p>-->
+        <!--<p>取指定<strong>元素</strong>的元dd素</p>-->
+        <!--<p></p>-->
+        <!--<p>选取含有子元素或dd者文本的元素</p>-->
+    <script>
+        $('p:contains("ss")').css("background","red");
+       //可以应用为简单搜索
+       // $('p:contains("ss")').show().siblings().hide();
+        $("p:has('strong')").css("background","green");
+        $("p:empty").css("background","red");
+        $("p:parent").css("background","yellow");
+    </script>
+
+    可见性选择器
+        hidden 选取所有不可见元素
+        visible 选择所有可见元素
+    <p style="display: block">可见的变背景红色</p>
+    <p style="display: none">不可见的变为可见</p>
+    <script>
+        $("p:visible").css("background","red");
+        $("p:hidden").css("display","block");
+        //hidden选择器的使用条件
+        //在页面上看不到 && 不占用页面位置的 隐藏元素
+    </script>
+</body>
+</html>

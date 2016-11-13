@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>背景和边框样式-圆角边框</title>
+    <style>
+        div#d1{
+            width: 100px;
+            height: 100px;
+            background-color: #2292ff;
+            border: solid 20px #ff002e;
+            border-radius: 30px 20px;
+        }
+        div#d2{
+            width: 100px;
+            height: 100px;
+            background-color: #ffdd3f;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>背景和边框样式-圆角边框</h1>
+    <P>
+        border-radius：length,length 第一个为左上角和右下角圆角半径 第二个为右上角和左下角圆角半径<br>
+        使用了border-radius 但没有使用border 就会把背景四个角绘制圆角
+    </P>
+    <div id="d1"></div>
+    <div id="d2"></div>
+</body>
+</html>

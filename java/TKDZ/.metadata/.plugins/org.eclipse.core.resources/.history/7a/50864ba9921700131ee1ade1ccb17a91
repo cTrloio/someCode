@@ -1,0 +1,418 @@
+package T1;
+import java.util.*;
+
+class Tank
+{
+	int x=0, y=0;
+	int fangxiang=0;
+	int sudu=5;
+	int color;
+	boolean shengming=true;
+		
+	public int getColor() {
+		return color;
+	}
+	public void setColor(int color) {
+		this.color = color;
+	}
+	public int getSudu() {
+		return sudu;
+	}
+	public void setSudu(int sudu) {
+		this.sudu = sudu;
+	}
+	public int getFangxiang() {
+		return fangxiang;
+	}
+	public void setFangxiang(int fangxiang) {
+		this.fangxiang = fangxiang;
+	}	
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public Tank(int x,int y)
+	{
+		this.x=x;
+		this.y=y;
+	}
+}
+
+class DiTank extends Tank implements Runnable
+{
+	int sudu=1;	
+	int time=0;
+	Vector<Zidan> dzd=new Vector<Zidan>();	
+	Vector<DiTank> dtk=new Vector<DiTank>();
+	
+	public DiTank(int x, int y)
+	{
+		super(x, y);
+	}
+	public void dtkxl(Vector<DiTank> dxl)
+	{
+		this.dtk=dxl;
+	}
+	
+	public boolean huxiangpengzhuang()
+	{
+		boolean b=false;
+		switch(this.fangxiang)
+		{
+		case 0:
+			
+			for(int i=0;i<dtk.size();i++)
+			{
+				DiTank dt=dtk.get(i);
+				
+				if(dt!=this)
+				{
+					if(dt.fangxiang==0||dt.fangxiang==2)
+					{
+						if(this.x>=dt.x && this.x<=dt.x+20 && this.y>=dt.y && this.y<=dt.y+30)
+						{
+							return true;
+						}
+						if(this.x+20>=dt.x && this.x+20<=dt.x+20 && this.y>=dt.y && this.y<=dt.y+30)
+						{
+							return true;
+						}
+					}
+					if(dt.fangxiang==3||dt.fangxiang==1)
+					{
+						if(this.x>=dt.x && this.x<=dt.x+30 && this.y>=dt.y && this.y<=dt.y+20)
+						{
+							return true;
+						}
+						if(this.x+20>=dt.x && this.x+20<=dt.x+30 && this.y>=dt.y && this.y<=dt.y+20)
+						{
+							return true;
+						}
+					}
+				}
+			}
+			break;
+		case 1:
+			for(int i=0;i<dtk.size();i++)
+			{
+				DiTank dt=dtk.get(i);
+				if(dt!=this)
+				{
+				    if(dt.fangxiang==0||dt.fangxiang==2)
+					{
+						if(this.x>=dt.x&&this.x<=dt.x+20&&this.y>=dt.y&&this.y<=dt.y+30)
+						{
+							return true;
+						}
+						//下一点
+						if(this.x>=dt.x&&this.x<=dt.x+20&&this.y+20>=dt.y&&this.y+20<=dt.y+30)
+						{
+							return true;
+						}
+					}
+					if(dt.fangxiang==3||dt.fangxiang==1)
+					{
+						if(this.x>=dt.x&&this.x<=dt.x+30&&this.y>=dt.y&&this.y<=dt.y+20)
+						{
+							return true;
+						}
+						if(this.x>=dt.x&&this.x<=dt.x+30&&this.y+20>=dt.y&&this.y+20<=dt.y+20)
+						{
+							return true;
+						}
+					}
+				}
+			}
+			
+			
+			break;
+		case 2:
+			for(int i=0;i<dtk.size();i++)
+			{
+				DiTank dt=dtk.get(i);
+				if(dt!=this)
+				{
+					if(dt.fangxiang==0||dt.fangxiang==2)
+					{
+						if(this.x>=dt.x&&this.x<=dt.x+20&&this.y+30>=dt.y&&this.y+30<=dt.y+30)
+						{
+							return true;
+						}
+						if(this.x+20>=dt.x&&this.x+20<=dt.x+20&&this.y+30>=dt.y&&this.y+30<=dt.y+30)
+						{
+							return true;
+						}
+					}
+					if(dt.fangxiang==3||dt.fangxiang==1)
+					{
+						if(this.x>=dt.x&&this.x<=dt.x+30&&this.y+30>=dt.y&&this.y+30<=dt.y+20)
+						{
+							return true;
+						}
+						
+						if(this.x+20>=dt.x&&this.x+20<=dt.x+30&&this.y+30>=dt.y&&this.y+30<=dt.y+20)
+						{
+							return true;
+						}
+					}
+				}
+			}
+			break;
+		case 3:
+			for(int i=0;i<dtk.size();i++)
+			{
+				DiTank dt=dtk.get(i);
+				if(dt!=this)
+				{
+					if(dt.fangxiang==0||dt.fangxiang==2)
+					{
+						if(this.x+30>=dt.x && this.x+30<=dt.x+20 && this.y>=dt.y && this.y<=dt.y+30)
+						{
+							return true;
+						}
+						//下点 
+						if(this.x+30>=dt.x && this.x+30<=dt.x+20 && this.y+20>=dt.y && this.y+20<=dt.y+30)
+						{
+							return true;
+						}
+					}
+					if(dt.fangxiang==3||dt.fangxiang==1)
+					{
+						if(this.x+30>=dt.x && this.x+30<=dt.x+30 && this.y>=dt.y && this.y<=dt.y+20)
+						{
+							return true;
+						}
+						if(this.x+30>=dt.x && this.x+30<=dt.x+30 && this.y+20>=dt.y && this.y+20<=dt.y+20)
+						{
+							return true;
+						}
+					}
+				}
+			}
+			
+			break;
+		}		
+		return b;
+	}
+	public void run() 
+	{
+		while(true)
+		{
+		   switch(this.fangxiang)
+		   {
+		    case 0:
+		    	for(int i=0;i<30;i++)
+		    	{
+		    		if(y>0 && !huxiangpengzhuang())
+		    			{y-=sudu;}	
+		    		try {
+		                Thread.sleep(50);
+		            } catch (Exception e){}
+		    	}		    	
+				 break;
+		    case 1:
+		    	for(int i=0;i<30;i++)
+		    	{
+		    		if(x>0 && !huxiangpengzhuang())
+		    			{x-=sudu;}	
+		    		try {
+		                Thread.sleep(50);
+		            } catch (Exception e){}
+		    	}			    	
+		    	break;
+		    case 2:
+		    	for(int i=0;i<30;i++)
+		    	{
+		    		if(y<250 && !huxiangpengzhuang())
+		    			{y+=sudu;}	
+		    		try {
+		                Thread.sleep(50);
+		            } catch (Exception e){}
+		    	}			    	
+				 break;
+		    case 3:
+		    	for(int i=0;i<30;i++)
+		    	{
+		    		if(x<360 && !huxiangpengzhuang())
+		    			{x+=sudu;}	
+		    		try {
+		                Thread.sleep(50);
+		            } catch (Exception e){}
+		    	}		    	
+				 break;	
+				 
+	       }  
+		   	this.fangxiang=(int)(Math.random()*4);
+		   				
+			if(this.shengming==false)
+			{
+				break;
+			}
+            this.time++;
+			
+			if(time%2==0)
+			{
+				if(shengming)
+				{
+					if(dzd.size()<5)
+					{
+						Zidan zd=null;
+						
+						switch(fangxiang)
+						{
+						case 0:
+							zd=new Zidan(x+10,y,0);
+							dzd.add(zd);
+							break;
+						case 1:
+							zd=new Zidan(x,y+10,3);
+							dzd.add(zd);
+							break;
+						case 2:
+							zd=new Zidan(x+10,y+30,2);
+							dzd.add(zd);
+							break;
+						case 3:
+							zd=new Zidan(x+30,y+10,1);
+							dzd.add(zd);
+							break;
+						}
+						Thread t5=new Thread(zd);
+						t5.start();
+				   }
+				}
+			}
+			
+		} 
+	}
+}
+class MyTank extends Tank
+{
+	Vector<Zidan>aa=new Vector<Zidan>();
+	Zidan zd=null;
+	
+	
+	public MyTank(int x,int y)
+	{
+		super(x,y);		
+	}
+	
+	public void fszd()
+	{
+		switch(this.fangxiang)
+		{
+		case 0:
+			zd=new Zidan(x+10,y,0);
+			aa.add(zd);
+			break;
+		case 1:
+			zd=new Zidan(x,y+10,1);
+			aa.add(zd);
+			break;
+		case 2:
+			zd=new Zidan(x+10,y+30,2);
+			aa.add(zd);
+			break;
+		case 3:			
+			zd=new Zidan(x+30,y+10,3);
+			aa.add(zd);
+			break;			
+		}
+		Thread t=new Thread(zd);
+		t.start();
+	}
+	public void xiangshang()
+	{
+		y-=sudu;
+	}
+	public void xiangzuo()
+	{
+		x-=sudu;
+	}
+	public void xiangxia()
+	{
+		y+=sudu;
+	}
+	public void xiangyou()
+	{
+		x+=sudu;
+	}
+}
+
+class Zidan implements Runnable 
+{
+	int x;
+	int y;
+	int fangxiang;
+	int sudu=5;
+	boolean shengming=true;
+	
+	public Zidan(int x,int y,int fangxiang)
+	{
+		this.x=x;
+		this.y=y;
+		this.fangxiang=fangxiang;
+	}
+	public void run() 
+	{	
+		while(true)
+		{
+			try	{
+				Thread.sleep(50);}
+			catch (Exception e) {}
+				
+			switch(fangxiang)
+			{
+			case 0:
+				y-=sudu;
+				break;
+			case 1:
+				x-=sudu;
+				break;
+			case 2:
+				y+=sudu;
+				break;
+			case 3:
+				x+=sudu;
+				break;
+			}
+			if(x<0||x>400||y<0||y>300)
+			{
+				this.shengming=false;
+				break;				
+			}
+		}
+		
+	}	
+}
+class Baozha 
+{
+	int x,y;
+	int shengcunqi=9;
+	boolean shengming=true;
+	
+    public Baozha(int x,int y)
+	{
+	    this.x=x;
+	    this.y=y;
+	}
+    public void scqjd()
+    {
+	    if(shengcunqi>0)
+	    {
+		    shengcunqi--;		   
+    	}
+	    else{
+		    this.shengming=false;
+	    }	    
+    }
+}

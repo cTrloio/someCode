@@ -1,0 +1,135 @@
+{
+	"resources": [
+	  {
+		  "name": "levelStart",
+		  "type": "image",
+		  "url": "assets/level0.png"
+	  },
+	  {
+		  "name": "levelOne",
+		  "type": "image",
+		  "url": "assets/level1.png"
+	  },
+	  {
+		  "name": "levelTwo",
+		  "type": "image",
+		  "url": "assets/level2.png"
+	  },
+	  {
+		  "name": "levelThree",
+		  "type": "image",
+		  "url": "assets/level3.png"
+	  },
+	  {
+		  "name": "levelEnd",
+		  "type": "image",
+		  "url": "assets/level4.png"
+	  },
+	  {
+		  "name": "character",
+		  "type": "image",
+		  "url": "assets/character.png"
+	  },
+	  {
+		  "name": "herBorder",
+		  "type": "image",
+		  "url": "assets/herBorder.png"
+	  },
+	  {
+		"name": "verBorder",
+		"type": "image",
+		"url": "assets/verBorder.png"
+	  },
+	  {
+		"name": "doorOpen",
+		"type": "image",
+		"url": "assets/door1.png"
+	  },
+	  {
+		"name": "doorClose",
+		"type": "image",
+		"url": "assets/door2.png"
+	  },
+	  {
+		"name": "endPlace1",
+		"type": "image",
+		"url": "assets/Photoshop001.png"
+	  },
+	  {
+		"name": "endPlace2",
+		"type": "image",
+		"url": "assets/Photoshop005.png"
+	  },
+	  {
+		"name": "endPlace3",
+		"type": "image",
+		"url": "assets/Photoshop003.png"
+	  },
+	  {
+		"name": "enemySoul",
+		"type": "image",
+		"url": "assets/soul1.png"
+	  },
+	  {
+		"name": "enemyTwo",
+		"type": "image",
+		"url": "assets/soul2.png"
+	  },
+	  {
+		"name": "character2",
+		"type": "image",
+		"url": "assets/renwu.png"
+	  },
+	  {
+		"name": "Wuqi",
+		"type": "image",
+		"url": "assets//wuqi.png"
+	  },
+	  {
+		"name": "TextP",
+		"type": "image",
+		"url": "assets/startText/O.png"
+	  },
+	  {
+		"name": "TextO",
+		"type": "image",
+		"url": "assets/startText/R.png"
+	  },
+	  {
+		"name": "TextR",
+		"type": "image",
+		"url": "assets/startText/A.png"
+	  },
+	  {
+		"name": "TextA",
+		"type": "image",
+		"url": "assets/startText/L.png"
+	  },
+	  {
+		"name": "TextT",
+		"type": "image",
+		"url": "assets/startText/T.png"
+	  },
+	  {
+		"name": "TextL",
+		"type": "image",
+		"url": "assets/startText/P.png"
+	  },
+	  {
+		"name": "gameOver",
+		"type": "image",
+		"url": "assets/gameover.png"
+	  },
+	  {
+		  "name": "description",
+		  "type": "json",
+		  "url": "config/description.json"
+	  }
+	],
+	"groups": [
+		{
+			"name": "preload",
+			"keys": "character,levelStart,Wuqi,levelOne,enemyTwo,gameOver,TextP,TextO,TextR,TextT,TextA,TextL,levelTwo,levelThree,levelEnd,verBorder,herBorder,character2,doorClose,doorOpen,endPlace1,endPlace2,endPlace3,enemySoul"
+		}
+	]
+}

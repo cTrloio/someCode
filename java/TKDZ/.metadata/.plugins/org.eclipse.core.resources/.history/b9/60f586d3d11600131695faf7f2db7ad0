@@ -1,0 +1,144 @@
+package T1;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+
+public class Tank1 extends JFrame 
+{
+	MyPanel mp=null;
+	
+	public static void main(String[] args) 
+	{
+		Tank1 t1=new Tank1();
+	}
+	
+	public Tank1()
+	{
+		mp=new MyPanel();
+		
+		this.add(mp);
+		this.addKeyListener(mp);
+		Thread t=new Thread(mp);
+		t.start();
+		this.setSize(400,300);
+		this.setLocation(300,280);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+	}	
+}
+class MyPanel extends JPanel implements KeyListener,Runnable
+{
+	MyTank mt=null;
+	Vector<DiTank> dtk=new Vector<DiTank>();
+	int tksl=3;
+	
+	public MyPanel()
+	{
+		mt=new MyTank(140,232);
+		
+		for(int i=0;i<tksl;i++)
+		{
+			DiTank dt=new DiTank((i)*181+5,0);
+			dtk.add(dt);			
+		}
+	}
+	public void paint(Graphics g)
+	{
+		super.paint(g);
+		g.fillRect(0,0,400,300);
+		this.drawTank(mt.getX(),mt.getY(),g,mt.fangxiang,0);
+		for(int i=0;i<dtk.size();i++)
+		{
+			this.drawTank(dtk.get(i).getX(),dtk.get(i).getY(),g,2,1);
+		}
+		if(mt.zd!=null && mt.zd.shengming==true)
+		{
+			g.setColor(Color.white);
+			g.fill3DRect(mt.zd.x,mt.zd.y,3,3,false);
+		}
+	}   
+	public void drawTank(int x,int y,Graphics g,int fangxiang,int leixing)
+	{
+		switch(leixing)
+		{
+		   case 0:
+			   g.setColor(Color.yellow);
+			   break;
+		   case 1:
+			   g.setColor(Color.green);
+			   break;
+		}
+		switch(fangxiang)
+		{
+		case 0:
+			g.fill3DRect(x, y, 5, 30,false);
+			g.fill3DRect(x+15,y , 5, 30,false);
+			g.fill3DRect(x+5,y+5 , 10, 20,false);
+			g.fillOval(x+5, y+10, 10, 10);
+			g.drawLine(x+10, y+15, x+10, y-3);
+			break;
+		case 1:
+			g.fill3DRect(x, y, 30, 5,false);
+			g.fill3DRect(x, y+15, 30, 5, false);
+			g.fill3DRect(x+5, y+5, 20, 10, false);
+			g.fillOval(x+10, y+5, 10, 10);
+			g.drawLine(x+15, y+10, x-3, y+10);
+			break;
+		case 2:
+			g.fill3DRect(x, y, 5, 30,false);
+			g.fill3DRect(x+15,y , 5, 30,false);
+			g.fill3DRect(x+5,y+5 , 10, 20,false);
+			g.fillOval(x+5, y+10, 10, 10);
+			g.drawLine(x+10, y+15, x+10, y+33);
+			break;
+		case 3:
+			g.fill3DRect(x, y, 30, 5,false);
+			g.fill3DRect(x, y+15, 30, 5, false);
+			g.fill3DRect(x+5, y+5, 20, 10, false);
+			g.fillOval(x+10, y+5, 10, 10);
+			g.drawLine(x+15, y+10, x+33, y+10);
+			break;			
+		}
+	}
+	
+	public void keyTyped(KeyEvent e){}
+	public void keyReleased(KeyEvent e){}
+	public void keyPressed(KeyEvent e)
+	{
+		if(e.getKeyCode()==KeyEvent.VK_W)
+		{
+			this.mt.setFangxiang(0);
+			this.mt.xiangshang();
+			
+		}else if(e.getKeyCode()==KeyEvent.VK_A)
+		{
+			this.mt.setFangxiang(1);
+			this.mt.xiangzuo();
+		}else if(e.getKeyCode()==KeyEvent.VK_S)
+		{
+			this.mt.setFangxiang(2);
+			this.mt.xiangxia();
+		}else if(e.getKeyCode()==KeyEvent.VK_D)
+		{
+			this.mt.setFangxiang(3);
+			this.mt.xiangyou();
+		}	
+		if(e.getKeyCode()==KeyEvent.VK_J)
+		{
+			this.mt.fszd();
+		}
+		this.repaint();
+	}
+	public void run()
+	{
+		while(true)
+		{
+			try	{
+				Thread.sleep(100);}
+			catch (Exception e) {}
+			
+			this.repaint();
+		}		
+	}       	
+}

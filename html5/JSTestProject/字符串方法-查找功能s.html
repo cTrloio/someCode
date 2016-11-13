@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>字符串方法-查找功能s</title>
+    <style>
+        p{
+            width: 300px;
+            height: auto;
+            padding: 20px;
+            background: #c1c1c1;
+            margin: 20px;
+            border: solid 5px #000000;
+        }
+        span{
+            background: #96ff15;
+            color: #ff553c;
+        }
+        input{
+            margin: 25px;
+        }
+    </style>
+    <script>
+
+        window.onload = function () {
+            var aInput=document.getElementsByTagName('input')[0];
+            var aBtn=document.getElementsByTagName('input')[1];
+            var op=document.getElementsByTagName('p')[0];
+            aBtn.onclick = function () {
+                var str = aInput.value;
+                if(str!==null){
+//                    op.innerHTML = op.innerHTML.split(str).join(str );
+                    op.innerHTML = op.innerHTML.split(str).join('<span>'+ str +'</span>');
+                }else{
+                    alert('字符串为空');
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" placeholder="请输入要查找的字符">
+    <input type="button" value="查找">
+    <p>
+        刀塔2有一只小牛女马甲卡萨诺卡就是你的，刀塔2拉链设计的<br>卢卡死机啦啦啦，刀塔2很2马克思鹿鼎记
+    </p>
+</body>
+</html>

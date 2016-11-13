@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CSS3属性选择器</title>
+    <style>
+        body{
+            padding: 10px;
+            margin: 10px;
+            background: #befdff;
+        }
+        div{
+            padding: 15px;
+            margin: 15px;
+        }
+        [id*="section"]{    /*属性的值中包含指定字符*/
+            border: 1px solid #ff002e;
+        }
+        [id$="\-1"]{        /*以指定字符结尾*/
+            background: #ffdd3f;
+        }
+        [id^="section1"]{   /*以指定字符开头*/
+            background: #4752ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>css3属性选择器</h1>
+    <div id="section">section</div>
+    <div id="section1">section1</div>
+    <div id="section1-1">section-1</div>
+    <div id="section1-1-2">section1-1-2</div>
+    <div id="section2">section2</div>
+    <div id="section2-1">section2-1</div>
+    <div id="section2-1-1">section2-1-1</div>
+    <div id="section2-1-2">section2-1-2</div>
+</body>
+</html>

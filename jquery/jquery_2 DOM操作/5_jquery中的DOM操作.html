@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            background: #abcdef;
+            border: 2px solid #000000;
+            margin: 20px;
+            float: left;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    1   查找节点
+            children()
+            parent()
+    2   创建节点
+            两种创建方式 $方式 字符串方式
+    3   插入节点
+            内插
+            append()    向每个匹配元素尾部插入DOM，匹配元素在前
+            appendTo()  向每个匹配元素尾部插入DOM，匹配元素在后
+            prepend()   向每个匹配元素头部插入DOM，匹配元素在前
+            prependTo() 向每个匹配元素头部插入DOM，匹配元素在后
+            外插
+            after()         在匹配元素之后插入DOM，匹配元素在前
+            insertAfter()   在匹配元素之后插入DOM，匹配元素在后
+            before()        在匹配元素之前插入DOM，匹配元素在前
+            insertBefore()  在匹配元素之前插入DOM，匹配元素在后
+    4   包裹节点
+            wrap()      将所有匹配元素单独包裹
+            wrapAll()   将所有匹配元素用一个元素包裹
+            wrapInner() 将所有匹配元素的子内容用其他标签包裹
+    5   删除节点
+            remove()        删除节点
+            empty()         清空节点
+            unwrap()        删除元素的父元素
+            detach()        删除节点，但保留jquery对象
+    6   复制节点
+            clone()             复制节点
+    7   替换节点
+            replaceWith()       替换一个
+            replaceWithAll()    替换全部
+    8   遍历节点
+            见DOM遍历查找.html
+    9   操作DOM节点属性
+            attr(key,value); 获取添加属性值
+            removeAttr();    删除属性值
+            prop()同attr();  官方推荐prop 。。
+            removeProp()同removeAttr()
+
+    10  操作样式
+    11  设置和获取节点内的HTML和文本
+        见样式操作.html  和 设置和获取节点内的HTML和文本.html
+    <br><br><br>
+    <a href="#">点击</a>
+    <p title="javascript">P标签1</p>
+    <p>P标签2</p>
+    <span>span</span>
+    <div>
+        <h2>h2h2h2h2h2</h2>
+    </div>
+    <em>emem</em>
+    <script>
+//        创建插入
+        var newElement = $("<div>div元素</div>");
+//      var newElement2 = "<div>div元素2</div>";
+        //匹配元素在前
+        $("body").append(newElement);
+        //匹配元素在后
+//        newElement.appendTo($("p"));
+
+        var newElement2 = $("<p>是P兄弟</p>");
+        $("p").before(newElement2);
+//        newElement2.insertBefore($("p"));
+
+//        包裹元素
+        $("p").wrap("<div></div>");
+        $("p").wrapAll("<div></div>");    //把P标签用一个DIV包裹
+        $("p").wrapInner("<div></div>"); //把P元素里的内容用P包裹
+//        删除
+        $("span").remove(); //删除所有
+        $("h2").empty();    //清空内容
+        $("h2").unwrap();
+//        复制节点 及其事件(位置前后! 或 参数true)
+        $("a").click(function () {
+           alert("111");
+        });
+        var newA = $("a").clone(true);
+        $("body").append(newA);
+//        替换节点
+        $("em").replaceWith("<strong>strong</strong>");
+
+//      操作DOM节点属性
+        $('p').attr("title","livescript");
+
+    </script>
+
+</body>
+</html>

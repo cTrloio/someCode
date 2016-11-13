@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>文本的自动换行</title>
+    <style>
+        p.p1{
+            word-break: keep-all;
+            background: #53ebff;
+        }
+        p.p2{
+            word-break: break-all;
+            background: #43ff25;
+        }
+        p.p3{
+            word-wrap: break-word;
+            background: #ffdd3f;
+        }
+    </style>
+</head>
+<body>
+    <h1>文本的自动换行</h1>
+    <p class="p1">今年以来，官方多次表态要“研究提出个税改革方案”，
+        财政部部长楼继伟也曾多次提出，下一步改革个税的方
+        向是由目前的分类税制转向综合和分类相结合的税制，
+        在对部分所得项目实行综合计税的同时，会将纳税人家庭负担，
+        如赡养人口、按揭贷款等情况计入抵扣因素，更体现税收公平。</p>
+    <p class="p2">The comment came as the Chinese government allowed all
+        couples to have two children, after long-standing pressure
+        that the restrictive population policy, if maintained, would damage
+        China's population structure, undermine its potential GDP growth and
+        cripple the pension system.</p>
+    <p class="p3">
+        word-break 三个属性
+        normal默认
+        keep-all只能在半角空格或连字符处换行，
+        break-all 允许在单词内换行
+        <br>
+
+        word-wrap
+        narmal默认在半角空格或连字符处换行
+        break-word 浏览器可以在长单词或长URL内部换行
+
+        http://kaggxgy.pop.qcl777.com/flash/rkyk/index.html?agent_id=1322&place
+        id=1886&type=1&game_id=7&aid=rkyk&rand=1&tid=0&t=0.28213459276986746&refere
+        r=&ref=http%3A//www.dy2018.com/
+    </p>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+
+</head>
+<body>
+    <form id="form">
+        用户名：<input type="text" name="username" id="username"><br>
+        邮箱地址：<input type="text" name="email" id="email"><br>
+        URL地址：<input type="text" name="url" id="url"><br>
+        QQ:<input type="text" name="qq" id="qq"><br>
+        skype:<input type="text" name="skype" id="skype"><br>
+        <input type="button" value="提交">
+    </form>
+    <script>
+        $('input[type=button]').click(function () {
+//            var data = {
+//                "username":$('#username').val(),
+//                "email":$('#email').val(),
+//                    ...,
+//            };
+
+            //序列化取得所有数据(须再form里)
+            var data = $("#form").serialize();
+
+            $.ajax({
+                url:'demo3.php',
+                type:'post',
+                data:data,
+                success: function () {
+                    //do something
+                }
+            })
+        });
+    </script>
+
+</body>
+</html>

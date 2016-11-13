@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>数据类型和类型转换</title>
+    <script>
+        //Number();不能转换json
+        /*
+         Number只能转换字符串，和布尔值。数组里面东西太复杂同样不能转换；数组json无法转换，Obj也无法转换
+         Number:可用方法：“100”；“000010”；“+100”；“空”==0；“布尔值”true=1 false=0；[空]==0;['123']==123;null==0;
+         parseInt:逐步解析整数：可用“100px”==100；“+空格-100”==100；不认小数点
+         parsefloat：能认识小数点
+         parseInt 从左往右走 只识别数字和+-等
+         Number整体转换
+         isNaN判断数字；数字：false；内部根据number判断
+         “250”：false；
+         NaN是一个不是数字的数字类型
+         NaN一旦出现肯定进行了非法操作
+         NaN自己与自己不相等
+         数据类型：数字、字符串、布尔值（true/false）、函数类型、对象（obj、[]、{}、null）、未定义
+         字符串 可以测量长度s.length
+         找当前字符串中的第四个字符s.charAT(3)
+         arr.push();往数组的后面添加内容
+         obj可以添加很多属性，包括函数
+         var json={name:"miaov",age:'5'}
+         alert(json.name);//miaov
+         alert(json[0]);//name
+         ----------------------------------------------------------------
+         数据类型的转换
+         显式类型转换（强制类型转换）：
+         Number();
+         parseInt();
+         parseFloat();
+         隐式类型转换：
+         +             200+'3'    变成字符串
+         - * /%      200-‘3’     变成数字
+         ++ --        变成数字
+         ><          '10'>9      变成数字比较 |   ‘10’>'9'    变成字符串比较，移位比较
+         ！            !'ok'      true
+         ==         ’2‘==2      true
+         +   字符串连接 ，同时也是数学加
+
+         方法：
+         var a='100'; Number(a)+100;    //100+100=200
+         var a='0000100';Number(a);    //100
+         var a='+100';Number(a);    //100;
+         var a='    ';Number(a);    //0
+         var a=true;Number(a);    //1    true--1;false--0
+         var a=[];Number(a);      //0
+         var a=[''];Number(a);    //0
+         var a=['123'];Number(a);    //123
+         var a=null;Number(a);    //0
+         var b='100px';alert(parseInt(b));    //100
+         parseInt(b,8)    //以8进制转换
+         parseFloat();
+         NaN:not a number  不是数字的数字类型
+         一旦出现了NaN，则出现了非法的运算操作。
+         NaN是一个false的boolean
+           //false   NaN与自己也不相等
+         isNaN：is not a number 是不是不是一个数字（不是数字）
+         判断某些值是不是数字
+         不喜欢数字、讨厌数字  ==>先number()转换成数字，再交由isNaN判断
+         从html中找到的内容，类型全部是字符串，不能用typeof来判断数据类型
+         */
+        var arr=['100px','abc'-6,[],-98765,34,-2,0,'300',,function(){alert(1)},
+            null,document,[],true,'200px'-30,'23.45元',5,Number('abc'),function(){alert(3);}];
+        //找出所有数字-987654 34 -2 0 5
+        //找出可以转换成数字的 '100px' -987654 34 -2 0 '300' 5
+        //转换成数字以后判断最大值出来 300
+        //吧NaN的位置找出来 1 14 17
+        for(var i=0;i<arr.length;i++){
+//            if(isNaN(arr[i])){
+//                alert('不是数字的：'+arr[i])
+//            }else{
+//                alert(arr[i]);
+//            }
+            //*******************************
+//            if(isNaN(Number(arr[i]))){
+//                alert('转换完不是数字的'+arr[i]);
+//            }
+//            else{
+//                alert('转换完事数字的：'+arr[i]);
+//            }
+        }
+        var a='100px';
+        alert(parseInt(a));//100
+    </script>
+</head>
+<body>
+
+</body>
+</html>

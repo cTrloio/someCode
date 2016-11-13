@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #table{
+            width: 500px;
+            border: 1px solid #f60;
+            border-collapse:collapse;
+        }
+        #table td{
+            border: 1px solid #000000;
+        }
+    </style>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+    原生js：
+    <table id="table">
+        <tr>
+            <td>1111</td>
+            <td>2222</td>
+            <td>3333</td>
+            <td>4444</td>
+        </tr>
+        <tr>
+            <td>aaaa</td>
+            <td>bbbb</td>
+            <td>cccc</td>
+            <td>dddd</td>
+        </tr>
+        <tr>
+            <td>1111</td>
+            <td>2222</td>
+            <td>3333</td>
+            <td>4444</td>
+        </tr>
+        <tr>
+            <td>aaaa</td>
+            <td>bbbb</td>
+            <td>cccc</td>
+            <td>dddd</td>
+        </tr>
+        <tr>
+            <td>1111</td>
+            <td>2222</td>
+            <td>3333</td>
+            <td>4444</td>
+        </tr>
+        <tr>
+            <td>aaaa</td>
+            <td>bbbb</td>
+            <td>cccc</td>
+            <td>dddd</td>
+        </tr>
+        <tr>
+            <td>1111</td>
+            <td>2222</td>
+            <td>3333</td>
+            <td>4444</td>
+        </tr>
+        <tr>
+            <td>aaaa</td>
+            <td>bbbb</td>
+            <td>cccc</td>
+            <td>dddd</td>
+        </tr>
+    </table>
+    <script>
+        var oTable = document.getElementById("table");
+        var aTr = oTable.getElementsByTagName("tr");
+        for(var i=0;i<aTr.length;i++){
+            if(i%2==1){
+                aTr[i].style.background = "blue";
+            }else{
+                aTr[i].style.background = "red";
+            }
+        }
+    </script>
+    jQuery写法
+    <script>
+//        $("#table tr:even").css("background","blue");
+//        $("#table tr:odd").css("background","yellow");
+$("#table tr").filter(":even").css("background","#abcdef").end().filter(":odd").css("background","yellow");
+    </script>
+</body>
+</html>

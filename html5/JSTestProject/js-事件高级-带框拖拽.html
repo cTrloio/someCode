@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: #f60;
+            position: absolute;
+        }
+        .box{
+            border: 1px dashed black;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload= function () {
+            var oDiv=document.getElementById('div1');
+            var disX=0;
+            var dixY=0;
+            oDiv.onmousedown= function (ev) {
+                var oEvent=ev||event;
+                disX=oEvent.clientX-oDiv.offsetLeft;   //计算鼠标和div相对距离
+                dixY=oEvent.clientY-oDiv.offsetTop;
+                                                         //创建一个虚线框 添加到页面
+                var oBox=document.createElement('div');
+                oBox.className='box';
+                oBox.style.width=oDiv.offsetWidth+"px"; //初始化oBox的宽高
+                oBox.style.height=oDiv.offsetHeight+'px';
+                document.body.appendChild(oBox);         //将oBox添加到页面上
+                oBox.style.left=oDiv.offsetLeft+'px';   //初始化oBox的位置
+                oBox.style.top=oDiv.offsetTop+'px';
+
+                if(oDiv.setCapture){           //ie下兼容 捕获事件，把所有事件都捕获给oDiv
+                    oDiv.onmousemove=mouseMove;
+                    oDiv.onmouseup=mouseUp;
+                    oDiv.setCapture();         //捕获就不需要绑定到document 因为捕获了所有事件
+                }else{                        //chrome ff 兼容
+                    document.onmousemove=mouseMove;
+                    document.onmouseup=mouseUp;
+                }
+
+                function mouseMove(ev) {
+                    var oEvent=ev||event;
+                    var left=oEvent.clientX-disX; //计算相对距离
+                    var top=oEvent.clientY-dixY;
+                    oBox.style.left=left+'px';   //拖动时 拖动虚线框
+                    oBox.style.top=top+'px';
+                }
+                function mouseUp() {
+                    this.onmousemove=null;
+                    this.onmouseup=null;
+                    if(oDiv.releaseCapture){ //如果认识releaseCapture 就释放捕获 ie兼容
+                        oDiv.releaseCapture();
+                    }
+                    oDiv.style.left = oBox.offsetLeft+'px'; //移动oDiv
+                    oDiv.style.top = oBox.offsetTop+'px';
+                    document.body.removeChild(oBox);
+                }
+                return false; //阻止FF拖拽空div的bug  顺便也阻止了chrome,ff下拖动选中文字的bug
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>

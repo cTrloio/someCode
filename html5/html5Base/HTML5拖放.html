@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HTML5拖放</title>
+    <script>
+        function allowDrop(ev)//拖放过程中
+        {
+            ev.preventDefault();
+            ev.dataTransfer.dropEffect="link";
+        }
+        function drop(ev)//结束拖放
+        {
+            ev.preventDefault();
+            var data=ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+        function drag(ev)//开始拖放
+        {
+            ev.effectAllowed="all";
+            ev.dataTransfer.setData("Text",ev.target.id);
+        }
+    </script>
+    <style>
+        #cun{
+            width: 540px;
+            height: 320px;
+            border: 2px solid #ffdd3f;
+            box-shadow:1px 4px 8px #ff2415;
+        }
+        #tuo{
+            background: #4752ff;
+            width: 540px;
+            height: 320px;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML5拖放</h1>
+    <div id="cun" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<br>
+    <img src="../image/asd.jpg" id="tuo" draggable="true" ondragstart="drag(event)" width="500" height="280">
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    COOKIE基础        //!!  使用ff测试
+        什么是COOKIE
+            页面用来保存信息
+                比如自动登录、记住用户名
+        COOKIE的特性
+            同一个网站中所有页面共享一套COOKIE(同一域名)
+            数量、大小有限制
+            过期时间
+        JS中使用COOKIE
+            document.cookie
+    cookie的使用 最多50条
+        设置cookie
+            格式：名字=值  document.cookie='user=tt' document.cookie='age=123'
+            不会覆盖
+            过期时间：expires=时间   document.cookie='user=tt,expires='+oDate;
+                日期对象的使用
+                var oDate=new Date();
+                oDate.setDate(oDate.getDate()+7);//一个礼拜之后
+            封装函数 详见》cookie
+        读取cookie
+            字符串分割    多条cookie是通过'; '来分割的
+        删除cookie
+            已经过期
+    cookie的使用2
+        用cookie记录上一次登录的用户名
+            提交时---记录用户名
+            window.onload----读取用户名
+    详见cookie-基础-保存信息
+</body>
+</html>

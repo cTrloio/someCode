@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>到wamp中去运行</title>
+    <script>
+        window.onload= function () {
+            var oBtn=document.getElementById('btn1');
+            oBtn.onclick= function () {
+                //1:创建AJAX
+                //只兼容非ie6的浏览器            so>>（IE6用 ActiveXObject("Microsoft.XMLHTTP")）
+                //js中 如果使用没有定义的变量----报错   如果使用没有定义的属性----undefined
+                //所有的全局变量 var a=0; 其实是window的属性  alert(window.a);
+                //如果直接写XMLHttpRequest ie6会把他当作没有定义的变量，就会报错
+                if(window.XMLHttpRequest){
+                    var oAjax=new XMLHttpRequest();
+                }else{
+                    var oAjax=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                //2：连接服务器
+                //同步：事情一件一件做   异步：事情可以一起做  ajax一般用异步true
+                oAjax.open('GET','data.txt?t=new Date().getTime()',true);
+                //3:发送请求
+                oAjax.send();
+                //4:接收返回值
+                //服务器收到请求后自动调用的方法
+                oAjax.onreadystatechange= function () {
+                    //readyState:浏览器和服务器进行到哪一步
+                    //0 (未初始化)还没有调用open()方法
+                    //1 (载入)已调用send()方法，正在发送请求
+                    //2 (载入完成)send()方法完成,已收到全部响应内容
+                    //3 (解析)正在解析响应内容
+                    //4 (完成)响应内容解析完成，可以在客户端用了
+                    if(oAjax.readyState==4){ //读取完成
+                        if(oAjax.status==200){ //status:http状态码 >> 200代表成功,404||其他代表失败
+                            alert(oAjax.responseText);//服务器响应的文本
+                        }else{
+                            alert('404 not found page');
+                        }
+                    }
+                };
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="读取" id="btn1">
+</body>
+</html>

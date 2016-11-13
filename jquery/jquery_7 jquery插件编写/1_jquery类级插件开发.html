@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery/jquery-1.12.1.min.js"></script>
+    <script src="../jquery_7%20jquery插件编写/demo1.js"></script>
+</head>
+<body>
+    类级别开发插件就是给jquery添加静态方法
+        添加新的全局函数    → demo1.js
+        使用$.extend（obj）
+        使用命名空间
+    <input type="button" value="click1" id="btn1">
+    <input type="button" value="click2" id="btn2">
+    <input type="button" value="click2" id="btn3">
+    <script>
+        var a = "插件弹出框";
+        $("#btn1").click(function () {
+            $.myAlert(a);
+        });
+        $("#btn2").click(function () {
+            $.myAlert2(a);
+            $.myAlert3(a);
+        });
+        $("#btn3").click(function () {
+            $.hfySpace.myAlert(a);
+        });
+    </script>
+
+</body>
+</html>

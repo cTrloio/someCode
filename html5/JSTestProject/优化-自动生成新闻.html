@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload = function () {
+            var arr=[
+                '广东茂名政协主席被诉 退赃时曾当众掌掴老婆',
+                '小伙结婚半年得知“妻子”是男人 被骗15万元',
+                '公交司机报站提醒:上来两小偷 车上共4个小偷',
+                '3名同学酒吧叙旧消费3千元 无人买单闹到报警',
+                '土耳其击落俄机 会引发第三次世界大战吗？'
+            ];
+            var oUL=document.getElementById('ul1');
+            var oBtn=document.getElementById('btn1');
+            var openBtn=true;
+            oBtn.onclick= function () {
+                if(openBtn){
+                    //oBtn.disabled=true;           //用户体验不好  找按钮原因
+                    //oBtn.style.display='none';    //用户体验不好
+                    //oUL.innerHTML ='';            //性能较差      找显示的原因
+                    for(var i=0;i<arr.length;i++){
+                        oUL.innerHTML += '<li><a>'+ arr[i]+'</a></li>'
+                    }
+                    openBtn=false; //最佳方案
+                }
+            };
+        }
+    </script>
+</head>
+<body>
+    <ul id="ul1"></ul>
+    <input type="button" value="生成" id="btn1">
+</body>
+</html>
