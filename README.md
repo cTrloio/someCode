@@ -2,7 +2,7 @@
  整理了大学期间所学所写
  多是一些基础知识,方便以后查阅
  
-git命令:  总结git在window下的一些基本命令使用方式  参考链接:http://www.liaoxuefeng.com/
+git命令:  总结git在window下的一些基本命令使用方式  学习链接:http://www.liaoxuefeng.com/
  
 egret:    基于egret做过的一些小游戏源码 egret官网:http://developer.egret.com/cn/
 
