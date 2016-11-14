@@ -10,7 +10,7 @@ html5:    总结了一些html5新元素新特性,和一些小栗子 其中包括
  
 java:     几个简单的小案例
 
-nodejs:   <<nodejs权威指南>> <<深入浅出nodejs>>学习实践笔记
+nodejs:  << NodeJs权威指南 >>、<< 深入浅出nodejs >>学习实践笔记
 
 unity:    学习Unity过程中的一些终结
 
