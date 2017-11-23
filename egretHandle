@@ -1,0 +1,312 @@
+class Utils {
+    /**
+     * 
+     */
+    public static random(min: number, max: number): number {
+        var rand: number = Math.random();
+        return rand * (max - min) + min;
+    }
+
+    /**
+     * 
+     */
+    public static radian2Angle(radian: number): number {
+        return radian * Utils.ANGLE_PER_RADIAN;
+    }
+
+    public static angle2Radian(angle: number): number {
+        return angle * Utils.ANGLE_PER_RADIAN;
+    }
+
+    private static ANGLE_PER_RADIAN: number = Math.PI / 180;
+    private static RADIAN_PER_ANGLE: number = 180 / Math.PI;
+
+    /**
+     * 
+     * 
+     */
+    public static drawBounds(graphics: egret.Graphics, bounds: egret.Rectangle, color: number): void {
+        // graphics.clear();
+        graphics.lineStyle(2, color);
+        graphics.moveTo(bounds.topLeft.x, bounds.topLeft.y);
+        graphics.lineTo(bounds.bottomRight.x, bounds.topLeft.y);
+
+        // this..graphics.lineStyle(2, 0x00ff00, 1);
+        graphics.moveTo(bounds.bottomRight.x, bounds.topLeft.y);
+        graphics.lineTo(bounds.bottomRight.x, bounds.bottomRight.y);
+
+        // this..graphics.lineStyle(2, 0xff0000, 1);
+        graphics.moveTo(bounds.bottomRight.x, bounds.bottomRight.y);
+        graphics.lineTo(bounds.topLeft.x, bounds.bottomRight.y);
+
+        // this..graphics.lineStyle(2, 0x0000ff, 1);
+        graphics.moveTo(bounds.topLeft.x, bounds.bottomRight.y);
+        graphics.lineTo(bounds.topLeft.x, bounds.topLeft.y);
+        graphics.endFill();
+    }
+
+    /**
+     * 
+     */
+    public static getClassName(obj: any): string {
+        return obj.constructor.name;
+    }
+
+    /**
+     * Unicode-8 char array to string
+     * ref: http://blog.csdn.net/lltaoyy/article/details/70236997
+     * ref: http://www.onicos.com/staff/iz/amuse/javascript/expert/utf.txt
+     * ref: http://www.onicos.com/staff/iz/amuse/javascript/expert/
+     * */
+    public static uint8s2Str(uint8s: Uint8Array): string {
+        let out: string = "";
+        let c: number, char2: number, char3: number;
+
+        let len: number = uint8s.length;
+        let i: number = 0;
+        while (i < len) {
+            c = uint8s[i++];
+            switch (c >> 4) {
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+                    // 0xxxxxxx
+                    out += String.fromCharCode(c);
+                    break;
+                case 12: case 13:
+                    // 110x xxxx   10xx xxxx
+                    char2 = uint8s[i++];
+                    out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
+                    break;
+                case 14:
+                    // 1110 xxxx  10xx xxxx  10xx xxxx
+                    char2 = uint8s[i++];
+                    char3 = uint8s[i++];
+                    out += String.fromCharCode(((c & 0x0F) << 12) | ((char2 & 0x3F) << 6) | ((char3 & 0x3F) << 0));
+                    break;
+            }
+        }
+
+        return out;
+    }
+
+    /**
+     * TODO 是否在浏览器, iOS, Android 下 egret.ByteArray.bytes 均可替代以下方法？
+     */
+    public static bytes2Uint8s(bytes: egret.ByteArray): Uint8Array {
+        let raw: Array<number> = [];
+        for (let i: number = 0; i < bytes.dataView.byteLength; i++) {
+            raw.push(bytes.dataView.getUint8(i));
+        }
+        return new Uint8Array(raw);
+        // return bytes.bytes;  // Replaceable ? 
+    }
+
+    /**
+     * 
+     */
+    private static md5Encoder: md5 = new md5();
+    public static md5(str: string): string {
+        return Utils.md5Encoder.hex_md5(str);
+    }
+
+
+    /**
+     * URL
+     */
+    public static getQueryStringByName(name: string): string {
+        let val = window.location.search.match(new RegExp('[\?\&]' + name + '=([^\&]+)', 'i'));
+        return val == null || val.length < 2 ? "" : val[1];
+    }
+
+    public static getQueryMap(): { [key: string]: string; } {
+        let map: { [key: string]: string; } = {};
+        let result = window.location.search.match(new RegExp("[\?\&][^\?\&]+=[^\?\&]+", "g"));
+        if (result != null) for (let i = 0; i < result.length; i++) {
+            let kv = result[i].split("=");
+            map[kv[0].substr(1)] = kv[1];
+        }
+        return map;
+    }
+
+    public static updateUrlSearch(key: string, val: string): void {
+        let params = Utils.getQueryMap();
+        params[key] = val;
+        let search = "?";
+        for (let k in params) {
+            search = search.concat(k).concat("=").concat(params[k]).concat("&");
+        }
+        search = search.substr(0, search.length - 1);
+        let url = window.location.origin + window.location.pathname + search;
+        window.history.replaceState(null, null, url);
+    }
+
+    /**
+     * 循环播放动画组
+     * @param target 动画组
+     * @param isLoop 是否循环
+     */
+    public static playAnimation(target: egret.tween.TweenGroup, isLoop: boolean): void {
+        if (isLoop) {
+            for (var key in target.items) {
+                target.items[key].props = { loop: true };
+            }
+        }
+        target.play();
+    }
+
+    /**
+     * 滤镜
+     */
+    public static GRAY = [
+        0.3, 0.6, 0, 0, 0,
+        0.3, 0.6, 0, 0, 0,
+        0.3, 0.6, 0, 0, 0,
+        0, 0, 0, 1, 0
+    ];
+
+    /** 
+     * 毫秒转字符串
+     * type == 0  return day + hour + sec + min 
+     * type == 1  return year + mon + day + hour + sec + min 
+     */
+    public static sceonds2MinStr(s: number, type: number = 0): string {
+        let date = new Date(s);
+        let year = date.getFullYear();
+        let mon = date.getMonth() + 1;
+        let day = date.getDate();
+        let hor = date.getHours();
+        let sec = date.getSeconds();
+        let min = date.getMinutes();
+        let addZero = function (num) {
+            if (Number(num) <= 9) {
+                return "0" + num;
+            }
+            return num;
+        }
+        let ymd: string = year + "-" + addZero(mon) + "-" + addZero(day);
+        let hsm: string = addZero(hor) + ":" + addZero(sec) + ":" + addZero(min);
+        let str: string = "";
+        if (type == 0) {
+            str = day + "日 " + hsm;
+        } else if (type == 1) {
+            str = ymd + " " + hsm;
+        }
+        return str;
+    }
+
+    /**
+     * 格式化数字
+     * @param num 数字
+     */
+    public static formatNumber(num: number): string {
+        let resStr: string = num + "";
+        if (resStr.length > 7) {
+            resStr = Math.floor(num / 10000) + "万";
+        } else if (resStr.length > 9) {
+            resStr = Math.floor(num / 10000000) + "亿";
+        }
+        return resStr;
+    }
+
+    /**
+     * 复制文字信息
+     * @param message 要复制的文本
+     */
+    public static copyMessage(message: string) {
+        var input = document.createElement("input");
+        input.value = message;
+        document.body.appendChild(input);
+        input.readOnly = true;
+        input.select();
+        input.setSelectionRange(0, input.value.length), document.execCommand('Copy');
+        document.body.removeChild(input);
+        ContextHolder.instance.gameManager.showMessage("复制成功");
+    }
+
+    /**
+     * 弹出UI效果
+     * @param display 布局UI
+     * @param fun 回调
+     */
+    public static popView(display: egret.DisplayObject, fun: Function = null): void {
+        display.scaleX = display.scaleY = 0;
+        let tw = egret.Tween.get(display);
+        tw.to({ scaleX: 1.1, scaleY: 1.1 }, 220).
+            to({ scaleX: 1, scaleY: 1 }, 80)
+            .call(function (): void {
+                egret.Tween.removeTweens(display);
+                fun && fun();
+            });
+    }
+
+    /**
+     * 关闭UI效果
+     * @param display 布局UI
+     * @param fun 回调
+     */
+    public static closeView(display: egret.DisplayObject, fun: Function): void {
+        let tw = egret.Tween.get(display);
+        tw.to({ scaleX: 1.1, scaleY: 1.1 }, 80)
+            .to({ scaleX: 0, scaleY: 0 }, 220)
+            .call(function (): void {
+                egret.Tween.removeTweens(display);
+                fun && fun();
+            });
+    }
+
+    /**
+     * 根据一个远程url得到图片资源
+     */
+    public static getIconByUrl(url: string, callback: Function) {
+        let imgLoadHandler = (evt: egret.Event) => {
+            var imageLoader = <egret.ImageLoader>evt.currentTarget;
+            let texture = new egret.Texture();
+            texture._setBitmapData(imageLoader.data);
+            callback && callback(texture);
+        }
+        let imgLoadErrorHandler = (evt: egret.Event) => {
+            callback && callback("common_json.intoTitle");
+            console.log("load texture error" + url);
+        }
+        let imgLoader: egret.ImageLoader = new egret.ImageLoader();
+        imgLoader.crossOrigin = "anonymous";
+        imgLoader.once(egret.Event.COMPLETE, imgLoadHandler, this);
+        imgLoader.once(egret.IOErrorEvent.IO_ERROR, imgLoadErrorHandler, this);
+        imgLoader.load(url);
+    }
+
+    /**
+     * 获取默认高度
+     */
+    public static getDefaultHeight(): number {
+        return Constants.SCREEN_HEITH;
+    }
+
+    /**
+     * 获取当前高度
+     */
+    public static getCurrentHeight(): number {
+        return egret.MainContext.instance.stage.stageHeight;
+    }
+
+    /**
+     * 获取当前宽度
+     */
+    public static getCurrentWidth(): number {
+        return egret.MainContext.instance.stage.stageWidth;
+    }
+
+    /**
+     * 检查分辨率
+     * @return 屏幕太宽
+     */
+    public static checkResolution(): boolean {
+        let scale: number = this.getCurrentWidth() / this.getCurrentHeight();
+        if (scale >= (Constants.maxResolution)) {
+            return true;
+        }
+        return false;
+    }
+
+
+}
+
