@@ -1,0 +1,272 @@
+//Socket
+class WebsocketClient extends egret.EventDispatcher {
+	public constructor(url:string) {
+		super();
+		this.socket = new egret.WebSocket();
+		this.socket.type = egret.WebSocket.TYPE_STRING;
+		this.socket.addEventListener(egret.Event.CONNECT, this.onOpen, this);
+		this.socket.addEventListener(egret.Event.CLOSE, this.onClose, this);
+		this.socket.addEventListener(egret.IOErrorEvent.IO_ERROR, this.onError, this);
+		this.socket.addEventListener(egret.ProgressEvent.SOCKET_DATA, this.onReceive, this);
+		this.socket.connectByUrl(url);
+	}
+
+	// public send(bytes:egret.ByteArray):void {
+	// 	this.socket.writeBytes(bytes);
+	// 	this.socket.flush();
+	// }
+
+	public send(data:string):void {
+		egret.log("onSend", data);
+		this.socket.writeUTF(data);
+		this.socket.flush();
+	}
+
+	private onOpen(evt:egret.Event):void {
+		egret.log("onOpen");
+	}
+
+	private onClose(evt:egret.Event):void {
+		egret.log("onClose", evt);
+		this.dispatchEvent(new egret.Event(net.Event.ON_CLOSE));
+	}
+
+	private onError(evt:egret.IOErrorEvent):void {
+		egret.error("onError");
+	}
+
+	private onReceive(evt:egret.ProgressEvent):void {
+		// var bytes = new egret.ByteArray();
+		// this.socket.readBytes(bytes);
+		// var data = ContextHolder.instance.pbHelper.decode("Testmsg", bytes);
+
+		var data = this.socket.readUTF();
+		egret.log("onReceive", data);
+		this.dispatchEvent(new egret.Event(net.Event.ON_RECEIVE, false, false, data));
+	}
+
+	private socket:egret.WebSocket;	
+}
+
+
+
+
+//Http
+import HttpRequest = egret.HttpRequest;
+import HttpMethod = egret.HttpMethod;
+import URLVariables = egret.URLVariables;
+
+class HttpClient {
+
+    /**
+     * Base
+     * */
+    public get(url:string, callback:Function):HttpRequest {
+        return this.request(url, null, callback);
+    }
+
+    public post(url:string, data:{[index:string]:any;}, callback:Function):HttpRequest {
+        return this.request(url, data, callback);
+    }
+
+    private request(url:string, postData:{[index:string]:any;}, callback:Function):HttpRequest {
+        // Prepare
+        var httpRequest = new egret.HttpRequest();
+        httpRequest.responseType = egret.HttpResponseType.TEXT;
+        var method = (postData == null) ? HttpMethod.GET : HttpMethod.POST;
+
+        //
+        httpRequest.open(url, method);
+        httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        if(postData == null) {
+            httpRequest.send();
+        } else {
+            var postDataStr:string = "";
+            for(var k in postData) {
+                postDataStr += "&" + k + "=" + postData[k];
+            }
+            httpRequest.send(new URLVariables(postDataStr.substr(1)));
+        }
+
+        //
+        httpRequest.once(egret.Event.COMPLETE, function(evt:egret.Event):void {
+            var vo = new HttpResponseVO();
+            vo.errcode = 0;
+            vo.result = JSON.parse(httpRequest.response);
+            callback(vo);
+        }, this);
+        httpRequest.once(egret.IOErrorEvent.IO_ERROR, function(evt:egret.IOErrorEvent):void {
+            var vo = new HttpResponseVO();
+            vo.errcode = 1;
+            vo.error = evt;
+            callback(vo);
+        }, this);
+
+        return httpRequest;
+    }
+
+    public static getUrlWithQueryString(url:string, query:{[index:string]:string;}):string {
+        // Compose query string
+        if(query != null) {
+            var queryStr = "";
+            for(var k in query) {
+                queryStr += "&" + k + "=" + query[k];
+            }
+            if(url.indexOf("?") >= 0) {
+                url += queryStr;
+            } else {
+                url += "?" + queryStr.substr(1);
+            }
+        }
+        return url;
+    }
+}
+
+class HttpResponseVO {
+    public errcode:number;
+    public error:any;
+    public result:any;
+}
+
+
+//map
+namespace collections {
+	export class Dictionary<K, V> /*implements IDictionary<T, U>*/ {
+		constructor() {
+			this._table = {};
+			this._len = 0;
+		}
+
+		public get(key:K):V {
+			const k = this.keyToString(key);
+			const pair:IDictionaryPair<K, V> = this._table[k];
+			if(Utils.isUndefined(pair)) return undefined;
+			return pair.value;
+		}
+		
+		public put(key:K, value:V):V {
+			if(Utils.isUndefined(key) || Utils.isUndefined(value)) {
+				return undefined;
+			}
+
+			let prevVal:V;
+			const k = this.keyToString(key);
+			const prevEle:IDictionaryPair<K, V> = this._table[k];
+			if(Utils.isUndefined(prevEle)) {
+				this._len ++;
+				prevVal = undefined;
+			} else {
+				prevVal = prevEle.value;
+			}
+
+			this._table[k] = {key:key, value:value};
+			return prevVal;
+		}
+		
+		public remove(key:K):V {
+			const k = this.keyToString(key);
+			const prevEle:IDictionaryPair<K, V> = this._table[k];
+			if(Utils.isUndefined(prevEle)) return undefined;
+			delete this._table[k];
+			this._len --;
+			return prevEle.value;
+		}
+
+		public removeAll():void {
+			this.keys.forEach(this.remove, this);
+		}
+
+		public containKey(key:K):boolean {
+			const k = this.keyToString(key);
+			const ele:IDictionaryPair<K, V> = this._table[k];
+			return ! Utils.isUndefined(ele);
+		}
+
+		public get keys():K[] {
+			const arr:K[] = [];
+			for(const name in this._table) {
+				// if(collections.has(this._table, name)) {
+
+				// }
+				const pair = this._table[name];
+				arr.push(pair.key);
+			}
+			return arr;
+		}
+
+		public get values():V[] {
+			const arr:V[] = [];
+			for(const name in this._table) {
+				// if(collections.has(this._table, name)) {
+
+				// }
+				const pair = this._table[name];
+				arr.push(pair.value);
+			}
+			return arr;
+		}
+
+		private keyToString(key:K):string {
+			if(Utils.isNull(key)) {
+				return 'COLLECTION_NULL';
+			} else if(Utils.isUndefined(key)) {
+				return 'COLLECTION_UNDEFINED';
+			} else if(Utils.isString(key)) {
+				return '$s' + key;
+			} else {
+				return '$o' + key.toString();
+			}
+		}
+
+		public get length():number {
+			return this._len;
+		}
+
+		/**
+		 * 
+		 */
+		private _table:{[key:string]:IDictionaryPair<K, V>};
+		private _len:number;
+		// private _keys:K[];
+		// private _values:V[];
+	}
+}
+namespace collections {
+	export interface IDictionaryPair<K, V> {
+		key:K;
+		value:V;
+	}
+}
+namespace collections {
+	export class Utils {
+		public static isUndefined(obj:any):boolean {
+			return (typeof obj) === 'undefined';
+		}
+
+		public static isString(obj:any):boolean {
+			return Object.prototype.toString.call(obj) === '[object String]';
+		}
+
+		public static isNull(obj:any):boolean {
+			return obj === null;
+		}
+
+		public static isFunction(obj:any):boolean {
+			return (typeof obj) === 'function';
+		}
+	}
+
+	/**
+	 * 
+	 */
+	const _hasOwnProperty = Object.prototype.hasOwnProperty;
+	export const has = function(obj: any, prop: any) {
+		return _hasOwnProperty.call(obj, prop);
+	};
+}
+
+/*
+ref:
+https://github.com/basarat/typescript-collections/blob/release/src/lib/Dictionary.ts
+http://stackoverflow.com/questions/15877362/declare-and-initialize-a-dictionary-in-typescript
+*/
